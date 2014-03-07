@@ -5,6 +5,7 @@ import javax.swing.event.*;
 import javax.swing.table.*;
 
 import MYGUI.ButtonFactory;
+import MYGUI.Label;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
 
@@ -21,6 +22,7 @@ public class MyCalendar extends MetroPanel {
 	private JScrollPane stblCalendar; // The scrollpane
 	private MetroPanel pnlCalendar;
 	private int realYear, realMonth, realDay, currentYear, currentMonth;
+	private MyButton btnBack;
 
 	public MyCalendar() {
 
@@ -30,10 +32,12 @@ public class MyCalendar extends MetroPanel {
 
 		// Create controls
 		lblMonth = new JLabel("January");
+		Label.decorateTitle(lblMonth);
 		lblYear = new JLabel("Change year:");
+		Label.decorateNormal(lblYear);
 		cmbYear = new JComboBox();
-		btnPrev = ButtonFactory.getNormalButton("&lt;&lt;");
-		btnNext = ButtonFactory.getNormalButton("&gt;&gt;");
+		btnPrev = ButtonFactory.getNormalButton("...");
+		btnNext = ButtonFactory.getNormalButton("...");
 		mtblCalendar = new DefaultTableModel() {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return false;
@@ -43,13 +47,16 @@ public class MyCalendar extends MetroPanel {
 		stblCalendar = new JScrollPane(tblCalendar);
 		pnlCalendar = new MetroPanel();
 
-//		// Set border
-//		pnlCalendar.setBorder(BorderFactory.createTitledBorder("Calendar"));
+		// // Set border
+		// pnlCalendar.setBorder(BorderFactory.createTitledBorder("Calendar"));
 
 		// Register action listeners
 		btnPrev.addActionListener(new btnPrev_Action());
 		btnNext.addActionListener(new btnNext_Action());
 		cmbYear.addActionListener(new cmbYear_Action());
+
+		btnBack = ButtonFactory.getNormalButton("Back");
+		btnBack.setBounds(35, Config.HEIGHT - 120, 80, 25);
 
 		// Add controls to pane
 		this.add(pnlCalendar);
@@ -58,19 +65,21 @@ public class MyCalendar extends MetroPanel {
 		pnlCalendar.add(cmbYear);
 		pnlCalendar.add(btnPrev);
 		pnlCalendar.add(btnNext);
+		pnlCalendar.add(btnBack);
 		pnlCalendar.add(stblCalendar);
 
 		// Set bounds
 		int midX = Config.WIDTH / 2;
-		
+
 		pnlCalendar.setBounds(0, 0, Config.WIDTH, Config.HEIGHT);
-		lblMonth.setBounds(midX , 25,
-				100, 25);
+		lblMonth.setBounds(midX, 25, 100, 25);
 		lblYear.setBounds(midX + 200, Config.HEIGHT - 120, 80, 20);
 		cmbYear.setBounds(midX + 290, Config.HEIGHT - 120, 80, 20);
-		btnPrev.setBounds(midX -  lblMonth.getPreferredSize().width / 2 - 10, 25, 50, 25);
-		btnNext.setBounds(midX +  lblMonth.getPreferredSize().width / 2 + 10, 25, 50, 25);
-		stblCalendar.setBounds(1, 50,  Config.WIDTH - 2, Config.HEIGHT);
+		btnPrev.setBounds(midX - lblMonth.getPreferredSize().width / 2 - 10,
+				25, 50, 25);
+		btnNext.setBounds(midX + lblMonth.getPreferredSize().width / 2 + 10,
+				25, 50, 25);
+		stblCalendar.setBounds(1, 50, Config.WIDTH - 2, Config.HEIGHT);
 
 		// Get real month/year
 		GregorianCalendar cal = new GregorianCalendar(); // Create calendar
@@ -88,7 +97,7 @@ public class MyCalendar extends MetroPanel {
 		}
 
 		tblCalendar.getParent().setBackground(Config.COLOR); // Set
-																			// background
+																// background
 
 		// No resize/reorder
 		tblCalendar.getTableHeader().setResizingAllowed(false);
@@ -175,7 +184,7 @@ public class MyCalendar extends MetroPanel {
 			if (value != null) {
 				if (Integer.parseInt(value.toString()) == realDay
 						&& currentMonth == realMonth && currentYear == realYear) { // Today
-					setBackground(new Color(220, 220, 255));
+					setBackground(new Color(120, 220, 255));
 				}
 			}
 			setBorder(null);
@@ -226,18 +235,17 @@ public class MyCalendar extends MetroPanel {
 		this.setVisible(false);
 	}
 
+	public void addMyActionListener(ActionListener l) {
+		btnBack.addActionListener(l);
+	}
+
 	// to dedicate which cell was choosen
 	public void addListener(MouseListener l) {
 		tblCalendar.addMouseListener(l);
 	}
 
-	public Component getTableCellRendererComponent(JTable table, Object color,
-			boolean isSelected, boolean hasFocus, int row, int column) {
-
-		table.setBackground(Color.blue);
-
-		return this;
+	public MyButton getBtnBack() {
+		return btnBack;
 	}
 
-	
 }

@@ -55,6 +55,7 @@ public class Controller {
 
 							calendar = new MyCalendar();
 							calendar.addListener(new CalendarListner());
+							calendar.addMyActionListener(new CalendarListner());
 							frame.showPane(calendar);
 
 						} else {
@@ -84,10 +85,22 @@ public class Controller {
 		}
 	}// end of LoginListener
 
-	private class CalendarListner implements MouseListener {
+	private class CalendarListner implements MouseListener, ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Object source = e.getSource();
+
+			if (source == calendar.getBtnBack()) {
+				frame.showPane(login);
+
+			}
+
+		}
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+
 			if (e.getClickCount() == 2) {
 
 				JTable target = (JTable) e.getSource();
@@ -102,6 +115,7 @@ public class Controller {
 				frame.showPane(event);
 
 			}
+
 		}
 
 		@Override
@@ -153,19 +167,27 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object source = e.getSource();
-			
-			if(source == register.getBtnCancel()){
+
+			if (source == register.getBtnCancel()) {
 				frame.showPane(login);
 			}
-			
-			if(source == register.getBtnSave()){
-				if(calendar == null){
-					calendar = new MyCalendar();
-					calendar.addListener(new CalendarListner());
+
+			if (source == register.getBtnSave()) {
+
+				if (register.isAllowToRegister()) {
+					if (calendar == null) {
+						calendar = new MyCalendar();
+						CalendarListner cc = new CalendarListner();
+						calendar.addListener(cc);
+						calendar.addMyActionListener(cc);
+					}
+
+					frame.showPane(calendar);
+				}else{
+					System.out.println("cant.register you");
 				}
-				frame.showPane(calendar);
 			}
-			
+
 		}
 
 	}// END RegisterListener

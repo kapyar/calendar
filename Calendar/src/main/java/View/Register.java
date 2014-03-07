@@ -1,84 +1,105 @@
 package View;
 
 import MYGUI.ButtonFactory;
+import MYGUI.Label;
+import MYGUI.MetroEditablePane;
+import MYGUI.MetroEditablePin;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Register extends MetroPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+	private MetroEditablePane txtLogin;
+	private MetroEditablePane txtEmail;
+	private MetroEditablePane txtPhone;
+	private MetroEditablePin txtPass;
+	private MetroEditablePin txtConfirmPass;
 	private MyButton btnSave;
 	private MyButton btnCancel;
 
 	public Register() {
 
-		JLabel lblRegister = new JLabel("Register");
-		lblRegister.setBounds(423, 26, 46, 14);
+		int w = 215;
+		int h = 30;
+
+		JLabel lblRegister = new JLabel("Register", SwingConstants.CENTER);
+		Label.decorateTitle(lblRegister);
+		lblRegister.setBounds(312, 26, 236, 40);
 		add(lblRegister);
 
-		JLabel lblLogin = new JLabel("login");
+		JLabel lblLogin = new JLabel("login", SwingConstants.CENTER);
+		Label.decorateNormal(lblLogin);
 		lblLogin.setBounds(328, 147, 30, 14);
 		add(lblLogin);
 
-		textField = new JTextField();
-		textField.setBounds(368, 144, 86, 20);
-		add(textField);
-		textField.setColumns(10);
+		txtLogin = new MetroEditablePane();
+		txtLogin.setBounds(368, 144, w, h);
+		add(txtLogin);
 
-		JLabel lblEmail = new JLabel("e-mail");
-		lblEmail.setBounds(328, 192, 30, 14);
+		JLabel lblEmail = new JLabel("e-mail", SwingConstants.CENTER);
+		Label.decorateNormal(lblEmail);
+		lblEmail.setBounds(328, 192, 40, 14);
 		add(lblEmail);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(368, 189, 86, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
+		txtEmail = new MetroEditablePane();
+		txtEmail.setBounds(368, 189, w, h);
+		add(txtEmail);
+		
 
-		JLabel lblNewLabel = new JLabel("phone");
-		lblNewLabel.setBounds(328, 236, 30, 14);
+		JLabel lblNewLabel = new JLabel("phone", SwingConstants.CENTER);
+		Label.decorateNormal(lblNewLabel);
+		lblNewLabel.setBounds(328, 236, 40, 14);
 		add(lblNewLabel);
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(368, 233, 86, 20);
-		add(textField_2);
-		textField_2.setColumns(10);
+		txtPhone = new MetroEditablePane();
+		txtPhone.setBounds(368, 233, w, h);
+		add(txtPhone);
 
-		JLabel lblPassword = new JLabel("password");
-		lblPassword.setBounds(312, 279, 46, 14);
+		JLabel lblPassword = new JLabel("password", SwingConstants.CENTER);
+		Label.decorateNormal(lblPassword);
+		lblPassword.setBounds(312, 279, 60, 14);
 		add(lblPassword);
 
-		passwordField = new JPasswordField();
-		passwordField.setBounds(368, 276, 86, 20);
-		add(passwordField);
+		txtPass = new MetroEditablePin();
+		txtPass.getDel().setLocation(180, 2);
+		txtPass.setBounds(368, 276, w, h);
+		add(txtPass);
 
-		JLabel lblConfigm = new JLabel("configm password");
-		lblConfigm.setBounds(272, 315, 86, 14);
+		JLabel lblConfigm = new JLabel("configm password",
+				SwingConstants.CENTER);
+		Label.decorateNormal(lblConfigm);
+		lblConfigm.setBounds(260, 323, 120, 14);
 		add(lblConfigm);
 
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(368, 312, 86, 20);
-		add(passwordField_1);
+		txtConfirmPass = new MetroEditablePin();
+		txtConfirmPass.getDel().setLocation(180, 3);
+		txtConfirmPass.setBounds(368, 317, w, h);
+		add(txtConfirmPass);
 
 		btnSave = ButtonFactory.getNormalButton("Save");
 		btnSave.setBounds(701, 527, 89, 23);
 		add(btnSave);
 
-		btnCancel = ButtonFactory.getNormalButton("Cancel");
+		btnCancel = ButtonFactory.getNormalButton("Cancel"); 	
 		btnCancel.setBounds(602, 527, 89, 23);
 		add(btnCancel);
+		
+	
 	}
+
+	
 
 	public void addListener(ActionListener l) {
 		btnSave.addActionListener(l);
@@ -92,5 +113,29 @@ public class Register extends MetroPanel {
 
 	public MyButton getBtnCancel() {
 		return btnCancel;
+	}
+
+	public boolean isConfirmedPass() {
+		return (!txtPass.getText().equals(""))
+				&& txtPass.getText().equals(txtConfirmPass.getText())
+				&& txtPass.getText().length() > 5;
+	}
+
+	public boolean isAllowToRegister() {
+		highLight();
+		return isConfirmedPass() && txtEmail.getText().contains("@");
+	}
+
+	public void highLight() {
+	
+
+		if (!isConfirmedPass()) {
+			txtPass.showError();
+			txtConfirmPass.showError();
+		}
+		
+		if(!txtEmail.getText().contains("@")){
+			txtEmail.showError();
+		}
 	}
 }

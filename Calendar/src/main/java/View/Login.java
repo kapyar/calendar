@@ -16,12 +16,16 @@ import javax.swing.JTextField;
 
 import MYGUI.ButtonFactory;
 import MYGUI.ConfigGUICLient;
+import MYGUI.Label;
 import MYGUI.MetroEditablePane;
 import MYGUI.MetroEditablePin;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
+
 import javax.swing.JButton;
+
 import java.awt.Component;
+
 import javax.swing.SwingConstants;
 
 public class Login extends MetroPanel implements MouseListener {
@@ -47,20 +51,16 @@ public class Login extends MetroPanel implements MouseListener {
 	private MyButton btnRegister;
 
 	public Login() {
+	
 		_W = super.getWidth();
-
 		_x = super.getX();
 
 		JLabel lblBalanceTitle = new JLabel("Create Your Event",
-				JLabel.CENTER);
-		lblBalanceTitle.setFont(new Font(FontType, Font.PLAIN, 27));
-		lblBalanceTitle.setForeground(new Color(255, 255, 255));
-		lblBalanceTitle.setBounds((_W / 2) - ConfigGUICLient._WTL / 2,
-				ConfigGUICLient._yTL, ConfigGUICLient._WTL,
-				ConfigGUICLient._HTL);
-		lblBalanceTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+				SwingConstants.CENTER);
+		Label.decorateTitle(lblBalanceTitle);
+		lblBalanceTitle.setBounds(277, 40, 290, 40);
 		add(lblBalanceTitle);
+		
 		panel = new MetroPanel();
 		panel.setBounds(42, 116, 688, 296);
 		panel.setOpaque(true);
@@ -87,12 +87,7 @@ public class Login extends MetroPanel implements MouseListener {
 		int _HRightElemets = 31;
 
 		JLabel lblNubrerCart = new JLabel("Login", SwingConstants.CENTER);
-		/*
-		 * lblNewLabel.setForeground(Color.WHITE); lblNewLabel.setFont(new
-		 * Font("Segoe UI", Font.PLAIN, 11));
-		 */
-		lblNubrerCart.setForeground(Color.WHITE);
-		lblNubrerCart.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+		Label.decorateNormal(lblNubrerCart);
 		lblNubrerCart.setBounds(243, 56, 190, 15);
 		panel.add(lblNubrerCart);
 
@@ -104,8 +99,7 @@ public class Login extends MetroPanel implements MouseListener {
 		panel.add(txt);
 
 		JLabel lblPin = new JLabel("Password", SwingConstants.CENTER);
-		lblPin.setForeground(Color.WHITE);
-		lblPin.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+		Label.decorateNormal(lblPin);
 		lblPin.setBounds(243, 126, 190, 15);
 		panel.add(lblPin);
 
