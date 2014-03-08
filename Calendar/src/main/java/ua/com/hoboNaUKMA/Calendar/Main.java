@@ -1,6 +1,5 @@
 package ua.com.hoboNaUKMA.Calendar;
 
-import java.util.Calendar;
 import java.util.HashMap;
 
 import main.APIConfig;

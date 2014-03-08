@@ -5,7 +5,7 @@ import javax.swing.event.*;
 import javax.swing.table.*;
 
 import MYGUI.ButtonFactory;
-import MYGUI.Label;
+import MYGUI.Decorator;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
 
@@ -32,9 +32,9 @@ public class MyCalendar extends MetroPanel {
 
 		// Create controls
 		lblMonth = new JLabel("January");
-		Label.decorateTitle(lblMonth);
+		Decorator.decorateTitle(lblMonth);
 		lblYear = new JLabel("Change year:");
-		Label.decorateNormal(lblYear);
+		Decorator.decorateNormal(lblYear);
 		cmbYear = new JComboBox();
 		btnPrev = ButtonFactory.getNormalButton("...");
 		btnNext = ButtonFactory.getNormalButton("...");
@@ -90,7 +90,7 @@ public class MyCalendar extends MetroPanel {
 		currentYear = realYear;
 
 		// Add headers
-		String[] headers = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" }; // All
+		String[] headers = Config.DAYS_TITLE; // All
 																				// headers
 		for (int i = 0; i < 7; i++) {
 			mtblCalendar.addColumn(headers[i]);
@@ -125,9 +125,7 @@ public class MyCalendar extends MetroPanel {
 
 	public void refreshCalendar(int month, int year) {
 		// Variables
-		String[] months = { "January", "February", "March", "April", "May",
-				"June", "July", "August", "September", "October", "November",
-				"December" };
+		String[] months = Config.MONTHS;
 		int nod, som; // Number Of Days, Start Of Month
 
 		// Allow/disallow buttons
@@ -246,6 +244,14 @@ public class MyCalendar extends MetroPanel {
 
 	public MyButton getBtnBack() {
 		return btnBack;
+	}
+
+	public JLabel getLblMonth() {
+		return lblMonth;
+	}
+
+	public JComboBox getCmbYear() {
+		return cmbYear;
 	}
 
 }

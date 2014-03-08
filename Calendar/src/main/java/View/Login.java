@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 import MYGUI.ButtonFactory;
 import MYGUI.ConfigGUICLient;
-import MYGUI.Label;
+import MYGUI.Decorator;
 import MYGUI.MetroEditablePane;
 import MYGUI.MetroEditablePin;
 import MYGUI.MetroPanel;
@@ -57,7 +57,7 @@ public class Login extends MetroPanel implements MouseListener {
 
 		JLabel lblBalanceTitle = new JLabel("Create Your Event",
 				SwingConstants.CENTER);
-		Label.decorateTitle(lblBalanceTitle);
+		Decorator.decorateTitle(lblBalanceTitle);
 		lblBalanceTitle.setBounds(277, 40, 290, 40);
 		add(lblBalanceTitle);
 		
@@ -87,7 +87,7 @@ public class Login extends MetroPanel implements MouseListener {
 		int _HRightElemets = 31;
 
 		JLabel lblNubrerCart = new JLabel("Login", SwingConstants.CENTER);
-		Label.decorateNormal(lblNubrerCart);
+		Decorator.decorateNormal(lblNubrerCart);
 		lblNubrerCart.setBounds(243, 56, 190, 15);
 		panel.add(lblNubrerCart);
 
@@ -99,7 +99,7 @@ public class Login extends MetroPanel implements MouseListener {
 		panel.add(txt);
 
 		JLabel lblPin = new JLabel("Password", SwingConstants.CENTER);
-		Label.decorateNormal(lblPin);
+		Decorator.decorateNormal(lblPin);
 		lblPin.setBounds(243, 126, 190, 15);
 		panel.add(lblPin);
 
@@ -232,5 +232,13 @@ public class Login extends MetroPanel implements MouseListener {
 
 	public MyButton getBtnRegister() {
 		return btnRegister;
+	}
+
+	public MetroEditablePane getTxt() {
+		return txt;
+	}
+
+	public MetroEditablePin getPin() {
+		return pin;
 	}
 }

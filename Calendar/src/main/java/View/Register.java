@@ -1,7 +1,7 @@
 package View;
 
 import MYGUI.ButtonFactory;
-import MYGUI.Label;
+import MYGUI.Decorator;
 import MYGUI.MetroEditablePane;
 import MYGUI.MetroEditablePin;
 import MYGUI.MetroPanel;
@@ -9,6 +9,7 @@ import MYGUI.MyButton;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ import javax.swing.border.Border;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -34,67 +36,82 @@ public class Register extends MetroPanel {
 		int w = 215;
 		int h = 30;
 
-		JLabel lblRegister = new JLabel("Register", SwingConstants.CENTER);
-		Label.decorateTitle(lblRegister);
-		lblRegister.setBounds(312, 26, 236, 40);
-		add(lblRegister);
+		MetroPanel panel = new MetroPanel();
+		panel.setBounds(0, 100, 400, 450);
+		int midX = Config.WIDTH / 2 - panel.getWidth() / 2;
+		panel.setBounds(midX, 100, 400, 400);
+		Font font = new Font("Segoe UI", 1, 11);
+		panel.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createBevelBorder(1), "Action", 0, 0, font,
+				Color.WHITE));
+		panel.setAlignmentX(SwingConstants.CENTER);
 
-		JLabel lblLogin = new JLabel("login", SwingConstants.CENTER);
-		Label.decorateNormal(lblLogin);
-		lblLogin.setBounds(328, 147, 30, 14);
-		add(lblLogin);
-
-		txtLogin = new MetroEditablePane();
-		txtLogin.setBounds(368, 144, w, h);
-		add(txtLogin);
-
-		JLabel lblEmail = new JLabel("e-mail", SwingConstants.CENTER);
-		Label.decorateNormal(lblEmail);
-		lblEmail.setBounds(328, 192, 40, 14);
-		add(lblEmail);
-
-		txtEmail = new MetroEditablePane();
-		txtEmail.setBounds(368, 189, w, h);
-		add(txtEmail);
+		add(panel);
+		
+				JLabel lblLogin = new JLabel("login", SwingConstants.CENTER);
+				lblLogin.setBounds(118, 55, 30, 14);
+				panel.add(lblLogin);
+				Decorator.decorateNormal(lblLogin);
+		
+				txtLogin = new MetroEditablePane();
+				txtLogin.setBounds(151, 47, 215, 30);
+				
+				panel.add(txtLogin);
+				
+						JLabel lblEmail = new JLabel("e-mail", SwingConstants.CENTER);
+						lblEmail.setBounds(110, 107, 40, 14);
+						panel.add(lblEmail);
+						Decorator.decorateNormal(lblEmail);
+		
+				txtEmail = new MetroEditablePane();
+				txtEmail.setBounds(152, 102, 215, 30);
+				panel.add(txtEmail);
 		
 
 		JLabel lblNewLabel = new JLabel("phone", SwingConstants.CENTER);
-		Label.decorateNormal(lblNewLabel);
-		lblNewLabel.setBounds(328, 236, 40, 14);
-		add(lblNewLabel);
+		lblNewLabel.setBounds(112, 167, 40, 14);
+		panel.add(lblNewLabel);
+		Decorator.decorateNormal(lblNewLabel);
 
 		txtPhone = new MetroEditablePane();
-		txtPhone.setBounds(368, 233, w, h);
-		add(txtPhone);
+		txtPhone.setBounds(155, 157, 215, 30);
+		panel.add(txtPhone);
 
 		JLabel lblPassword = new JLabel("password", SwingConstants.CENTER);
-		Label.decorateNormal(lblPassword);
-		lblPassword.setBounds(312, 279, 60, 14);
-		add(lblPassword);
+		lblPassword.setBounds(91, 220, 60, 14);
+		panel.add(lblPassword);
+		Decorator.decorateNormal(lblPassword);
 
 		txtPass = new MetroEditablePin();
+		txtPass.setBounds(154, 210, 215, 30);
+		panel.add(txtPass);
 		txtPass.getDel().setLocation(180, 2);
-		txtPass.setBounds(368, 276, w, h);
-		add(txtPass);
 
 		JLabel lblConfigm = new JLabel("configm password",
 				SwingConstants.CENTER);
-		Label.decorateNormal(lblConfigm);
-		lblConfigm.setBounds(260, 323, 120, 14);
-		add(lblConfigm);
+		lblConfigm.setBounds(35, 266, 120, 14);
+		panel.add(lblConfigm);
+		Decorator.decorateNormal(lblConfigm);
 
 		txtConfirmPass = new MetroEditablePin();
+		txtConfirmPass.setBounds(155, 258, 215, 30);
+		panel.add(txtConfirmPass);
 		txtConfirmPass.getDel().setLocation(180, 3);
-		txtConfirmPass.setBounds(368, 317, w, h);
-		add(txtConfirmPass);
 
 		btnSave = ButtonFactory.getNormalButton("Save");
 		btnSave.setBounds(701, 527, 89, 23);
 		add(btnSave);
+		
+		JLabel lblRegister = new JLabel("Register", SwingConstants.CENTER);
+		lblRegister.setBounds(0, 0, 236, 40);
+		add(lblRegister);
+		Decorator.decorateTitle(lblRegister);
 
 		btnCancel = ButtonFactory.getNormalButton("Cancel"); 	
 		btnCancel.setBounds(602, 527, 89, 23);
 		add(btnCancel);
+		
+		
 		
 	
 	}
