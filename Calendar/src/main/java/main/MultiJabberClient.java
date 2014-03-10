@@ -18,7 +18,7 @@ public class MultiJabberClient implements Callable<HashMap<Action, Object>> {
 	private HashMap<Action, Object> command;
 
 	final String HOST_NAME = "localhost";
-	final int PORT_NUMBER = 8081;
+	final int PORT_NUMBER = 8082;
 
 	public MultiJabberClient(HashMap<Action, Object> command)
 			throws IOException {
