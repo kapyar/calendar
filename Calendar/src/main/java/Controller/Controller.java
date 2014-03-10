@@ -218,14 +218,12 @@ public class Controller {
 
 							if (Model.Model.MODEL.doRegisterNewOne(user)) {
 
-								if (calendar == null) {
-									calendar = new MyCalendar();
-									CalendarListner cc = new CalendarListner();
-									calendar.addListener(cc);
-									calendar.addMyActionListener(cc);
+								if (login == null) {
+									login = new Login();
+									login.addListener(new LoginListener());
 								}
 
-								frame.showPane(calendar);
+								frame.showPane(login);
 
 							} else {
 								System.out.println("Already exists");
@@ -241,7 +239,7 @@ public class Controller {
 					new MyWorker().execute();
 
 				} else {
-					
+
 					System.out.println("CCant.register you");
 				}
 			}
@@ -263,6 +261,7 @@ public class Controller {
 			}
 
 			if (source == choose.getBtnBack()) {
+				Model.Model.MODEL.doLogOut();
 				frame.showPane(login);
 			}
 
