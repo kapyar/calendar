@@ -218,12 +218,14 @@ public class Controller {
 
 							if (Model.Model.MODEL.doRegisterNewOne(user)) {
 
-								if (login == null) {
-									login = new Login();
-									login.addListener(new LoginListener());
+								if (calendar == null) {
+									calendar = new MyCalendar();
+									CalendarListner cc = new CalendarListner();
+									calendar.addListener(cc);
+									calendar.addMyActionListener(cc);
 								}
 
-								frame.showPane(login);
+								frame.showPane(calendar);
 
 							} else {
 								System.out.println("Already exists");
@@ -239,7 +241,7 @@ public class Controller {
 					new MyWorker().execute();
 
 				} else {
-
+					
 					System.out.println("CCant.register you");
 				}
 			}
@@ -261,7 +263,6 @@ public class Controller {
 			}
 
 			if (source == choose.getBtnBack()) {
-				Model.Model.MODEL.doLogOut();
 				frame.showPane(login);
 			}
 
@@ -280,7 +281,7 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object source = e.getSource();
-			System.out.println("FL");
+
 			if (source == friend.getBtnBack()) {
 				frame.showPane(choose);
 			}
