@@ -68,6 +68,8 @@ public enum Model {
 		command.put(Action.MAIL, user.getUser_mail());
 		command.put(Action.PHONE, user.getUser_phone());
 		command.put(Action.PASS, user.getUser_pass());
+		
+		System.out.println("lkajhlkfjashdkl"+user.getUser_pass());
 
 		ExecutorService ex = Executors.newCachedThreadPool();
 		try {
