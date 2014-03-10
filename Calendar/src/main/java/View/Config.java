@@ -3,10 +3,20 @@ package View;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 
+import main.DataBaseAPI;
+import main.User;
+
+import com.sun.mail.imap.protocol.Namespaces.Namespace;
+
 public class Config {
+	private Object dataBase =DataBaseAPI.GET;;
+	
+	
 	public static final int HEIGHT = 600;
 	public static final int WIDTH = 800;
 
@@ -44,5 +54,30 @@ public class Config {
 
 		return -1;
 	}
+	
+	public static AbstractListModel friendList = new AbstractListModel()
+	{
+		
+		List<User> users = dataBase.getAllUsers();
+	String[] values = new String[3];
+	{
+	values[0] = "sdfsdf";
+	values[1]= "sdf";
+	values[2]= "sdf";
+	}
+	
 
+		
+		@Override
+		public Object getElementAt(int index) {
+			
+			return values[index];
+		}
+
+		@Override
+		public int getSize() {
+			return values.length;
+		}
+	};
+	
 }

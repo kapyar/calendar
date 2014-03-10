@@ -31,17 +31,8 @@ public class Friend extends MetroPanel {
 
 		JList list = new JList();
 		initList();
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] { "s" };
-
-			public int getSize() {
-				return values.length;
-			}
-
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		
+		list.setModel(Config.friendList);
 		DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 		list.setBounds(365, 142, 195, 301);

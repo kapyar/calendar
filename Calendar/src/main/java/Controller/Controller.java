@@ -281,7 +281,7 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object source = e.getSource();
-
+			System.out.println("FL");
 			if (source == friend.getBtnBack()) {
 				frame.showPane(choose);
 			}

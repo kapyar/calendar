@@ -26,13 +26,14 @@ public enum DataBaseAPI {
 	}
 
 	// TODO: trash. remove this one later
-	public void getAllUsers() {
+	public List<User> getAllUsers() {
 		Query q = em.createQuery("SELECT a FROM User a");
 		List<User> todoList = q.getResultList();
-		for (User todo : todoList) {
-			System.out.println(todo);
-		}
+//		for (User todo : todoList) {
+//			System.out.println(todo);
+//		}
 		System.out.println("Size: " + todoList.size());
+		return todoList;
 	}
 
 	public void addNewUser(HashMap<String, String> userData) throws Exception {
