@@ -42,7 +42,8 @@ public class Friend extends MetroPanel {
 				return values[index];
 			}
 		});
-		DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+		DefaultListCellRenderer renderer = (DefaultListCellRenderer) list
+				.getCellRenderer();
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 		list.setBounds(365, 142, 195, 301);
 		add(list);

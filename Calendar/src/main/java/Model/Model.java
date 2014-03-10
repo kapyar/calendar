@@ -19,6 +19,7 @@ import main.MultiJabberClient;
 
 public enum Model {
 	MODEL;
+	
 
 	public String CURRENT_LOGIN;
 
