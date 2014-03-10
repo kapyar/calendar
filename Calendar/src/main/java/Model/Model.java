@@ -96,7 +96,33 @@ public enum Model {
 		return true;
 	}
 
-	/////////////private part goes here/////////////////////////////
+	public boolean doLogOut() {
+		HashMap<Action, Object> command = new HashMap<Action, Object>();
+		command.put(Action.ACTION, Action.LOG_OUT);
+
+		ExecutorService ex = Executors.newCachedThreadPool();
+		try {
+			Future<HashMap<Action, Object>> res = ex
+					.submit(new MultiJabberClient(command));
+
+			System.out.println(" GET: " + res.get());
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ex.shutdown();
+		return true;
+
+	}
+
+	// ///////////private part goes here/////////////////////////////
 
 	private boolean checkRegister(HashMap<Action, Object> hashMap) {
 		Action t = (Action) hashMap.get(Action.REGISTER);

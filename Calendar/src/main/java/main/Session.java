@@ -1,13 +1,14 @@
 package main;
 
-
-
 import java.math.BigInteger;
 import java.security.SecureRandom;
+
+import static main.APIConfig.log;
 
 public class Session {
 	private static SecureRandom random = new SecureRandom();
 	
+	// NOTE: user_name of user EMAIL, not actual name
 	private String user_name;
 	private String user_session;
 	
@@ -17,7 +18,7 @@ public class Session {
 	public Session(String name) {
 		user_name = name;
 		user_session = nextSessionId();
-		System.out.println("New session created(user: " + user_name + ", sessionId: " + user_session + ")");
+		log("Session(): New session created(user: " + user_name + ", sessionId: " + user_session + ")");
 	}
 	
 

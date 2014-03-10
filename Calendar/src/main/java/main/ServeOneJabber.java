@@ -46,7 +46,12 @@ public class ServeOneJabber extends Thread {
 				String pass = (String) in.get(Action.PASS_FIELD);
 
 				if (dataBase.userExists(login)) {
-					dataBase.logIn(login, pass);
+					System.out.println("Pass in login: " + pass);
+					try {
+						dataBase.logIn(login, pass);
+					} catch (Exception e) {
+						out.put(Action.LOG_IN, Action.ERROR_NOT_MATCHES);
+					}
 					out.put(Action.LOG_IN, Action.LOG_IN);
 				} else {
 					out.put(Action.LOG_IN, Action.LOGIN_FIELD);
@@ -74,6 +79,13 @@ public class ServeOneJabber extends Thread {
 					out.put(Action.REGISTER, Action.ERROR_CODE);
 				}
 
+				break;
+
+			case LOG_OUT:
+				System.out.println("LOG OUT PART");
+				dataBase.logOut();
+				System.out.println("_____________==========____________");
+				out.put(Action.LOG_OUT, Action.LOG_OUT);
 				break;
 
 			}// END of switch
