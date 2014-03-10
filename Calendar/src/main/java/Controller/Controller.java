@@ -211,6 +211,7 @@ public class Controller {
 							String name = register.getTxtLogin().getText();
 							String pass = register.getTxtConfirmPass()
 									.getText();
+
 							String mail = register.getTxtEmail().getText();
 							String phone = register.getTxtPhone().getText();
 							UserDataHolder user = new UserDataHolder(name,

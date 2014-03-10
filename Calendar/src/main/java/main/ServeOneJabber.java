@@ -45,21 +45,17 @@ public class ServeOneJabber extends Thread {
 				String login = (String) in.get(Action.LOGIN_FIELD);
 				String pass = (String) in.get(Action.PASS_FIELD);
 
-				if (dataBase.userExists(login)) {
-					System.out.println("Pass in login: " + pass);
-					try {
-						dataBase.logIn(login, pass);
-					} catch (Exception e) {
-						out.put(Action.LOG_IN, Action.ERROR_NOT_MATCHES);
-					}
-					out.put(Action.LOG_IN, Action.LOG_IN);
-				} else {
-					out.put(Action.LOG_IN, Action.LOGIN_FIELD);
+				try {
+					dataBase.logIn(login, pass);
+				} catch (Exception e) {
+					out.put(Action.LOG_IN, Action.ERROR_NOT_MATCHES);
 				}
+				out.put(Action.LOG_IN, Action.LOG_IN);
 
 				break;
 
 			case REGISTER:
+				
 				System.out.println("REGISTER PART");
 				String name = (String) in.get(Action.NAME);
 				String mail = (String) in.get(Action.MAIL);

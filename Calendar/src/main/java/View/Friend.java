@@ -1,7 +1,6 @@
 package View;
 
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import MYGUI.ButtonFactory;
 import MYGUI.Decorator;
@@ -15,13 +14,10 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.SwingConstants;
 
-import main.DataBaseAPI;
-import main.User;
-
 public class Friend extends MetroPanel {
 	private MyButton btnBack;
 	private MyButton btnMakeFriend;
-	private main.DataBaseAPI dataBase = main.DataBaseAPI.GET;
+
 	public Friend() {
 
 		JLabel lblFindYourFriends = new JLabel("Find Your Friends");
@@ -32,9 +28,7 @@ public class Friend extends MetroPanel {
 		btnBack = ButtonFactory.getNormalButton("Back");
 		btnBack.setBounds(10, 525, 89, 23);
 		add(btnBack);
-		try {
-			List<User> us = dataBase.getAllUsers();
-		
+
 		JList list = new JList();
 		initList();
 		list.setModel(new AbstractListModel() {
@@ -48,9 +42,8 @@ public class Friend extends MetroPanel {
 				return values[index];
 			}
 		});
-		
-		
-		DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+		DefaultListCellRenderer renderer = (DefaultListCellRenderer) list
+				.getCellRenderer();
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 		list.setBounds(365, 142, 195, 301);
 		add(list);
@@ -58,12 +51,6 @@ public class Friend extends MetroPanel {
 		btnMakeFriend = ButtonFactory.getNormalButton("Make Friend");
 		btnMakeFriend.setBounds(692, 526, 98, 23);
 		add(btnMakeFriend);
-		
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	private void initList() {

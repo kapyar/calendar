@@ -10,7 +10,7 @@ public class UserDataHolder {
 
 	public UserDataHolder(String name, String pass, String mail, String phone) {
 		user_name = name;
-		user_pass = DigestUtils.md5Hex(pass);
+		user_pass = pass;
 		user_mail = mail;
 		user_phone = phone;
 	}
