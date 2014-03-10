@@ -21,6 +21,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JProgressBar;
 
 public class Register extends MetroPanel {
 	private MetroEditablePane txtLogin;
@@ -30,6 +31,7 @@ public class Register extends MetroPanel {
 	private MetroEditablePin txtConfirmPass;
 	private MyButton btnSave;
 	private MyButton btnCancel;
+	private JProgressBar progressBar;
 
 	public Register() {
 
@@ -37,7 +39,7 @@ public class Register extends MetroPanel {
 		int h = 30;
 
 		MetroPanel panel = new MetroPanel();
-		panel.setBounds(0, 100, 400, 450);
+		panel.setBounds(199, 61, 400, 450);
 		int midX = Config.WIDTH / 2 - panel.getWidth() / 2;
 		panel.setBounds(midX, 100, 400, 400);
 		Font font = new Font("Segoe UI", 1, 11);
@@ -110,6 +112,11 @@ public class Register extends MetroPanel {
 		btnCancel.setBounds(602, 527, 89, 23);
 		add(btnCancel);
 
+		progressBar = new JProgressBar();
+		progressBar.setBounds(200, 499, 400, 23);
+		progressBar.setVisible(false);
+		add(progressBar);
+
 	}
 
 	public void addListener(ActionListener l) {
@@ -133,7 +140,7 @@ public class Register extends MetroPanel {
 	}
 
 	public boolean isAllowToRegister() {
-
+		highLight();
 		return isConfirmedPass() && txtEmail.getText().contains("@");
 	}
 
@@ -147,5 +154,29 @@ public class Register extends MetroPanel {
 		if (!txtEmail.getText().contains("@")) {
 			txtEmail.showError();
 		}
+	}
+
+	public JProgressBar getProgressBar() {
+		return progressBar;
+	}
+
+	public MetroEditablePane getTxtLogin() {
+		return txtLogin;
+	}
+
+	public MetroEditablePane getTxtEmail() {
+		return txtEmail;
+	}
+
+	public MetroEditablePane getTxtPhone() {
+		return txtPhone;
+	}
+
+	public MetroEditablePin getTxtPass() {
+		return txtPass;
+	}
+
+	public MetroEditablePin getTxtConfirmPass() {
+		return txtConfirmPass;
 	}
 }

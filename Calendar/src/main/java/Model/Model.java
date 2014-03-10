@@ -96,7 +96,7 @@ public enum Model {
 		return true;
 	}
 
-	// ///////////privat part goes here/////////////////////////////
+	/////////////private part goes here/////////////////////////////
 
 	private boolean checkRegister(HashMap<Action, Object> hashMap) {
 		Action t = (Action) hashMap.get(Action.REGISTER);
