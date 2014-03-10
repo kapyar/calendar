@@ -47,26 +47,25 @@ public class Register extends MetroPanel {
 		panel.setAlignmentX(SwingConstants.CENTER);
 
 		add(panel);
-		
-				JLabel lblLogin = new JLabel("login", SwingConstants.CENTER);
-				lblLogin.setBounds(118, 55, 30, 14);
-				panel.add(lblLogin);
-				Decorator.decorateNormal(lblLogin);
-		
-				txtLogin = new MetroEditablePane();
-				txtLogin.setBounds(151, 47, 215, 30);
-				
-				panel.add(txtLogin);
-				
-						JLabel lblEmail = new JLabel("e-mail", SwingConstants.CENTER);
-						lblEmail.setBounds(110, 107, 40, 14);
-						panel.add(lblEmail);
-						Decorator.decorateNormal(lblEmail);
-		
-				txtEmail = new MetroEditablePane();
-				txtEmail.setBounds(152, 102, 215, 30);
-				panel.add(txtEmail);
-		
+
+		JLabel lblLogin = new JLabel("login", SwingConstants.CENTER);
+		lblLogin.setBounds(118, 55, 30, 14);
+		panel.add(lblLogin);
+		Decorator.decorateNormal(lblLogin);
+
+		txtLogin = new MetroEditablePane();
+		txtLogin.setBounds(151, 47, 215, 30);
+
+		panel.add(txtLogin);
+
+		JLabel lblEmail = new JLabel("e-mail", SwingConstants.CENTER);
+		lblEmail.setBounds(110, 107, 40, 14);
+		panel.add(lblEmail);
+		Decorator.decorateNormal(lblEmail);
+
+		txtEmail = new MetroEditablePane();
+		txtEmail.setBounds(152, 102, 215, 30);
+		panel.add(txtEmail);
 
 		JLabel lblNewLabel = new JLabel("phone", SwingConstants.CENTER);
 		lblNewLabel.setBounds(112, 167, 40, 14);
@@ -101,22 +100,17 @@ public class Register extends MetroPanel {
 		btnSave = ButtonFactory.getNormalButton("Save");
 		btnSave.setBounds(701, 527, 89, 23);
 		add(btnSave);
-		
+
 		JLabel lblRegister = new JLabel("Register", SwingConstants.CENTER);
 		lblRegister.setBounds(0, 0, 236, 40);
 		add(lblRegister);
 		Decorator.decorateTitle(lblRegister);
 
-		btnCancel = ButtonFactory.getNormalButton("Cancel"); 	
+		btnCancel = ButtonFactory.getNormalButton("Cancel");
 		btnCancel.setBounds(602, 527, 89, 23);
 		add(btnCancel);
-		
-		
-		
-	
-	}
 
-	
+	}
 
 	public void addListener(ActionListener l) {
 		btnSave.addActionListener(l);
@@ -139,19 +133,18 @@ public class Register extends MetroPanel {
 	}
 
 	public boolean isAllowToRegister() {
-		highLight();
+
 		return isConfirmedPass() && txtEmail.getText().contains("@");
 	}
 
 	public void highLight() {
-	
 
 		if (!isConfirmedPass()) {
 			txtPass.showError();
 			txtConfirmPass.showError();
 		}
-		
-		if(!txtEmail.getText().contains("@")){
+
+		if (!txtEmail.getText().contains("@")) {
 			txtEmail.showError();
 		}
 	}
