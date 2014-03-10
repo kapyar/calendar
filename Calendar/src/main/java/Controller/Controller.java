@@ -13,6 +13,7 @@ import javax.swing.SwingWorker;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.text.TableView.TableCell;
 
+import Model.UserDataHolder;
 import View.Config;
 import View.Friend;
 import View.ChooserPanel;
@@ -128,7 +129,6 @@ public class Controller {
 				Integer year = Integer.parseInt((String) calendar.getCmbYear()
 						.getSelectedItem());
 				d.setYear(year);
-				
 
 				System.out.println("Choosen date: " + d);
 
@@ -191,27 +191,62 @@ public class Controller {
 			Object source = e.getSource();
 
 			if (source == register.getBtnCancel()) {
-				frame.showPane(login);
+
+				choose = new ChooserPanel();
+				choose.addListener(new ChooseListener());
+				frame.showPane(choose);
+
 			}
 
 			if (source == register.getBtnSave()) {
 
 				if (register.isAllowToRegister()) {
-					if (calendar == null) {
-						calendar = new MyCalendar();
-						CalendarListner cc = new CalendarListner();
-						calendar.addListener(cc);
-						calendar.addMyActionListener(cc);
-					}
 
-					frame.showPane(calendar);
+					class MyWorker extends SwingWorker<Object, Object> {
+						@Override
+						protected Object doInBackground() throws Exception {
+							register.getProgressBar().setVisible(true);
+							register.getProgressBar().setIndeterminate(true);
+
+							String name = register.getTxtLogin().getText();
+							String pass = register.getTxtConfirmPass()
+									.getText();
+							String mail = register.getTxtEmail().getText();
+							String phone = register.getTxtPhone().getText();
+							UserDataHolder user = new UserDataHolder(name,
+									pass, mail, phone);
+
+							if (Model.Model.MODEL.doRegisterNewOne(user)) {
+
+								if (calendar == null) {
+									calendar = new MyCalendar();
+									CalendarListner cc = new CalendarListner();
+									calendar.addListener(cc);
+									calendar.addMyActionListener(cc);
+								}
+
+								frame.showPane(calendar);
+
+							} else {
+								System.out.println("Already exists");
+							}
+							return null;
+						}
+
+						@Override
+						protected void done() {
+							register.getProgressBar().setVisible(false);
+						}
+					}
+					new MyWorker().execute();
+
 				} else {
-					System.out.println("cant.register you");
+					
+					System.out.println("CCant.register you");
 				}
 			}
 
 		}
-
 	}// END RegisterListener
 
 	private class ChooseListener implements ActionListener {

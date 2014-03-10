@@ -55,7 +55,7 @@ public class ServeOneJabber extends Thread {
 				break;
 
 			case REGISTER:
-
+				System.out.println("REGISTER PART");
 				String name = (String) in.get(Action.NAME);
 				String mail = (String) in.get(Action.MAIL);
 				String phone = (String) in.get(Action.PHONE);
