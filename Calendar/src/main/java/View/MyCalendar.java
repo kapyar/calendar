@@ -29,7 +29,7 @@ public class MyCalendar extends MetroPanel {
 		this.setLayout(null); // Apply null layout
 		this.setBackground(new Color(34, 77, 125));
 		this.setSize(new Dimension(Config.C_WIDTH, Config.C_HEIGHT));
-
+		
 		// Create controls
 		lblMonth = new JLabel("January");
 		Decorator.decorateTitle(lblMonth);
@@ -91,11 +91,13 @@ public class MyCalendar extends MetroPanel {
 
 		// Add headers
 		String[] headers = Config.DAYS_TITLE; // All
-																				// headers
-		for (int i = 0; i < 7; i++) {
-			mtblCalendar.addColumn(headers[i]);
+		// headers
+		for (int i = 0; i < 6; i++) {
+			mtblCalendar.addColumn(headers[i+1]);
 		}
-
+		mtblCalendar.addColumn(headers[0]);
+		
+		
 		tblCalendar.getParent().setBackground(Config.COLOR); // Set
 																// background
 
@@ -157,12 +159,21 @@ public class MyCalendar extends MetroPanel {
 
 		// Draw calendar
 		for (int i = 1; i <= nod; i++) {
-			int row = new Integer((i + som - 2) / 7);
-			int column = (i + som - 2) % 7;
+			int row = new Integer((i + som - 3) / 7);
+			
+			int column = (i + som - 3) % 7;
+			
+			//початок костиля
+			if (row == -1)
+				row=6;
+			if (column == -1)
+				column=6;
+			//кінець костиля
+			
 			mtblCalendar.setValueAt(i, row, column);
 
 		}
-
+		
 		// Apply renderers
 		tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0),
 				new tblCalendarRenderer());
@@ -174,19 +185,22 @@ public class MyCalendar extends MetroPanel {
 				int column) {
 			super.getTableCellRendererComponent(table, value, selected,
 					focused, row, column);
-			if (column == 0 || column == 6) { // Week-end
-				setBackground(new Color(255, 220, 220));
+			if (column == 5 || column == 6) { // Week-end
+				setBackground(ConfigColor._cnwkBG);
 			} else { // Week
-				setBackground(new Color(255, 255, 255));
+				setBackground(ConfigColor._cwkBG);
 			}
 			if (value != null) {
 				if (Integer.parseInt(value.toString()) == realDay
 						&& currentMonth == realMonth && currentYear == realYear) { // Today
-					setBackground(new Color(120, 220, 255));
+					setBackground(ConfigColor._ctBG);
 				}
 			}
 			setBorder(null);
 			setForeground(Color.black);
+			setFont(new Font("Segoe UI", Font.PLAIN, 20));
+			setForeground(new Color(255,255,255));
+			
 			return this;
 		}
 	}
@@ -228,6 +242,7 @@ public class MyCalendar extends MetroPanel {
 	public void show() {
 		this.setVisible(true);
 	}
+	
 
 	public void hide() {
 		this.setVisible(false);

@@ -286,6 +286,12 @@ public class Controller {
 			if (source == friend.getBtnBack()) {
 				frame.showPane(choose);
 			}
+			
+			if (source == friend.getBtnMakeFriend()) {
+				//frame.showPane(choose);
+				
+			}
+
 
 		}
 

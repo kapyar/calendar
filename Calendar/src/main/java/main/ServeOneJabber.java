@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class ServeOneJabber extends Thread {
@@ -16,7 +17,8 @@ public class ServeOneJabber extends Thread {
 	private ObjectInputStream osIn;
 	private ObjectOutputStream osOut;
 	private DataBaseAPI dataBase = DataBaseAPI.GET;
-
+	private List<User> us;
+	
 	public ServeOneJabber(Socket s) throws IOException {
 		System.out.println("Constructor ServerOneJabber");
 		socket = s;
@@ -51,7 +53,11 @@ public class ServeOneJabber extends Thread {
 					out.put(Action.LOG_IN, Action.ERROR_NOT_MATCHES);
 				}
 				out.put(Action.LOG_IN, Action.LOG_IN);
-
+				 us= dataBase.getAllUsers();
+				 for (User u : us) {
+					 System.out.println(u.getName());
+				}
+				 
 				break;
 
 			case REGISTER:

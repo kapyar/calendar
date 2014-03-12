@@ -23,7 +23,7 @@ public class Config {
 	public static final int C_HEIGHT = 400;
 	public static final int C_WIDTH = 400;
 
-	public static final Color COLOR = new Color(51, 153, 255);
+	public static final Color COLOR = ConfigColor._MAINcolor;
 
 	public static final String[] MONTHS = { "January", "February", "March",
 			"April", "May", "June", "July", "August", "September", "October",
