@@ -3,10 +3,15 @@ package View;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 
+import main.DataBaseAPI;
+import main.User;
+
 public class Config {
+	private static DataBaseAPI db = DataBaseAPI.GET;
 	public static final int HEIGHT = 600;
 	public static final int WIDTH = 800;
 
@@ -44,5 +49,7 @@ public class Config {
 
 		return -1;
 	}
+
+	
 
 }

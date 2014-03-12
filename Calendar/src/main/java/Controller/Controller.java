@@ -32,6 +32,7 @@ public class Controller {
 	private Register register;
 	private ChooserPanel choose;
 	private Friend friend;
+	private Date dateWhen;
 
 	public Controller(MainContainer main) {
 		frame = main;
@@ -117,20 +118,20 @@ public class Controller {
 				System.out.println("Found, column: " + column + " row: " + row);
 				// need to rennder chosen cell
 
-				Date d = new Date();
+				dateWhen = new Date();
 
 				Integer day = (Integer) target.getValueAt(row, column);
-				d.setDate(day);
+				dateWhen.setDate(day);
 
 				int month = Config.getIndex(Config.MONTHS, calendar
 						.getLblMonth().getText());
-				d.setMonth(month);
+				dateWhen.setMonth(month);
 
 				Integer year = Integer.parseInt((String) calendar.getCmbYear()
 						.getSelectedItem());
-				d.setYear(year);
+				dateWhen.setYear(year);
 
-				System.out.println("Choosen date: " + d);
+				System.out.println("Choosen date: " + dateWhen);
 
 				event = new UserEvent();
 				event.addListener(new UserEventListener());

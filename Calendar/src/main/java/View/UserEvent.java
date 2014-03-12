@@ -24,12 +24,15 @@ import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+import main.DataBaseAPI;
+
 public class UserEvent extends MetroPanel {
 	private MetroEditablePane txtName;
 	private MetroEditablePane txtWhere;
 	private MetroEditablePane txtWhen;
 	private MyButton btnCancel;
 	private MyButton btnSave;
+	private DataBaseAPI db = DataBaseAPI.GET;
 
 	public UserEvent() {
 
@@ -153,5 +156,9 @@ public class UserEvent extends MetroPanel {
 
 	public JButton getBtnSave() {
 		return btnSave;
+	}
+	
+	public void initModel(){
+		
 	}
 }
