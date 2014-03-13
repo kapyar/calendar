@@ -1,7 +1,6 @@
-/META-INF
-/Model
-/ua
-/Server
-/main
-/View
 /Controller
+/Model
+/MYGUI
+/View
+/main
+/META-INF
