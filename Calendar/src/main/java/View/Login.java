@@ -64,7 +64,7 @@ public class Login extends MetroPanel implements MouseListener {
 		panel = new MetroPanel();
 		panel.setBounds(42, 116, 688, 296);
 		panel.setOpaque(true);
-		panel.setBackground(new Color(40, 140, 255));
+		panel.setBackground(ConfigColor._logBG);
 		panel.setVisible(true);
 		add(panel);
 
@@ -110,13 +110,13 @@ public class Login extends MetroPanel implements MouseListener {
 
 		rdbtnCardNumb = new JRadioButton("");
 		rdbtnCardNumb.setBounds(222, 78, 21, 23);
-		rdbtnCardNumb.setBackground(new Color(40, 140, 255));
+		rdbtnCardNumb.setBackground(ConfigColor._rbtnBG);
 		rdbtnCardNumb.setSelected(true);
 		panel.add(rdbtnCardNumb);
 
 		rdbtPass = new JRadioButton("");
 		rdbtPass.setBounds(222, 148, 21, 23);
-		rdbtPass.setBackground(new Color(40, 140, 255));
+		rdbtPass.setBackground(ConfigColor._rbtnBG);
 		panel.add(rdbtPass);
 
 		ButtonGroup radioGroup = new ButtonGroup();
@@ -154,13 +154,13 @@ public class Login extends MetroPanel implements MouseListener {
 	}
 
 	private void cleanField(JTextField txtCardNumb) {
-		txtCardNumb.setBackground(new Color(255, 255, 255));
+		txtCardNumb.setBackground(ConfigColor._clFlBG);
 	}
 
 	private void highlightInputFields(final JTextField txtCardNumb,
 			final JTextField txtPin) {
-		txtCardNumb.setBackground(new Color(123, 255, 0));
-		txtPin.setBackground(new Color(123, 255, 0));
+		txtCardNumb.setBackground(new Color(255, 0, 0));
+		txtPin.setBackground(new Color(255, 0, 0));
 
 	}
 

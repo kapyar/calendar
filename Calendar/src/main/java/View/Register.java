@@ -136,7 +136,7 @@ public class Register extends MetroPanel {
 	public boolean isConfirmedPass() {
 		return (!txtPass.getText().equals(""))
 				&& txtPass.getText().equals(txtConfirmPass.getText())
-				&& txtPass.getText().length() > 5;
+				&& txtPass.getText().length() > 4;
 	}
 
 	public boolean isAllowToRegister() {

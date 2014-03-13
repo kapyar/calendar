@@ -73,6 +73,8 @@ public enum DataBaseAPI {
 
 	public boolean isLoggedIn() {
 		if (session == null || this.session.getSessionId() == null) {
+			System.out.println(session);
+			System.out.println(this.session.getSessionId());
 			return false;
 		}
 		// compare sessions on server and local

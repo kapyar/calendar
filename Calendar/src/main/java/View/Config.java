@@ -5,20 +5,25 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 
 import main.DataBaseAPI;
 import main.User;
 
+import com.sun.mail.imap.protocol.Namespaces.Namespace;
+
 public class Config {
-	private static DataBaseAPI db = DataBaseAPI.GET;
+	
+	
+	
 	public static final int HEIGHT = 600;
 	public static final int WIDTH = 800;
 
 	public static final int C_HEIGHT = 400;
 	public static final int C_WIDTH = 400;
 
-	public static final Color COLOR = new Color(51, 153, 255);
+	public static final Color COLOR = ConfigColor._MAINcolor;
 
 	public static final String[] MONTHS = { "January", "February", "March",
 			"April", "May", "June", "July", "August", "September", "October",
@@ -49,7 +54,6 @@ public class Config {
 
 		return -1;
 	}
-
 	
 
 }

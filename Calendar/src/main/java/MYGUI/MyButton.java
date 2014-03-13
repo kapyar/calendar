@@ -27,10 +27,10 @@ public class MyButton extends JButton {
             this.setFont(new Font("Segoe UI", Font.PLAIN, 11));
             this.setBorderPainted(false);
             this.setFocusPainted(false);
-            this.setHoverBackgroundColor(new Color(3, 59, 90).brighter());
-            this.setPressedBackgroundColor(new Color(3, 59, 90));
-            this.setForeground(new Color(255, 255, 255));
-            this.setBackground(new Color(51, 102, 255));
+            this.setHoverBackgroundColor(ConfigGUICLient._bHBC);
+            this.setPressedBackgroundColor(ConfigGUICLient._bPBC);
+            this.setForeground(ConfigGUICLient._bFG);
+            this.setBackground(ConfigGUICLient._bBG);
         }
 
         @Override
