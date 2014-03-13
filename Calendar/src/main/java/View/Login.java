@@ -55,14 +55,13 @@ public class Login extends MetroPanel implements MouseListener {
 		_W = super.getWidth();
 		_x = super.getX();
 
-		JLabel lblBalanceTitle = new JLabel("Create Your Event",
-				SwingConstants.CENTER);
+		JLabel lblBalanceTitle = new JLabel("Create Your Event");
 		Decorator.decorateTitle(lblBalanceTitle);
-		lblBalanceTitle.setBounds(277, 40, 290, 40);
+		lblBalanceTitle.setBounds(_W/2-lblBalanceTitle.getPreferredSize().width / 2, 40, 290, 40);
 		add(lblBalanceTitle);
 		
 		panel = new MetroPanel();
-		panel.setBounds(42, 116, 688, 296);
+		panel.setBounds(50, 116, _W-100, 296);
 		panel.setOpaque(true);
 		panel.setBackground(ConfigColor._logBG);
 		panel.setVisible(true);
@@ -109,13 +108,13 @@ public class Login extends MetroPanel implements MouseListener {
 		panel.add(pin);
 
 		rdbtnCardNumb = new JRadioButton("");
-		rdbtnCardNumb.setBounds(222, 78, 21, 23);
+		rdbtnCardNumb.setBounds(222, 78, 21, 40);
 		rdbtnCardNumb.setBackground(ConfigColor._rbtnBG);
 		rdbtnCardNumb.setSelected(true);
 		panel.add(rdbtnCardNumb);
 
 		rdbtPass = new JRadioButton("");
-		rdbtPass.setBounds(222, 148, 21, 23);
+		rdbtPass.setBounds(222, 148, 21, 40);
 		rdbtPass.setBackground(ConfigColor._rbtnBG);
 		panel.add(rdbtPass);
 
@@ -124,7 +123,7 @@ public class Login extends MetroPanel implements MouseListener {
 		radioGroup.add(rdbtPass);
 		
 		btnRegister = ButtonFactory.getNormalButton("Register");
-		btnRegister.setBounds(599, 273, 89, 23);
+		btnRegister.setBounds(580, 250, Config._bH, Config._bW);
 		panel.add(btnRegister);
 
 		progressBar = new JProgressBar();

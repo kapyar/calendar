@@ -36,11 +36,11 @@ public class UserEvent extends MetroPanel {
 		int w = 215;
 		int h = 30;
 		btnSave = ButtonFactory.getNormalButton("Save");
-		btnSave.setBounds(701, 539, 89, 23);
+		btnSave.setBounds(701, 539, Config._bW, Config._bH);
 		add(btnSave);
 
 		btnCancel = ButtonFactory.getNormalButton("Cancel");
-		btnCancel.setBounds(602, 539, 89, 23);
+		btnCancel.setBounds(602, 539, Config._bW, Config._bH);
 		add(btnCancel);
 
 		JLabel lblNewEvent = new JLabel("New Event");

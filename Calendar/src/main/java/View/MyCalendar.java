@@ -24,6 +24,8 @@ public class MyCalendar extends MetroPanel {
 	private int realYear, realMonth, realDay, currentYear, currentMonth;
 	private MyButton btnBack;
 
+	
+	private int midX = Config.WIDTH / 2;
 	public MyCalendar() {
 
 		this.setLayout(null); // Apply null layout
@@ -33,6 +35,7 @@ public class MyCalendar extends MetroPanel {
 		// Create controls
 		lblMonth = new JLabel("January");
 		Decorator.decorateTitle(lblMonth);
+		
 		lblYear = new JLabel("Change year:");
 		Decorator.decorateNormal(lblYear);
 		cmbYear = new JComboBox();
@@ -56,7 +59,7 @@ public class MyCalendar extends MetroPanel {
 		cmbYear.addActionListener(new cmbYear_Action());
 
 		btnBack = ButtonFactory.getNormalButton("Back");
-		btnBack.setBounds(35, Config.HEIGHT - 120, 80, 25);
+		btnBack.setBounds(35, Config.HEIGHT - 120, 100, 40);
 
 		// Add controls to pane
 		this.add(pnlCalendar);
@@ -69,18 +72,25 @@ public class MyCalendar extends MetroPanel {
 		pnlCalendar.add(stblCalendar);
 
 		// Set bounds
-		int midX = Config.WIDTH / 2;
-
 		pnlCalendar.setBounds(0, 0, Config.WIDTH, Config.HEIGHT);
-		lblMonth.setBounds(midX, 25, 100, 25);
-		lblYear.setBounds(midX + 200, Config.HEIGHT - 120, 80, 20);
-		cmbYear.setBounds(midX + 290, Config.HEIGHT - 120, 80, 20);
-		btnPrev.setBounds(midX - lblMonth.getPreferredSize().width / 2 - 10,
-				25, 50, 25);
-		btnNext.setBounds(midX + lblMonth.getPreferredSize().width / 2 + 10,
-				25, 50, 25);
+		lblMonth.setBounds(midX, 100, 100, 40);
+		
+		lblYear.setBounds(midX + 200, Config.HEIGHT - 120, 100, 40);
+		cmbYear.setBounds(midX + 290, Config.HEIGHT - 120, 100, 40);
+		
+		btnPrev.setBounds(midX - lblMonth.getPreferredSize().width / 2 - 125,
+				5, 100, 40);
+		btnNext.setBounds(midX + lblMonth.getPreferredSize().width / 2 + 25,
+				5, 100, 40);
+		
 		stblCalendar.setBounds(1, 50, Config.WIDTH - 2, Config.HEIGHT);
 
+		// Set btn text
+		btnPrev.setFont(Config._gF);
+		btnNext.setFont(Config._gF);
+		btnPrev.setText("<");
+		btnNext.setText(">");
+		
 		// Get real month/year
 		GregorianCalendar cal = new GregorianCalendar(); // Create calendar
 		realDay = cal.get(GregorianCalendar.DAY_OF_MONTH); // Get day
@@ -140,8 +150,8 @@ public class MyCalendar extends MetroPanel {
 			btnNext.setEnabled(false);
 		} // Too late
 		lblMonth.setText(months[month]); // Refresh the month label (at the top)
-		lblMonth.setBounds(160 - lblMonth.getPreferredSize().width / 2, 25,
-				180, 25); // Re-align label with calendar
+		lblMonth.setBounds(midX - lblMonth.getPreferredSize().width / 2, 5,
+				200, 40); // Re-align label with calendar
 		cmbYear.setSelectedItem(String.valueOf(year)); // Select the correct
 														// year in the combo box
 
@@ -198,7 +208,7 @@ public class MyCalendar extends MetroPanel {
 			}
 			setBorder(null);
 			setForeground(Color.black);
-			setFont(new Font("Segoe UI", Font.PLAIN, 20));
+			setFont(Config._gF);
 			setForeground(new Color(255,255,255));
 			
 			return this;
