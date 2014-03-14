@@ -2,12 +2,16 @@ package View;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import MYGUI.ButtonFactory;
 import MYGUI.Decorator;
 import MYGUI.MetroEditablePane;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
+import Model.Model;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -25,6 +29,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import main.DataBaseAPI;
+import main.User;
 
 public class UserEvent extends MetroPanel {
 	private MetroEditablePane txtName;
@@ -32,10 +37,21 @@ public class UserEvent extends MetroPanel {
 	private MetroEditablePane txtWhen;
 	private MyButton btnCancel;
 	private MyButton btnSave;
-	private DataBaseAPI db = DataBaseAPI.GET;
+	private String[] st;
+	private Date dateEvent;
+	private JList listOfFriends;
 
 	public UserEvent() {
+		init();
 
+	}
+
+	public UserEvent(Date dateWhen) {
+		init();
+		dateEvent = dateWhen;
+	}
+
+	private void init() {
 		int w = 215;
 		int h = 30;
 		btnSave = ButtonFactory.getNormalButton("Save");
@@ -89,11 +105,19 @@ public class UserEvent extends MetroPanel {
 		lblDescription.setBounds(535, 97, 70, 14);
 		add(lblDescription);
 
-		JList listOfFriends = new JList();
+		listOfFriends = new JList();
+
+		List<User> users = Model.MODEL.doGetAllFriend();
+		st = new String[users.size()];
+
+		for (int i = 0; i < users.size(); ++i) {
+			st[i] = users.get(i).getMail();
+		}
+
 		listOfFriends
 				.setToolTipText("Invite your frinds to do something together");
 		listOfFriends.setModel(new AbstractListModel() {
-			String[] values = new String[] { "Andrew", "Mike", "John", "Victor" };
+			String[] values = st;
 
 			public int getSize() {
 				return values.length;
@@ -142,7 +166,7 @@ public class UserEvent extends MetroPanel {
 		comboBox.setModel(Config.comboBoxModel);
 		comboBox.setBounds(615, 290, 90, 20);
 		add(comboBox);
-	} 
+	}
 
 	public void addListener(ActionListener l) {
 		btnSave.addActionListener(l);
@@ -157,8 +181,18 @@ public class UserEvent extends MetroPanel {
 	public JButton getBtnSave() {
 		return btnSave;
 	}
-	
-	public void initModel(){
-		
+
+	public ArrayList<String> getSelected() {
+
+		int[] inList = listOfFriends.getSelectedIndices();
+
+		ArrayList<String> l = new ArrayList<String>();
+
+		for (int i = 0; i < inList.length; ++i) {
+			l.add((String) listOfFriends.getModel().getElementAt(inList[i]));
+
+		}
+
+		return l;
 	}
 }

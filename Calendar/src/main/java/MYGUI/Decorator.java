@@ -20,7 +20,7 @@ public class Decorator {
 
 	public static void decorateTitle(JLabel label) {
 
-		label.setFont(new Font(FontType, Font.ITALIC, 27));
+		label.setFont(new Font(FontType, Font.PLAIN, 27));
 		label.setForeground(ConfigColor._bCTC);
 
 		// label.setAlignmentX(label.CENTER_ALIGNMENT);

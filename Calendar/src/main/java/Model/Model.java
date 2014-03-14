@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -77,12 +78,48 @@ public enum Model {
 
 	}
 
-	public boolean doCreateEvent(Date date) {
-		// (String title, String desc, Date time, Date delta,
-		// Collection<Integer> members)
+	public boolean doCreateEvent(EventHolder eh) {
+
 		return false;
 	}
 
+	public List<User> doGetAllFriend() {
+
+		try {
+			return dataBase.getFriends();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public boolean doMakeFriendShip(ArrayList<String> list) {
+
+		List<User> l = doGetListPeolpleByEmail(list);
+		for (int i = 0; i < list.size(); ++i) {
+			l.add(dataBase.getUserWithEmail(list.get(i)));
+		}
+
+		for (int i = 0; i < l.size(); ++i) {
+			try {
+				dataBase.addFriend(l.get(i).getId());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public List<User> doGetListPeolpleByEmail(ArrayList<String> list) {
+		List<User> l = new ArrayList<User>();
+		for (int i = 0; i < list.size(); ++i) {
+			l.add(dataBase.getUserWithEmail(list.get(i)));
+		}
+		return l;
+	}
 	// ///////////private part goes here/////////////////////////////
 
 }

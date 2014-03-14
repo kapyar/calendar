@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -15,74 +16,98 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import javax.swing.JProgressBar;
 import javax.swing.ListModel;
+import javax.swing.ProgressMonitor;
 import javax.swing.SwingConstants;
 
 import main.DataBaseAPI;
 import main.User;
 
 public class Friend extends MetroPanel {
-	private MyButton btnBack;
-	private MyButton btnMakeFriend;
-	private List<User> us;
+
+	private JButton btnMakeFriendship;
+	private JButton btnBack;
+	private JProgressBar progressBar;
+	private String[] st;
 	private JList list;
-	private String[] values1;
 
 	public Friend() {
-		JLabel lblFindYourFriends = new JLabel("Find Your Friends");
-		lblFindYourFriends.setBounds(411, 11, 220, 35);
-		Decorator.decorateTitle(lblFindYourFriends);
-		add(lblFindYourFriends);
+
+		JLabel lblBalanceTitle = new JLabel("Create Your Event");
+		Decorator.decorateTitle(lblBalanceTitle);
+		lblBalanceTitle.setBounds(this.getPreferredSize().width / 2
+				- lblBalanceTitle.getWidth() / 2, 40, 290, 40);
+		add(lblBalanceTitle);
+
+		btnMakeFriendship = ButtonFactory.getNormalButton("Make Friendship");
+		btnMakeFriendship.setLocation(681, 537);
+		btnMakeFriendship.setSize(100, 50);
+		add(btnMakeFriendship);
 
 		btnBack = ButtonFactory.getNormalButton("Back");
-		btnBack.setBounds(10, 525, 89, 23);
+		btnBack.setLocation(10, 537);
+		btnBack.setSize(100, 50);
 		add(btnBack);
 
-		btnMakeFriend = ButtonFactory.getNormalButton("Make Friend");
-		btnMakeFriend.setBounds(692, 526, 98, 23);
-		add(btnMakeFriend);
+		progressBar = new JProgressBar();
+		progressBar.setBounds(50, 411, 700, 29);
+		progressBar.setVisible(false);
+		add(progressBar);
 
-		us = Model.MODEL.doAddAllFriend();
+		List<User> users = Model.MODEL.doAddAllFriend();
+		st = new String[users.size()];
 
-		values1 = new String[us.size()];
+		list = new JList();
 
-		for (int i = 0; i < us.size(); ++i) {
-			main.User ua = (main.User) us.get(i);
-			values1[i] = ua.getName();
+		for (int i = 0; i < users.size(); ++i) {
+			st[i] = users.get(i).getMail();
 		}
 
-//		list.setModel(new AbstractListModel() {
-//			String[] values = values1;
-//
-//			public int getSize() {
-//				return values.length;
-//			}
-//
-//			public Object getElementAt(int index) {
-//				return values[index];
-//			}
-//		});
-//
-//		DefaultListCellRenderer renderer = (DefaultListCellRenderer) list
-//				.getCellRenderer();
-//		renderer.setHorizontalAlignment(SwingConstants.CENTER);
-//
-//		list.setBounds(365, 142, 195, 301);
-//		add(list);
+		list.setModel(new AbstractListModel() {
+			String[] values = st;
+
+			public int getSize() {
+				return values.length;
+			}
+
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+
+		DefaultListCellRenderer renderer = (DefaultListCellRenderer) list
+				.getCellRenderer();
+		renderer.setHorizontalAlignment(SwingConstants.CENTER);
+		list.setBounds(380, 91, 147, 264);
+		add(list);
 
 	}
 
 	public void addListener(ActionListener l) {
-		// System.out.println("Ac List Chos");
 		btnBack.addActionListener(l);
-		btnMakeFriend.addActionListener(l);
+		btnMakeFriendship.addActionListener(l);
 	}
 
-	public MyButton getBtnBack() {
+	public JButton getBtnMakeFriendship() {
+		return btnMakeFriendship;
+	}
+
+	public JButton getBtnBack() {
 		return btnBack;
 	}
 
-	public MyButton getBtnMakeFriend() {
-		return btnMakeFriend;
+	public ArrayList<String> getSelectedMails() {
+
+		int[] inList = list.getSelectedIndices();
+
+		ArrayList<String> l = new ArrayList<String>();
+
+		for (int i = 0; i < inList.length; ++i) {
+			l.add((String) list.getModel().getElementAt(inList[i]));
+
+		}
+
+		return l;
 	}
 }
