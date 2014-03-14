@@ -118,11 +118,11 @@ public class Register extends MetroPanel {
 		add(btnCancel);
 
 		progressBar = new JProgressBar();
-		progressBar.setBounds(200, 499, 400, 23);
+		progressBar.setBounds(10, panel.getHeight()-35, panel.getWidth()-20, 25);
 		progressBar.setVisible(false);
 //		UIManager.put("ProgressBar.background", Color.white);
 //		UIManager.put("ProgressBar.foreground", new Color(63, 210, 253));
-		add(progressBar);
+		panel.add(progressBar);
 
 	}
 
