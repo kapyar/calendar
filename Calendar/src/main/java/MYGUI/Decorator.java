@@ -2,6 +2,7 @@ package MYGUI;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
@@ -29,8 +30,9 @@ public class Decorator {
 
 	public static void decorateNormal(JLabel label) {
 
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+		label.setSize(new Dimension(215,30));
+		label.setForeground(ConfigColor._bCTC);
+		label.setFont(new Font("Segoe UI", Font.ROMAN_BASELINE, 15));
 
 	}
 

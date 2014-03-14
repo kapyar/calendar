@@ -19,7 +19,7 @@ public class MetroEditablePin extends JPanel {
 
 	public MetroEditablePin() {
 
-		this.setSize(new Dimension(190, 31));
+		this.setSize(new Dimension(210, 31));
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 

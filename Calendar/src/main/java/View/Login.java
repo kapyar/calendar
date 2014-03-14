@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import MYGUI.ButtonFactory;
 import MYGUI.ConfigGUICLient;
@@ -128,8 +129,13 @@ public class Login extends MetroPanel implements MouseListener {
 
 		progressBar = new JProgressBar();
 		progressBar.setBounds(50, 411, 700, 29);
+		progressBar.setBackground(Color.white);
+		progressBar.setForeground(Color.black);
+		//UIManager.put("progressBar.background", Color.white);
+		//UIManager.put("progressBar.foreground", new Color(63, 210, 253));
 		progressBar.setVisible(false);
 		add(progressBar);
+		
 	}
 
 	public JRadioButton getCardRadioBtn() {

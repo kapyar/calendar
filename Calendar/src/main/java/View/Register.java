@@ -14,10 +14,12 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionListener;
@@ -40,85 +42,86 @@ public class Register extends MetroPanel {
 		int h = 30;
 
 		MetroPanel panel = new MetroPanel();
-		panel.setBounds(199, 61, 400, 450);
-		int midX = Config.WIDTH / 2 - panel.getWidth() / 2;
-		panel.setBounds(midX, 100, 400, 400);
+		panel.setSize(new Dimension(400, 400));
+		int midXfP = Config.WIDTH / 2 - panel.getWidth() / 2;
+		int midX = Config.WIDTH / 2;
+		panel.setLocation(midXfP,50);
 		Font font = new Font("Segoe UI", 1, 25);
 		panel.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createBevelBorder(1), "Action", 0, 0, font,
-				Color.WHITE));
+				BorderFactory.createBevelBorder(1), "Registration", 0, 0, font,
+				ConfigColor._bCTC));
 		panel.setAlignmentX(SwingConstants.CENTER);
-
 		add(panel);
-
-		JLabel lblLogin = new JLabel("login", SwingConstants.CENTER);
-		lblLogin.setBounds(118, 55, 30, 14);
+		
+		int _Y = 50;
+		int delta = 42+20;
+		
+		
+		JLabel lblLogin = new JLabel("login", SwingConstants.LEFT);
+		lblLogin.setLocation(new Point(118,_Y+delta*0));
 		panel.add(lblLogin);
 		Decorator.decorateNormal(lblLogin);
 
 		txtLogin = new MetroEditablePane();
-		txtLogin.setBounds(151, 47, 215, 30);
-
+		txtLogin.setLocation(new Point(Config._EP_X,_Y+delta*0));
 		panel.add(txtLogin);
 
-		JLabel lblEmail = new JLabel("e-mail", SwingConstants.CENTER);
-		lblEmail.setBounds(110, 107, 40, 14);
+		JLabel lblEmail = new JLabel("e-mail", SwingConstants.LEFT);
+		lblEmail.setLocation(new Point(110,_Y+delta*1));
 		panel.add(lblEmail);
 		Decorator.decorateNormal(lblEmail);
 
 		txtEmail = new MetroEditablePane();
-		txtEmail.setBounds(152, 102, 215, 30);
+		txtEmail.setLocation(new Point(Config._EP_X,_Y+delta*1));
+		
 		panel.add(txtEmail);
 
-		JLabel lblNewLabel = new JLabel("phone", SwingConstants.CENTER);
-		lblNewLabel.setBounds(112, 167, 40, 14);
+		JLabel lblNewLabel = new JLabel("phone", SwingConstants.LEFT);
+		lblNewLabel.setLocation(new Point(112,_Y+delta*2));
 		panel.add(lblNewLabel);
 		Decorator.decorateNormal(lblNewLabel);
 
 		txtPhone = new MetroEditablePane();
-		txtPhone.setBounds(155, 157, 215, 30);
+		txtPhone.setLocation(new Point(Config._EP_X,_Y+delta*2));
 		panel.add(txtPhone);
 
-		JLabel lblPassword = new JLabel("password", SwingConstants.CENTER);
-		lblPassword.setBounds(91, 220, 60, 14);
+		JLabel lblPassword = new JLabel("password", SwingConstants.LEFT);
+		lblPassword.setLocation(new Point(91,_Y+delta*3));
 		panel.add(lblPassword);
 		Decorator.decorateNormal(lblPassword);
 
 		txtPass = new MetroEditablePin();
-		txtPass.setBounds(154, 210, 215, 30);
+		txtPass.setLocation(new Point(Config._EP_X,_Y+delta*3));
 		panel.add(txtPass);
 		txtPass.getDel().setLocation(180, 2);
 
-		JLabel lblConfigm = new JLabel("configm password",
-				SwingConstants.CENTER);
-		lblConfigm.setBounds(35, 266, 120, 14);
+		JLabel lblConfigm = new JLabel("confirm password",SwingConstants.LEFT);
+		lblConfigm.setLocation(new Point(35,_Y+delta*4));
 		panel.add(lblConfigm);
 		Decorator.decorateNormal(lblConfigm);
 
 		txtConfirmPass = new MetroEditablePin();
-		txtConfirmPass.setBounds(155, 258, 215, 30);
+		txtConfirmPass.setLocation(new Point(Config._EP_X,_Y+delta*4));
 		panel.add(txtConfirmPass);
+		
 		txtConfirmPass.getDel().setLocation(180, 3);
-
+		
 		btnSave = ButtonFactory.getNormalButton("Save");
-		//btnSave.setBounds(701, 527, 89, 23);
-		btnSave.setLocation(new Point(701,521));
+		btnSave.setLocation(new Point(midX+25,Config.HEIGHT - 120));
 		add(btnSave);
-
-		JLabel lblRegister = new JLabel("Register", SwingConstants.CENTER);
-		lblRegister.setBounds(0, 0, 236, 40);
-		add(lblRegister);
-		Decorator.decorateTitle(lblRegister);
+		
 
 		btnCancel = ButtonFactory.getNormalButton("Cancel");
 		
-		//btnCancel.setBounds(602, 527, 89, 23);
-		btnCancel.setLocation(new Point(602,527));
+	
+		btnCancel.setLocation(new Point(midX-125,Config.HEIGHT - 120));
 		add(btnCancel);
 
 		progressBar = new JProgressBar();
 		progressBar.setBounds(200, 499, 400, 23);
 		progressBar.setVisible(false);
+//		UIManager.put("ProgressBar.background", Color.white);
+//		UIManager.put("ProgressBar.foreground", new Color(63, 210, 253));
 		add(progressBar);
 
 	}

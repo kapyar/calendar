@@ -62,4 +62,6 @@ public class Config {
 	public static int _bH = 40;
 	/** Tupical width button*/
 	public static int _bW = 100 ;
+	/** X ordinate of editable panes in Register.java  */
+	public static int _EP_X = 160;
 }
