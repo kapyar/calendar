@@ -59,7 +59,7 @@ public class Config {
 	
 	
 	/** Tupical height button*/
-	public static int _bH = 100;
+	public static int _bH = 40;
 	/** Tupical width button*/
-	public static int _bW = 40 ;
+	public static int _bW = 100 ;
 }

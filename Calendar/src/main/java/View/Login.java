@@ -123,7 +123,7 @@ public class Login extends MetroPanel implements MouseListener {
 		radioGroup.add(rdbtPass);
 		
 		btnRegister = ButtonFactory.getNormalButton("Register");
-		btnRegister.setBounds(580, 250, Config._bH, Config._bW);
+		btnRegister.setBounds(580, 250, Config._bW, Config._bH);
 		panel.add(btnRegister);
 
 		progressBar = new JProgressBar();

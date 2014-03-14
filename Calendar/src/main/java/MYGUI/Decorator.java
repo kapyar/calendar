@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import View.Config;
+import View.ConfigColor;
 
 public class Decorator {
 
@@ -18,11 +19,11 @@ public class Decorator {
 
 	public static void decorateTitle(JLabel label) {
 
-		label.setFont(new Font(FontType, Font.PLAIN, 27));
-		label.setForeground(new Color(255, 255, 255));
+		label.setFont(new Font(FontType, Font.ITALIC, 27));
+		label.setForeground(ConfigColor._bCTC);
 
 		// label.setAlignmentX(label.CENTER_ALIGNMENT);
-		label.setLocation(Config.WIDTH / 2 - label.getWidth() / 2, 10);
+		label.setLocation(Config.WIDTH / 2 - label.getWidth() / 2, 415);
 
 	}
 
