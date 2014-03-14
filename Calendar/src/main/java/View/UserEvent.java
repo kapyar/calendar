@@ -2,12 +2,14 @@ package View;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import MYGUI.ButtonFactory;
 import MYGUI.Decorator;
 import MYGUI.MetroEditablePane;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
+import Model.Model;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -25,6 +27,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import main.DataBaseAPI;
+import main.User;
 
 public class UserEvent extends MetroPanel {
 	private MetroEditablePane txtName;
@@ -32,7 +35,7 @@ public class UserEvent extends MetroPanel {
 	private MetroEditablePane txtWhen;
 	private MyButton btnCancel;
 	private MyButton btnSave;
-	private DataBaseAPI db = DataBaseAPI.GET;
+	private String[] st;
 
 	public UserEvent() {
 
@@ -90,10 +93,32 @@ public class UserEvent extends MetroPanel {
 		add(lblDescription);
 
 		JList listOfFriends = new JList();
+
+		List<User> users = Model.MODEL.doGetAllFriend();
+		st = new String[users.size()];
+
+		JList list = new JList();
+
+		for (int i = 0; i < users.size(); ++i) {
+			st[i] = users.get(i).getName();
+		}
+
+		list.setModel(new AbstractListModel() {
+			String[] values = st;
+
+			public int getSize() {
+				return values.length;
+			}
+
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+
 		listOfFriends
 				.setToolTipText("Invite your frinds to do something together");
 		listOfFriends.setModel(new AbstractListModel() {
-			String[] values = new String[] { "Andrew", "Mike", "John", "Victor" };
+			String[] values = st;
 
 			public int getSize() {
 				return values.length;
@@ -142,7 +167,7 @@ public class UserEvent extends MetroPanel {
 		comboBox.setModel(Config.comboBoxModel);
 		comboBox.setBounds(615, 290, 90, 20);
 		add(comboBox);
-	} 
+	}
 
 	public void addListener(ActionListener l) {
 		btnSave.addActionListener(l);
@@ -157,8 +182,8 @@ public class UserEvent extends MetroPanel {
 	public JButton getBtnSave() {
 		return btnSave;
 	}
-	
-	public void initModel(){
-		
+
+	public void initModel() {
+
 	}
 }

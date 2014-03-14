@@ -83,6 +83,16 @@ public enum Model {
 		return false;
 	}
 
+	public List<User> doGetAllFriend(){
+
+		try {
+			return dataBase.getFriends();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	// ///////////private part goes here/////////////////////////////
 
 }

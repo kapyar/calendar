@@ -281,7 +281,7 @@ public class Controller {
 
 						friend.addListener(new FriendsListener());
 						frame.showPane(friend);
-						
+
 						return null;
 					}
 
@@ -307,9 +307,14 @@ public class Controller {
 				frame.showPane(choose);
 			}
 
-			if (source == friend.getBtnMakeFriend()) {
-				// frame.showPane(choose);
+			if (source == friend.getBtnMakeFriendship()) {
 
+				if (calendar == null) {
+					calendar = new MyCalendar();
+					calendar.addListener(new CalendarListner());
+
+				}
+				frame.showPane(calendar);
 			}
 
 		}
