@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,6 +25,8 @@ public class MainContainer extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close when X is
 														// clicked
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				"resources\\logo.png"));
 	}
 
 	public void showPane(JPanel p) {

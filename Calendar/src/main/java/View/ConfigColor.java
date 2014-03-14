@@ -23,6 +23,17 @@ public class ConfigColor {
 	public static Color _cnwkBG = new Color (0,119,0);
 	
 	/** Color filds in calendar today*/
-	public static Color _ctBG =new Color (80, 2,27).brighter(); 
+	public static Color _ctBG =new Color (80, 2,27).brighter();
+
+	/** Cool color for girl in choser panel*/
+	public static Color _bCTC  =new Color (96,177,184);
+
+	/** Cool color for girl in choser panel
+	 * setHoverBackgroundColor MyButton */
+	public static Color _bCHBC = new Color (96,177,184);
 	
-}
+
+	/** Cool color for girl in choser panel
+	 * setPreseedBackgroundColor MyButton */
+	public static Color _bCPBC  = new Color (14,29,32);;
+	}
