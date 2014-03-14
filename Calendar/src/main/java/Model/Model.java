@@ -1,6 +1,8 @@
 package Model;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -125,6 +127,11 @@ public enum Model {
 
 	}
 
+	public boolean doCreateEvent(Date date){
+		//(String title, String desc, Date time, Date delta,
+//		Collection<Integer> members)
+		return false;
+	}
 	// ///////////private part goes here/////////////////////////////
 
 	private boolean checkRegister(HashMap<Action, Object> hashMap) {
