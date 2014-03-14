@@ -82,7 +82,7 @@ public enum DataBaseAPI {
 		return serverUser.getSession().equals(session.getSessionId());
 	}
 
-	private User getUserWithEmail(String mail) {
+	public User getUserWithEmail(String mail) {
 		Query q = em
 				.createQuery("SELECT a FROM User a WHERE a.user_mail=:arg_mail");
 		q.setParameter("arg_mail", mail);

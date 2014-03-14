@@ -134,7 +134,7 @@ public class Controller {
 
 				System.out.println("Choosen date: " + dateWhen);
 
-				event = new UserEvent();
+				event = new UserEvent(dateWhen);
 				event.addListener(new UserEventListener());
 				frame.showPane(event);
 
@@ -308,6 +308,8 @@ public class Controller {
 			}
 
 			if (source == friend.getBtnMakeFriendship()) {
+
+				Model.MODEL.doMakeFriendShip(friend.getSelectedMails());
 
 				if (calendar == null) {
 					calendar = new MyCalendar();

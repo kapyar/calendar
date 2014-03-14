@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
 import java.awt.Color;
@@ -29,6 +30,7 @@ public class ChooserPanel extends MetroPanel {
 	private MyButton btnFriends;
 	private MyButton btnEvent;
 	private int _W;
+	private JProgressBar progressBar;
 	
 	public ChooserPanel() {
 		_W = super.getWidth();
@@ -73,6 +75,11 @@ public class ChooserPanel extends MetroPanel {
 		logo.setIcon(start);
 		this.add(logo);
 		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(50, 411, 700, 29);
+		progressBar.setVisible(false);
+		add(progressBar);
+		
 	}
 
 
@@ -95,5 +102,11 @@ public class ChooserPanel extends MetroPanel {
 
 	public MyButton getBtnEvent() {
 		return btnEvent;
+	}
+
+
+
+	public JProgressBar getProgressBar() {
+		return progressBar;
 	}
 }

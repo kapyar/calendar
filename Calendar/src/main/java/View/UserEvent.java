@@ -2,6 +2,8 @@ package View;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import MYGUI.ButtonFactory;
@@ -36,9 +38,20 @@ public class UserEvent extends MetroPanel {
 	private MyButton btnCancel;
 	private MyButton btnSave;
 	private String[] st;
+	private Date dateEvent;
+	private JList listOfFriends;
 
 	public UserEvent() {
+		init();
 
+	}
+
+	public UserEvent(Date dateWhen) {
+		init();
+		dateEvent = dateWhen;
+	}
+
+	private void init() {
 		int w = 215;
 		int h = 30;
 		btnSave = ButtonFactory.getNormalButton("Save");
@@ -92,28 +105,14 @@ public class UserEvent extends MetroPanel {
 		lblDescription.setBounds(535, 97, 70, 14);
 		add(lblDescription);
 
-		JList listOfFriends = new JList();
+		listOfFriends = new JList();
 
 		List<User> users = Model.MODEL.doGetAllFriend();
 		st = new String[users.size()];
 
-		JList list = new JList();
-
 		for (int i = 0; i < users.size(); ++i) {
-			st[i] = users.get(i).getName();
+			st[i] = users.get(i).getMail();
 		}
-
-		list.setModel(new AbstractListModel() {
-			String[] values = st;
-
-			public int getSize() {
-				return values.length;
-			}
-
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 
 		listOfFriends
 				.setToolTipText("Invite your frinds to do something together");
@@ -183,7 +182,17 @@ public class UserEvent extends MetroPanel {
 		return btnSave;
 	}
 
-	public void initModel() {
+	public ArrayList<String> getSelected() {
 
+		int[] inList = listOfFriends.getSelectedIndices();
+
+		ArrayList<String> l = new ArrayList<String>();
+
+		for (int i = 0; i < inList.length; ++i) {
+			l.add((String) listOfFriends.getModel().getElementAt(inList[i]));
+
+		}
+
+		return l;
 	}
 }
