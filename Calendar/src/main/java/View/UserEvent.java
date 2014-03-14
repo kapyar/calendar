@@ -142,7 +142,7 @@ public class UserEvent extends MetroPanel {
 		comboBox.setModel(Config.comboBoxModel);
 		comboBox.setBounds(615, 290, 90, 20);
 		add(comboBox);
-	}
+	} 
 
 	public void addListener(ActionListener l) {
 		btnSave.addActionListener(l);
