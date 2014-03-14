@@ -54,6 +54,12 @@ public class Config {
 
 		return -1;
 	}
+	/** Font on numbers and <> on calendar */
+	public static Font _gF =  new Font("Segoe UI", Font.PLAIN, 20);
 	
-
+	
+	/** Tupical height button*/
+	public static int _bH = 100;
+	/** Tupical width button*/
+	public static int _bW = 40 ;
 }
