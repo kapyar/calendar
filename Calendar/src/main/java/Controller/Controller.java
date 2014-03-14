@@ -13,7 +13,8 @@ import javax.swing.SwingWorker;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.text.TableView.TableCell;
 
-import Model.UserDataHolder;
+import main.User;
+import Model.Model;
 import View.Config;
 import View.Friend;
 import View.ChooserPanel;
@@ -59,7 +60,7 @@ public class Controller {
 						login.getProgressBar().setIndeterminate(true);
 						String name = login.getLogin();
 						String pass = login.getPass();
-						if (Model.Model.MODEL.doLogIn(name, pass)) {
+						if (Model.MODEL.doLogIn(name, pass)) {
 
 							choose = new ChooserPanel();
 							choose.addListener(new ChooseListener());
@@ -215,10 +216,9 @@ public class Controller {
 
 							String mail = register.getTxtEmail().getText();
 							String phone = register.getTxtPhone().getText();
-							UserDataHolder user = new UserDataHolder(name,
-									pass, mail, phone);
+							User user = new User(name, pass, mail, phone);
 
-							if (Model.Model.MODEL.doRegisterNewOne(user)) {
+							if (Model.MODEL.doRegisterNewOne(user)) {
 
 								if (calendar == null) {
 									calendar = new MyCalendar();
@@ -243,7 +243,7 @@ public class Controller {
 					new MyWorker().execute();
 
 				} else {
-					
+
 					System.out.println("CCant.register you");
 				}
 			}
@@ -258,6 +258,7 @@ public class Controller {
 			Object source = e.getSource();
 
 			if (source == choose.getBtnEvent()) {
+
 				calendar = new MyCalendar();
 				calendar.addListener(new CalendarListner());
 				calendar.addMyActionListener(new CalendarListner());
@@ -269,9 +270,27 @@ public class Controller {
 			}
 
 			if (source == choose.getBtnFriends()) {
-				friend = new Friend();
-				friend.addListener(new FriendsListener());
-				frame.showPane(friend);
+				class MyWorker extends SwingWorker<Object, Object> {
+
+					@Override
+					protected Object doInBackground() throws Exception {
+						choose.getProgressBar().setVisible(true);
+						choose.getProgressBar().setIndeterminate(true);
+
+						friend = new Friend();
+
+						friend.addListener(new FriendsListener());
+						frame.showPane(friend);
+						
+						return null;
+					}
+
+					protected void done() {
+						choose.getProgressBar().setVisible(false);
+					}
+
+				}
+				new MyWorker().execute();
 			}
 
 		}
@@ -287,12 +306,11 @@ public class Controller {
 			if (source == friend.getBtnBack()) {
 				frame.showPane(choose);
 			}
-			
-			if (source == friend.getBtnMakeFriend()) {
-				//frame.showPane(choose);
-				
-			}
 
+			if (source == friend.getBtnMakeFriend()) {
+				// frame.showPane(choose);
+
+			}
 
 		}
 

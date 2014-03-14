@@ -1,5 +1,7 @@
 package main;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

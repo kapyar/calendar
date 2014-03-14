@@ -127,7 +127,7 @@ public class Login extends MetroPanel implements MouseListener {
 		panel.add(btnRegister);
 
 		progressBar = new JProgressBar();
-		progressBar.setBounds(42, 408, 688, 29);
+		progressBar.setBounds(50, 411, 700, 29);
 		progressBar.setVisible(false);
 		add(progressBar);
 	}

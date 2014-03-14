@@ -89,6 +89,14 @@ public class ServeOneJabber extends Thread {
 				System.out.println("_____________==========____________");
 				out.put(Action.LOG_OUT, Action.LOG_OUT);
 				break;
+				
+				
+				
+			case GET_ALL:
+				System.out.println("GET ALL USER PART");
+				List<User> users = dataBase.getAllUsers();
+				out.put(Action.GET_ALL, users);
+				break;
 
 			}// END of switch
 
