@@ -19,6 +19,7 @@ import javax.swing.border.Border;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
@@ -42,7 +43,7 @@ public class Register extends MetroPanel {
 		panel.setBounds(199, 61, 400, 450);
 		int midX = Config.WIDTH / 2 - panel.getWidth() / 2;
 		panel.setBounds(midX, 100, 400, 400);
-		Font font = new Font("Segoe UI", 1, 11);
+		Font font = new Font("Segoe UI", 1, 25);
 		panel.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createBevelBorder(1), "Action", 0, 0, font,
 				Color.WHITE));
@@ -100,7 +101,8 @@ public class Register extends MetroPanel {
 		txtConfirmPass.getDel().setLocation(180, 3);
 
 		btnSave = ButtonFactory.getNormalButton("Save");
-		btnSave.setBounds(701, 527, 89, 23);
+		//btnSave.setBounds(701, 527, 89, 23);
+		btnSave.setLocation(new Point(701,521));
 		add(btnSave);
 
 		JLabel lblRegister = new JLabel("Register", SwingConstants.CENTER);
@@ -109,7 +111,9 @@ public class Register extends MetroPanel {
 		Decorator.decorateTitle(lblRegister);
 
 		btnCancel = ButtonFactory.getNormalButton("Cancel");
-		btnCancel.setBounds(602, 527, 89, 23);
+		
+		//btnCancel.setBounds(602, 527, 89, 23);
+		btnCancel.setLocation(new Point(602,527));
 		add(btnCancel);
 
 		progressBar = new JProgressBar();

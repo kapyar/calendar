@@ -59,7 +59,8 @@ public class MyCalendar extends MetroPanel {
 		cmbYear.addActionListener(new cmbYear_Action());
 
 		btnBack = ButtonFactory.getNormalButton("Back");
-		btnBack.setBounds(45, Config.HEIGHT - 120, Config._bW, Config._bH);
+		btnBack.setLocation(new Point(45, Config.HEIGHT - 120));
+		
 
 		// Add controls to pane
 		this.add(pnlCalendar);
@@ -78,10 +79,9 @@ public class MyCalendar extends MetroPanel {
 		lblYear.setBounds(midX + 200, Config.HEIGHT - 120, 100, 40);
 		cmbYear.setBounds(midX + 290, Config.HEIGHT - 120, 100, 40);
 		
-		btnPrev.setBounds(midX - lblMonth.getPreferredSize().width / 2 - 125,
-				5, Config._bW, Config._bH);
-		btnNext.setBounds(midX + lblMonth.getPreferredSize().width / 2 + 25,
-				5, Config._bW, Config._bH);
+		
+		btnPrev.setLocation(new Point(midX - lblMonth.getPreferredSize().width / 2 - 125,5));
+		btnNext.setLocation(new Point(midX - lblMonth.getPreferredSize().width / 2 +120,5));
 		
 		stblCalendar.setBounds(1, 50, Config.WIDTH - 2, Config.HEIGHT);
 
