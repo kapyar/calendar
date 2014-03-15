@@ -19,7 +19,7 @@ public class MetroEditablePin extends JPanel {
 
 	public MetroEditablePin() {
 
-		this.setSize(new Dimension(190, 31));
+		this.setSize(new Dimension(210, 31));
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 
@@ -52,7 +52,7 @@ public class MetroEditablePin extends JPanel {
 		});
 
 		del = ButtonFactory.getDelButton("resources\\imagesClient\\del_1.png");
-		del.setLocation(160, 3);
+		del.setLocation(this.getWidth()-30, 3);
 		add(del);
 
 		addInnerListener();

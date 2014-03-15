@@ -50,8 +50,9 @@ public class ButtonFactory {
 	}
 
 	public static MyButton getNumbButton(String text, char mnem) {
+		
 		MyButton m = new MyButton(text);
-		m.setSize(new Dimension(42, 42));
+		m.setSize(new Dimension(100,40));
 		m.setMnemonic(mnem);
 		return m;
 	}
