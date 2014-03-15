@@ -20,6 +20,7 @@ import com.mysql.jdbc.TimeUtil;
 import main.User;
 import Model.EventHolder;
 import Model.Model;
+import Model.MyUser;
 import View.Config;
 import View.Friend;
 import View.ChooserPanel;
@@ -255,7 +256,7 @@ public class Controller {
 
 							String mail = register.getTxtEmail().getText();
 							String phone = register.getTxtPhone().getText();
-							User user = new User(name, pass, mail, phone);
+							MyUser user = new MyUser(name, pass, mail, phone);
 
 							if (Model.MODEL.doRegisterNewOne(user)) {
 

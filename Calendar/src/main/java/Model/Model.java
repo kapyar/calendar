@@ -41,14 +41,14 @@ public enum Model {
 		return true;
 	}
 
-	public boolean doRegisterNewOne(User user) {
+	public boolean doRegisterNewOne(MyUser user) {
 		// make a command to server
 
 		HashMap<String, String> lc = new HashMap<String, String>();
-		lc.put(APIConfig.FIELD_USERNAME, user.getName());
-		lc.put(APIConfig.FIELD_USERPASS, user.getPass());
-		lc.put(APIConfig.FIELD_USERMAIL, user.getMail());
-		lc.put(APIConfig.FIELD_USERPHONE, user.getPhone());
+		lc.put(APIConfig.FIELD_USERNAME, user.getUser_name());
+		lc.put(APIConfig.FIELD_USERPASS, user.getUser_pass());
+		lc.put(APIConfig.FIELD_USERMAIL, user.getUser_mail());
+		lc.put(APIConfig.FIELD_USERPHONE, user.getUser_phone());
 
 		try {
 			dataBase.addNewUser(lc);
@@ -66,7 +66,7 @@ public enum Model {
 
 	}
 
-	//select all user in Makefriendship
+	// select all user in Makefriendship
 	public List<User> doGetAllUsers() {
 
 		try {
@@ -81,19 +81,20 @@ public enum Model {
 	public boolean doCreateEvent(EventHolder eh) {
 
 		try {
-			dataBase.createEvent(eh.getTitle(), eh.getDescription(), eh.getDate(), eh.getDate(), eh.getMembers());
+			dataBase.createEvent(eh.getTitle(), eh.getDescription(),
+					eh.getDate(), eh.getDate(), eh.getMembers());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		return true;
 	}
 
-	//return my friends
+	// return my friends
 	public List<User> doGetAllFriend() {
 
-		try{
+		try {
 			return dataBase.getFriends();
 		} catch (Exception e) {
 
