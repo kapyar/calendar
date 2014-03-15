@@ -1,7 +1,6 @@
 package View;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -9,11 +8,11 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 
 import MYGUI.ButtonFactory;
@@ -24,9 +23,7 @@ import MYGUI.MetroEditablePin;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
 
-import javax.swing.JButton;
-
-import java.awt.Component;
+import javax.swing.UIManager;
 
 import javax.swing.SwingConstants;
 
@@ -132,13 +129,13 @@ public class Login extends MetroPanel implements MouseListener {
 		
 		panel.add(btnRegister);
 
+	
+		
+		
 		progressBar = new JProgressBar();
-		progressBar.setBounds(50, 411, 700, 29);
-		progressBar.setBackground(Color.white);
-		progressBar.setForeground(Color.black);
-		//UIManager.put("progressBar.background", Color.white);
-		//UIManager.put("progressBar.foreground", new Color(63, 210, 253));
+		progressBar.setBounds(55, 420, 690, 29);
 		progressBar.setVisible(false);
+		
 		add(progressBar);
 		
 	}

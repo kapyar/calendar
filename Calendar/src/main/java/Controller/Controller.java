@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.text.TableView.TableCell;
 
@@ -45,6 +46,7 @@ public class Controller {
 		login = new Login();
 		frame.showPane(login);
 		login.addListener(new LoginListener());
+		
 	}
 
 	// ////LISTENER CLASSES////////////

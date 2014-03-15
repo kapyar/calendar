@@ -148,30 +148,30 @@ public class UserEvent extends MetroPanel {
 		dateEvent = dateWhen;
 		listOfFriends = new MetroList();
 
-//		List<User> users =  Model.MODEL.doGetAllFriend();
-//		st = new String[users.size()];
-//
-//		for (int i = 0; i < users.size(); ++i) {
-//			st[i] = users.get(i).getMail();
-//		}
-//
-//		listOfFriends
-//				.setToolTipText("Invite your frinds to do something together");
-//		listOfFriends.setModel(new AbstractListModel() {
-//			String[] values = st;
-//
-//			public int getSize() {
-//				return values.length;
-//			}
-//
-//			public Object getElementAt(int index) {
-//				return values[index];
-//			}
-//		});
-//		l
-//		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
-//				.getCellRenderer();
-//		renderer.setHorizontalAlignment(SwingConstants.CENTER);
+		List<User> users =  Model.MODEL.doGetAllFriend();
+		st = new String[users.size()];
+
+		for (int i = 0; i < users.size(); ++i) {
+			st[i] = users.get(i).getMail();
+		}
+
+		listOfFriends
+				.setToolTipText("Invite your frinds to do something together");
+		listOfFriends.setModel(new AbstractListModel() {
+			String[] values = st;
+
+			public int getSize() {
+				return values.length;
+			}
+
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		
+		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
+				.getCellRenderer();
+		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 		listOfFriends.setBounds(10, 20, panelFriend.getWidth()-20, panelFriend.getHeight()-30);
 		panelFriend.add(listOfFriends);
 	}
