@@ -1,4 +1,4 @@
-package Model;
+package main;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
@@ -12,6 +12,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendEmail {
+
+	public SendEmail() {
+
+	}
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		System.out.println("---------Start sending-------");

@@ -48,7 +48,7 @@ public class Friend extends MetroPanel {
 		progressBar.setVisible(false);
 		add(progressBar);
 
-		List<User> users = Model.MODEL.doAddAllFriend();
+		List<User> users = Model.MODEL.doGetAllUsers();
 		st = new String[users.size()];
 
 		list = new JList();

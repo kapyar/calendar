@@ -40,18 +40,12 @@ public class UserEvent extends MetroPanel {
 	private String[] st;
 	private Date dateEvent;
 	private JList listOfFriends;
-
-	public UserEvent() {
-		init();
-
-	}
+	private JTextPane txtDescription;
+	private JCheckBox chckbxEmail;
+	private JCheckBox chckbxSms;
+	private JComboBox comboBox;
 
 	public UserEvent(Date dateWhen) {
-		init();
-		dateEvent = dateWhen;
-	}
-
-	private void init() {
 		int w = 215;
 		int h = 30;
 		btnSave = ButtonFactory.getNormalButton("Save");
@@ -95,7 +89,7 @@ public class UserEvent extends MetroPanel {
 		txtWhen.setBounds(175, 205, w, h);
 		add(txtWhen);
 
-		JTextPane txtDescription = new JTextPane();
+		txtDescription = new JTextPane();
 		txtDescription.setBounds(422, 111, 283, 111);
 		// Decorator.decorateBorderTitle(txtDescription, "Description");
 		add(txtDescription);
@@ -105,9 +99,44 @@ public class UserEvent extends MetroPanel {
 		lblDescription.setBounds(535, 97, 70, 14);
 		add(lblDescription);
 
+		JLabel lblInvite = new JLabel("Invite Friends");
+		Decorator.decorateNormal(lblInvite);
+		lblInvite.setBounds(440, 293, 120, 14);
+		add(lblInvite);
+
+		MetroPanel panel = new MetroPanel();
+		panel.setBounds(136, 308, 131, 140);
+		Decorator.decorateBorderTitle(panel, "Remind");
+		add(panel);
+
+		chckbxEmail = new JCheckBox("email");
+		chckbxEmail.setBounds(28, 24, 97, 23);
+		chckbxEmail.setForeground(Color.WHITE);
+		chckbxEmail.setFont(Config.font);
+		panel.add(chckbxEmail);
+		chckbxEmail.setBackground(Config.COLOR);
+
+		chckbxSms = new JCheckBox("sms");
+		chckbxSms.setBounds(28, 60, 97, 23);
+		chckbxSms.setForeground(Color.WHITE);
+		chckbxSms.setFont(Config.font);
+		panel.add(chckbxSms);
+		chckbxSms.setBackground(Config.COLOR);
+
+		JLabel lblRemindIn = new JLabel("Remind in");
+		lblRemindIn.setBounds(545, 293, 60, 14);
+		Decorator.decorateNormal(lblRemindIn);
+		add(lblRemindIn);
+
+		comboBox = new JComboBox();
+		comboBox.setModel(Config.comboBoxModel);
+		comboBox.setBounds(615, 290, 90, 20);
+		add(comboBox);
+		dateEvent = dateWhen;
+
 		listOfFriends = new JList();
 
-		List<User> users = Model.MODEL.doGetAllFriend();
+		List<User> users =  Model.MODEL.doGetAllFriend();
 		st = new String[users.size()];
 
 		for (int i = 0; i < users.size(); ++i) {
@@ -132,40 +161,6 @@ public class UserEvent extends MetroPanel {
 				.getCellRenderer();
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 		add(listOfFriends);
-
-		JLabel lblInvite = new JLabel("Invite Friends");
-		Decorator.decorateNormal(lblInvite);
-		lblInvite.setBounds(440, 293, 120, 14);
-		add(lblInvite);
-
-		MetroPanel panel = new MetroPanel();
-		panel.setBounds(136, 308, 131, 140);
-		Decorator.decorateBorderTitle(panel, "Remind");
-		add(panel);
-
-		JCheckBox chckbxEmail = new JCheckBox("email");
-		chckbxEmail.setBounds(28, 24, 97, 23);
-		chckbxEmail.setForeground(Color.WHITE);
-		chckbxEmail.setFont(Config.font);
-		panel.add(chckbxEmail);
-		chckbxEmail.setBackground(Config.COLOR);
-
-		JCheckBox chckbxSms = new JCheckBox("sms");
-		chckbxSms.setBounds(28, 60, 97, 23);
-		chckbxSms.setForeground(Color.WHITE);
-		chckbxSms.setFont(Config.font);
-		panel.add(chckbxSms);
-		chckbxSms.setBackground(Config.COLOR);
-
-		JLabel lblRemindIn = new JLabel("Remind in");
-		lblRemindIn.setBounds(545, 293, 60, 14);
-		Decorator.decorateNormal(lblRemindIn);
-		add(lblRemindIn);
-
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(Config.comboBoxModel);
-		comboBox.setBounds(615, 290, 90, 20);
-		add(comboBox);
 	}
 
 	public void addListener(ActionListener l) {
@@ -182,6 +177,7 @@ public class UserEvent extends MetroPanel {
 		return btnSave;
 	}
 
+	// return selected string in list
 	public ArrayList<String> getSelected() {
 
 		int[] inList = listOfFriends.getSelectedIndices();
@@ -194,5 +190,37 @@ public class UserEvent extends MetroPanel {
 		}
 
 		return l;
+	}
+
+	public MetroEditablePane getTxtName() {
+		return txtName;
+	}
+
+	public MetroEditablePane getTxtWhere() {
+		return txtWhere;
+	}
+
+	public MetroEditablePane getTxtWhen() {
+		return txtWhen;
+	}
+
+	public JTextPane getTxtDescription() {
+		return txtDescription;
+	}
+
+	public JCheckBox getChckbxEmail() {
+		return chckbxEmail;
+	}
+
+	public JCheckBox getChckbxSms() {
+		return chckbxSms;
+	}
+
+	public JComboBox getComboBox() {
+		return comboBox;
+	}
+
+	public Date getDateEvent() {
+		return dateEvent;
 	}
 }
