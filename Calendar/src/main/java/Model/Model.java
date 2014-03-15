@@ -66,7 +66,8 @@ public enum Model {
 
 	}
 
-	public List<User> doAddAllFriend() {
+	//select all user in Makefriendship
+	public List<User> doGetAllUsers() {
 
 		try {
 			return dataBase.getAllUsers();
@@ -89,10 +90,10 @@ public enum Model {
 		return true;
 	}
 
+	//return my friends
 	public List<User> doGetAllFriend() {
 
-		try {
-			System.out.println(dataBase.getFriends());
+		try{
 			return dataBase.getFriends();
 		} catch (Exception e) {
 

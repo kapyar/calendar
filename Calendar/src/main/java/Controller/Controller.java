@@ -7,12 +7,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingWorker;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.text.TableView.TableCell;
+
+import com.mysql.jdbc.TimeUtil;
 
 import main.User;
 import Model.EventHolder;
@@ -311,9 +314,10 @@ public class Controller {
 
 					@Override
 					protected Object doInBackground() throws Exception {
+
 						choose.getProgressBar().setVisible(true);
 						choose.getProgressBar().setIndeterminate(true);
-
+						TimeUnit.SECONDS.sleep(5);
 						friend = new Friend();
 
 						friend.addListener(new FriendsListener());

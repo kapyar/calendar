@@ -45,17 +45,7 @@ public class UserEvent extends MetroPanel {
 	private JCheckBox chckbxSms;
 	private JComboBox comboBox;
 
-	public UserEvent() {
-		init();
-
-	}
-
 	public UserEvent(Date dateWhen) {
-		init();
-		dateEvent = dateWhen;
-	}
-
-	private void init() {
 		int w = 215;
 		int h = 30;
 		btnSave = ButtonFactory.getNormalButton("Save");
@@ -109,34 +99,6 @@ public class UserEvent extends MetroPanel {
 		lblDescription.setBounds(535, 97, 70, 14);
 		add(lblDescription);
 
-		listOfFriends = new JList();
-
-		List<User> users = Model.MODEL.doGetAllFriend();
-		st = new String[users.size()];
-
-		for (int i = 0; i < users.size(); ++i) {
-			st[i] = users.get(i).getMail();
-		}
-
-		listOfFriends
-				.setToolTipText("Invite your frinds to do something together");
-		listOfFriends.setModel(new AbstractListModel() {
-			String[] values = st;
-
-			public int getSize() {
-				return values.length;
-			}
-
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		listOfFriends.setBounds(428, 308, 100, 140);
-		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
-				.getCellRenderer();
-		renderer.setHorizontalAlignment(SwingConstants.CENTER);
-		add(listOfFriends);
-
 		JLabel lblInvite = new JLabel("Invite Friends");
 		Decorator.decorateNormal(lblInvite);
 		lblInvite.setBounds(440, 293, 120, 14);
@@ -170,10 +132,37 @@ public class UserEvent extends MetroPanel {
 		comboBox.setModel(Config.comboBoxModel);
 		comboBox.setBounds(615, 290, 90, 20);
 		add(comboBox);
+		dateEvent = dateWhen;
+
+		listOfFriends = new JList();
+
+		List<User> users =  Model.MODEL.doGetAllFriend();
+		st = new String[users.size()];
+
+		for (int i = 0; i < users.size(); ++i) {
+			st[i] = users.get(i).getMail();
+		}
+
+		listOfFriends
+				.setToolTipText("Invite your frinds to do something together");
+		listOfFriends.setModel(new AbstractListModel() {
+			String[] values = st;
+
+			public int getSize() {
+				return values.length;
+			}
+
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		listOfFriends.setBounds(428, 308, 100, 140);
+		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
+				.getCellRenderer();
+		renderer.setHorizontalAlignment(SwingConstants.CENTER);
+		add(listOfFriends);
 	}
 
-	
-	
 	public void addListener(ActionListener l) {
 		btnSave.addActionListener(l);
 		btnCancel.addActionListener(l);
@@ -188,6 +177,7 @@ public class UserEvent extends MetroPanel {
 		return btnSave;
 	}
 
+	// return selected string in list
 	public ArrayList<String> getSelected() {
 
 		int[] inList = listOfFriends.getSelectedIndices();
