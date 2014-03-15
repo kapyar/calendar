@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import View.ConfigColor;
+
 public class MetroEditablePane extends JPanel {
 
 	private MetroTextView textField;
@@ -25,7 +27,7 @@ public class MetroEditablePane extends JPanel {
 
 	public MetroEditablePane() {
 		this.setSize(new Dimension(210, 31));
-		this.setBackground(Color.WHITE);
+		this.setBackground(ConfigColor._bgEDP);
 		this.setLayout(null);
 
 		textField = new MetroTextView();

@@ -35,5 +35,8 @@ public class ConfigColor {
 
 	/** Cool color for girl in choser panel
 	 * setPreseedBackgroundColor MyButton */
-	public static Color _bCPBC  = new Color (14,29,32);;
+	public static Color _bCPBC  = new Color (14,29,32);
+
+	/**Edidable panel color */
+	public static Color _bgEDP =   new Color (235,235,235);
 	}

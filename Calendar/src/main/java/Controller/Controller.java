@@ -88,6 +88,7 @@ public class Controller {
 			}
 
 			if (source == login.getMyButton_Cancel()) {
+				
 				System.exit(0);
 			}
 			if (source == login.getBtnRegister()) {
@@ -298,7 +299,7 @@ public class Controller {
 			Object source = e.getSource();
 
 			if (source == choose.getBtnEvent()) {
-
+			
 				calendar = new MyCalendar();
 				calendar.addListener(new CalendarListner());
 				calendar.addMyActionListener(new CalendarListner());
