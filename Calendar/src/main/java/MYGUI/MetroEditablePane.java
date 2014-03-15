@@ -32,7 +32,7 @@ public class MetroEditablePane extends JPanel {
 
 		textField = new MetroTextView();
 		textField.getMargin();
-		textField.setBounds(8, 5, this.getWidth() - 45, 20);
+		textField.setBounds(8, 5, this.getWidth() - 45, this.getHeight()-10);
 		add(textField);
 		textField.setColumns(10);
 		textField.getDocument().addDocumentListener(new DocumentListener() {
@@ -59,7 +59,7 @@ public class MetroEditablePane extends JPanel {
 			}
 		});
 
-		del = ButtonFactory.getDelButton("resources\\imagesClient\\del_1.png");
+		del = ButtonFactory.getDelButton("resources\\del_1.png");
 		del.setLocation(this.getWidth() - 30, 3);
 		add(del);
 		addInnerListener();

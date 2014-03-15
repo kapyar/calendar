@@ -8,7 +8,9 @@ import java.util.List;
 
 import MYGUI.ButtonFactory;
 import MYGUI.Decorator;
+import MYGUI.MetroBigEditPanel;
 import MYGUI.MetroEditablePane;
+import MYGUI.MetroList;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
 import Model.Model;
@@ -40,7 +42,7 @@ public class UserEvent extends MetroPanel {
 	private String[] st;
 	private Date dateEvent;
 	private JList listOfFriends;
-	private JTextPane txtDescription;
+	private MetroBigEditPanel txtDescription;
 	private JCheckBox chckbxEmail;
 	private JCheckBox chckbxSms;
 	private JComboBox comboBox;
@@ -48,12 +50,16 @@ public class UserEvent extends MetroPanel {
 	public UserEvent(Date dateWhen) {
 		int w = 215;
 		int h = 30;
-		btnSave = ButtonFactory.getNormalButton("Save");
-		btnSave.setBounds(701, 539, Config._bW, Config._bH);
+		int _Y = 120;
+		int deltaY = 50;
+		int lblX = 450;
+		int txtX = 520;
+		btnSave = ButtonFactory.getNormalButton("Save");;
+		btnSave.setLocation(txtX+110, _Y+deltaY*7);
 		add(btnSave);
 
 		btnCancel = ButtonFactory.getNormalButton("Cancel");
-		btnCancel.setBounds(602, 539, Config._bW, Config._bH);
+		btnCancel.setLocation(lblX, _Y+deltaY*7);
 		add(btnCancel);
 
 		JLabel lblNewEvent = new JLabel("New Event");
@@ -62,105 +68,112 @@ public class UserEvent extends MetroPanel {
 		lblNewEvent.setBounds(336, 25, 150, 40);
 		add(lblNewEvent);
 
+		JLabel lblName = new JLabel("What");
+		Decorator.decorateNormal(lblName);
+		lblName.setLocation(lblX, _Y+deltaY*0);
+		add(lblName);
+		
 		txtName = new MetroEditablePane();
-		txtName.setBounds(175, 111, w, h);
+		txtName.setLocation(txtX, _Y+deltaY*0);
 		add(txtName);
 
-		JLabel lblName = new JLabel("Name");
-		Decorator.decorateNormal(lblName);
-		lblName.setBounds(119, 114, 46, 14);
-		add(lblName);
-
+		
 		JLabel lblPlace = new JLabel("Where");
 		Decorator.decorateNormal(lblPlace);
-		lblPlace.setBounds(119, 158, 46, 14);
+		lblPlace.setLocation(lblX, _Y+deltaY*1);
 		add(lblPlace);
 
 		txtWhere = new MetroEditablePane();
-		txtWhere.setBounds(175, 155, w, h);
+		txtWhere.setLocation(txtX, _Y+deltaY*1);
 		add(txtWhere);
 
 		JLabel lblWhen = new JLabel("When");
 		Decorator.decorateNormal(lblWhen);
-		lblWhen.setBounds(119, 208, 46, 14);
+		lblWhen.setLocation(lblX, _Y+deltaY*2);
 		add(lblWhen);
 
 		txtWhen = new MetroEditablePane();
-		txtWhen.setBounds(175, 205, w, h);
+		txtWhen.setLocation(txtX, _Y+deltaY*2);
 		add(txtWhen);
 
-		txtDescription = new JTextPane();
-		txtDescription.setBounds(422, 111, 283, 111);
-		// Decorator.decorateBorderTitle(txtDescription, "Description");
-		add(txtDescription);
-
-		JLabel lblDescription = new JLabel("Description");
-		Decorator.decorateNormal(lblDescription);
-		lblDescription.setBounds(535, 97, 70, 14);
-		add(lblDescription);
-
-		JLabel lblInvite = new JLabel("Invite Friends");
-		Decorator.decorateNormal(lblInvite);
-		lblInvite.setBounds(440, 293, 120, 14);
-		add(lblInvite);
-
+		
+		
 		MetroPanel panel = new MetroPanel();
-		panel.setBounds(136, 308, 131, 140);
+		panel.setBounds(lblX, _Y+deltaY*3, 131, 140);
 		Decorator.decorateBorderTitle(panel, "Remind");
 		add(panel);
-
+		int _inPX = 28;
+		int _inPY = 20;
+		int  _inPdelta = 23;
 		chckbxEmail = new JCheckBox("email");
-		chckbxEmail.setBounds(28, 24, 97, 23);
-		chckbxEmail.setForeground(Color.WHITE);
-		chckbxEmail.setFont(Config.font);
+		Decorator.decorateJCheckBox(chckbxEmail);
+		chckbxEmail.setBounds(_inPX, _inPY+_inPdelta*0, 97, 23);
 		panel.add(chckbxEmail);
-		chckbxEmail.setBackground(Config.COLOR);
+		
 
 		chckbxSms = new JCheckBox("sms");
-		chckbxSms.setBounds(28, 60, 97, 23);
-		chckbxSms.setForeground(Color.WHITE);
-		chckbxSms.setFont(Config.font);
+		Decorator.decorateJCheckBox(chckbxSms);
+		chckbxSms.setBounds(_inPX, _inPY+_inPdelta*1, 97, 23);
 		panel.add(chckbxSms);
-		chckbxSms.setBackground(Config.COLOR);
+		
 
-		JLabel lblRemindIn = new JLabel("Remind in");
-		lblRemindIn.setBounds(545, 293, 60, 14);
+		JLabel lblRemindIn = new JLabel("In:");
+		lblRemindIn.setLocation(_inPX, _inPY+_inPdelta*2);
 		Decorator.decorateNormal(lblRemindIn);
-		add(lblRemindIn);
+		panel.add(lblRemindIn);
 
 		comboBox = new JComboBox();
 		comboBox.setModel(Config.comboBoxModel);
-		comboBox.setBounds(615, 290, 90, 20);
-		add(comboBox);
+		comboBox.setBounds(_inPX, _inPY+_inPdelta*3+10, panel.getWidth()-2*_inPX, 20);
+		panel.add(comboBox);
+		
+		
+		JLabel lblDescription = new JLabel("Description");
+		Decorator.decorateNormal(lblDescription);
+		lblDescription.setLocation(90, 80);
+		add(lblDescription);
+		
+		txtDescription = new MetroBigEditPanel();
+		txtDescription.setBounds(90,  _Y+deltaY*0, 283, deltaY*3+panel.getHeight());
+		add(txtDescription);
+		
+		
+			
+		MetroPanel panelFriend = new MetroPanel();
+		panelFriend.setBounds(lblX+150, _Y+deltaY*3, 131, 140);
+		Decorator.decorateBorderTitle(panelFriend, "Invite Friends");
+		add(panelFriend);
+		
+		
 		dateEvent = dateWhen;
+		listOfFriends = new MetroList();
 
-		listOfFriends = new JList();
-
-		List<User> users =  Model.MODEL.doGetAllFriend();
-		st = new String[users.size()];
-
-		for (int i = 0; i < users.size(); ++i) {
-			st[i] = users.get(i).getMail();
-		}
-
-		listOfFriends
-				.setToolTipText("Invite your frinds to do something together");
-		listOfFriends.setModel(new AbstractListModel() {
-			String[] values = st;
-
-			public int getSize() {
-				return values.length;
-			}
-
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		listOfFriends.setBounds(428, 308, 100, 140);
-		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
-				.getCellRenderer();
-		renderer.setHorizontalAlignment(SwingConstants.CENTER);
-		add(listOfFriends);
+//		List<User> users =  Model.MODEL.doGetAllFriend();
+//		st = new String[users.size()];
+//
+//		for (int i = 0; i < users.size(); ++i) {
+//			st[i] = users.get(i).getMail();
+//		}
+//
+//		listOfFriends
+//				.setToolTipText("Invite your frinds to do something together");
+//		listOfFriends.setModel(new AbstractListModel() {
+//			String[] values = st;
+//
+//			public int getSize() {
+//				return values.length;
+//			}
+//
+//			public Object getElementAt(int index) {
+//				return values[index];
+//			}
+//		});
+//		l
+//		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
+//				.getCellRenderer();
+//		renderer.setHorizontalAlignment(SwingConstants.CENTER);
+		listOfFriends.setBounds(10, 20, panelFriend.getWidth()-20, panelFriend.getHeight()-30);
+		panelFriend.add(listOfFriends);
 	}
 
 	public void addListener(ActionListener l) {
@@ -204,7 +217,7 @@ public class UserEvent extends MetroPanel {
 		return txtWhen;
 	}
 
-	public JTextPane getTxtDescription() {
+	public MetroBigEditPanel getTxtDescription() {
 		return txtDescription;
 	}
 

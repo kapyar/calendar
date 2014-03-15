@@ -87,8 +87,10 @@ public class Controller {
 			}
 
 			if (source == login.getMyButton_Cancel()) {
-				
-				System.exit(0);
+				event = new UserEvent(new Date());
+				event.addListener(new UserEventListener());
+				frame.showPane(event);
+				//System.exit(0);
 			}
 			if (source == login.getBtnRegister()) {
 				register = new Register();
