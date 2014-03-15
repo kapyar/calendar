@@ -38,9 +38,10 @@ public class MyCalendar extends MetroPanel {
 		
 		lblYear = new JLabel("Change year:");
 		Decorator.decorateNormal(lblYear);
+		
 		cmbYear = new JComboBox();
-		btnPrev = ButtonFactory.getNormalButton("...");
-		btnNext = ButtonFactory.getNormalButton("...");
+		btnPrev = ButtonFactory.getNormalButton("<");
+		btnNext = ButtonFactory.getNormalButton(">");
 		mtblCalendar = new DefaultTableModel() {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return false;
@@ -88,8 +89,7 @@ public class MyCalendar extends MetroPanel {
 		// Set btn text
 		btnPrev.setFont(Config._gF);
 		btnNext.setFont(Config._gF);
-		btnPrev.setText("<");
-		btnNext.setText(">");
+	
 		
 		// Get real month/year
 		GregorianCalendar cal = new GregorianCalendar(); // Create calendar
@@ -106,7 +106,7 @@ public class MyCalendar extends MetroPanel {
 			mtblCalendar.addColumn(headers[i+1]);
 		}
 		mtblCalendar.addColumn(headers[0]);
-		
+		//mtblCalendar.setBackground(ConfigColor._bgEDP);
 		
 		tblCalendar.getParent().setBackground(Config.COLOR); // Set
 																// background

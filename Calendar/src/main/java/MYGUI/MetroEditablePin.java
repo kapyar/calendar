@@ -12,6 +12,8 @@ import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import View.ConfigColor;
+
 public class MetroEditablePin extends JPanel {
 
 	private MetroPassView pass;
@@ -20,7 +22,7 @@ public class MetroEditablePin extends JPanel {
 	public MetroEditablePin() {
 
 		this.setSize(new Dimension(210, 31));
-		this.setBackground(Color.WHITE);
+		this.setBackground(ConfigColor._bgEDP);
 		this.setLayout(null);
 
 		pass = new MetroPassView();
