@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JPanel;
@@ -14,6 +15,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.text.TableView.TableCell;
 
 import main.User;
+import Model.EventHolder;
 import Model.Model;
 import View.Config;
 import View.Friend;
@@ -179,8 +181,42 @@ public class Controller {
 			}
 
 			if (source == event.getBtnSave()) {
+				// TODO hold data in EventHOlder
+				// and send to Model to do the rest
+				EventHolder eh = getDataToSend();
+				Model.MODEL.doCreateEvent(eh);
+
 				frame.showPane(calendar);
 			}
+
+		}
+
+		private EventHolder getDataToSend() {
+
+			String title = event.getTxtName().getText();
+			String where = event.getTxtWhere().getText();
+			String when = event.getTxtWhen().getText();
+
+			String desc = event.getTxtDescription().getText();
+			boolean isEmail = event.getChckbxEmail().isSelected();
+			boolean isSms = event.getChckbxSms().isSelected();
+			Date date = event.getDateEvent();
+
+			String remind = (String) event.getComboBox().getSelectedItem();
+
+			ArrayList<User> users = (ArrayList<User>) Model.MODEL
+					.doGetListPeolpleByEmail(event.getSelected());
+			// to send to eventHolder
+			ArrayList<Integer> usersId = new ArrayList<>();
+
+			for (User u : users) {
+				usersId.add(u.getId());
+			}
+
+			EventHolder eh = new EventHolder(title, when, where, desc, isEmail,
+					isSms, usersId, date, remind);
+
+			return eh;
 
 		}
 
@@ -266,6 +302,7 @@ public class Controller {
 			}
 
 			if (source == choose.getBtnBack()) {
+				Model.MODEL.doLogOut();
 				frame.showPane(login);
 			}
 

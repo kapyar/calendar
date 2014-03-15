@@ -41,63 +41,9 @@ public class ServeOneJabber extends Thread {
 
 			switch ((Action) in.get(Action.ACTION)) {
 
-			case LOG_IN:
-
-				System.out.println("LOGIN PART");
-				String login = (String) in.get(Action.LOGIN_FIELD);
-				String pass = (String) in.get(Action.PASS_FIELD);
-
-				try {
-					dataBase.logIn(login, pass);
-				} catch (Exception e) {
-					out.put(Action.LOG_IN, Action.ERROR_NOT_MATCHES);
-				}
-				out.put(Action.LOG_IN, Action.LOG_IN);
-				 us= dataBase.getAllUsers();
-				 for (User u : us) {
-					 System.out.println(u.getName());
-				}
-				 
-				break;
-
-			case REGISTER:
+			case EVENT:
 				
-				System.out.println("REGISTER PART");
-				String name = (String) in.get(Action.NAME);
-				String mail = (String) in.get(Action.MAIL);
-				String phone = (String) in.get(Action.PHONE);
-				String passw = (String) in.get(Action.PASS);
-
-				HashMap<String, String> lc = new HashMap<String, String>();
-				lc.put(APIConfig.FIELD_USERNAME, name);
-				lc.put(APIConfig.FIELD_USERPASS, passw);
-				lc.put(APIConfig.FIELD_USERMAIL, mail);
-				lc.put(APIConfig.FIELD_USERPHONE, phone);
-
-				try {
-					dataBase.addNewUser(lc);
-					out.put(Action.REGISTER, Action.REGISTER);
-				} catch (Exception e) {
-					out.put(Action.REGISTER, Action.ERROR_CODE);
-				}
-
 				break;
-
-			case LOG_OUT:
-				System.out.println("LOG OUT PART");
-				dataBase.logOut();
-				System.out.println("_____________==========____________");
-				out.put(Action.LOG_OUT, Action.LOG_OUT);
-				break;
-				
-				
-				
-			case GET_ALL:
-				System.out.println("GET ALL USER PART");
-				List<User> users = dataBase.getAllUsers();
-				out.put(Action.GET_ALL, users);
-				break;
-
 			}// END of switch
 
 			System.out.println("All ok");

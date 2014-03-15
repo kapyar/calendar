@@ -40,6 +40,10 @@ public class UserEvent extends MetroPanel {
 	private String[] st;
 	private Date dateEvent;
 	private JList listOfFriends;
+	private JTextPane txtDescription;
+	private JCheckBox chckbxEmail;
+	private JCheckBox chckbxSms;
+	private JComboBox comboBox;
 
 	public UserEvent() {
 		init();
@@ -95,7 +99,7 @@ public class UserEvent extends MetroPanel {
 		txtWhen.setBounds(175, 205, w, h);
 		add(txtWhen);
 
-		JTextPane txtDescription = new JTextPane();
+		txtDescription = new JTextPane();
 		txtDescription.setBounds(422, 111, 283, 111);
 		// Decorator.decorateBorderTitle(txtDescription, "Description");
 		add(txtDescription);
@@ -143,14 +147,14 @@ public class UserEvent extends MetroPanel {
 		Decorator.decorateBorderTitle(panel, "Remind");
 		add(panel);
 
-		JCheckBox chckbxEmail = new JCheckBox("email");
+		chckbxEmail = new JCheckBox("email");
 		chckbxEmail.setBounds(28, 24, 97, 23);
 		chckbxEmail.setForeground(Color.WHITE);
 		chckbxEmail.setFont(Config.font);
 		panel.add(chckbxEmail);
 		chckbxEmail.setBackground(Config.COLOR);
 
-		JCheckBox chckbxSms = new JCheckBox("sms");
+		chckbxSms = new JCheckBox("sms");
 		chckbxSms.setBounds(28, 60, 97, 23);
 		chckbxSms.setForeground(Color.WHITE);
 		chckbxSms.setFont(Config.font);
@@ -162,12 +166,14 @@ public class UserEvent extends MetroPanel {
 		Decorator.decorateNormal(lblRemindIn);
 		add(lblRemindIn);
 
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(Config.comboBoxModel);
 		comboBox.setBounds(615, 290, 90, 20);
 		add(comboBox);
 	}
 
+	
+	
 	public void addListener(ActionListener l) {
 		btnSave.addActionListener(l);
 		btnCancel.addActionListener(l);
@@ -194,5 +200,37 @@ public class UserEvent extends MetroPanel {
 		}
 
 		return l;
+	}
+
+	public MetroEditablePane getTxtName() {
+		return txtName;
+	}
+
+	public MetroEditablePane getTxtWhere() {
+		return txtWhere;
+	}
+
+	public MetroEditablePane getTxtWhen() {
+		return txtWhen;
+	}
+
+	public JTextPane getTxtDescription() {
+		return txtDescription;
+	}
+
+	public JCheckBox getChckbxEmail() {
+		return chckbxEmail;
+	}
+
+	public JCheckBox getChckbxSms() {
+		return chckbxSms;
+	}
+
+	public JComboBox getComboBox() {
+		return comboBox;
+	}
+
+	public Date getDateEvent() {
+		return dateEvent;
 	}
 }

@@ -71,7 +71,6 @@ public enum Model {
 		try {
 			return dataBase.getAllUsers();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -80,15 +79,23 @@ public enum Model {
 
 	public boolean doCreateEvent(EventHolder eh) {
 
-		return false;
+		try {
+			dataBase.createEvent(eh.getTitle(), eh.getDescription(), eh.getDate(), eh.getDate(), eh.getMembers());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
 	}
 
 	public List<User> doGetAllFriend() {
 
 		try {
+			System.out.println(dataBase.getFriends());
 			return dataBase.getFriends();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return null;
@@ -105,7 +112,6 @@ public enum Model {
 			try {
 				dataBase.addFriend(l.get(i).getId());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			}
@@ -113,10 +119,10 @@ public enum Model {
 		return true;
 	}
 
-	public List<User> doGetListPeolpleByEmail(ArrayList<String> list) {
+	public List<User> doGetListPeolpleByEmail(ArrayList<String> mail) {
 		List<User> l = new ArrayList<User>();
-		for (int i = 0; i < list.size(); ++i) {
-			l.add(dataBase.getUserWithEmail(list.get(i)));
+		for (int i = 0; i < mail.size(); ++i) {
+			l.add(dataBase.getUserWithEmail(mail.get(i)));
 		}
 		return l;
 	}
