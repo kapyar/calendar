@@ -146,7 +146,7 @@ public class Controller {
 						.getSelectedItem());
 				year = year - magic;
 				dateWhen.setYear(year);
-				//END of MAGIC
+				// END of MAGIC
 
 				System.out.println("Choosen date: " + dateWhen);
 
@@ -220,7 +220,6 @@ public class Controller {
 
 			ArrayList<User> users = (ArrayList<User>) Model.MODEL
 					.doGetListPeolpleByEmail(event.getSelected());
-			
 
 			EventHolder eh = new EventHolder(title, when, where, desc, isEmail,
 					isSms, users, date, remind);
@@ -238,6 +237,12 @@ public class Controller {
 			Object source = e.getSource();
 
 			if (source == register.getBtnCancel()) {
+
+				System.out
+						.println("closing window: " + Model.MODEL.isLoginIn());
+				if (Model.MODEL.isLoginIn()) {
+					Model.MODEL.doLogOut();
+				}
 
 				choose = new ChooserPanel();
 				choose.addListener(new ChooseListener());

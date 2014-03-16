@@ -68,6 +68,7 @@ public enum DataBaseAPI {
 		em.getTransaction().begin();
 		user.setSession(session.getSessionId());
 		em.getTransaction().commit();
+		
 		log("logIn(): User with id " + user.getId() + " has logged in");
 	}
 
@@ -157,6 +158,7 @@ public enum DataBaseAPI {
 				+ " added ( current userId: " + user.getId());
 	}
 
+	//it does not f..... works!
 	public List<User> getFriends() throws Exception {
 		if (!isLoggedIn()) {
 			log("getFriends(): exception: not logged in");
@@ -247,9 +249,9 @@ public enum DataBaseAPI {
 		List<User> allUsers = q.getResultList();
 		return allUsers;
 	}
-
+   
 	// TODO: call this in shutDown hook in main app
-	public void closeConnection() {
+	public void closeConnection() {  
 		log("closeConnection(): starting closing connection");
 		em.close();
 		factory.close();
