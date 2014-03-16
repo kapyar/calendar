@@ -78,7 +78,7 @@ public class ChooserPanel extends MetroPanel {
 		progressBar = new JProgressBar();
 		progressBar.setBackground(ConfigColor._bCPBC);
 		progressBar.setForeground(ConfigColor._bCHBC);
-		progressBar.setBounds(55, Config.HEIGHT - 120, 690, 40);
+		progressBar.setBounds(45, 620, 100, 40);
 		progressBar.setVisible(false);
 		add(progressBar);
 		
