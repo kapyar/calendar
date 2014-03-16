@@ -1,6 +1,7 @@
 package Controller;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -9,12 +10,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.text.TableView.TableCell;
+
+import org.eclipse.persistence.exceptions.EclipseLinkException;
 
 import com.mysql.jdbc.TimeUtil;
 
@@ -64,19 +68,43 @@ public class Controller {
 
 					@Override
 					protected Object doInBackground() throws Exception {
-						login.getProgressBar().setVisible(true);
-						login.getProgressBar().setIndeterminate(true);
+
 						String name = login.getLogin();
 						String pass = login.getPass();
-						if (Model.MODEL.doLogIn(name, pass)) {
 
-							choose = new ChooserPanel();
-							choose.addListener(new ChooseListener());
-							frame.showPane(choose);
+						if (name.isEmpty() || pass.isEmpty()) {
 
-						} else {
+							System.out.println("Please, enter data in filds");
+							Controller
+									.alert(frame,
+											"Please, enter email and passowrd in filds");
 							login.getTxt().showError();
 							login.getPin().showError();
+						} else {
+							if (!name.contains("@")) {
+								System.out.println("Incorect email");
+								Controller.alert(frame,
+										"Please, enter CORECT email  fild");
+								login.getTxt().showError();
+							} else {
+
+								login.getProgressBar().setVisible(true);
+								login.getProgressBar().setIndeterminate(true);
+								
+								if (Model.MODEL.doLogIn(name, pass,frame)) {
+
+									choose = new ChooserPanel();
+									choose.addListener(new ChooseListener());
+									frame.showPane(choose);
+
+								} else {
+									login.getProgressBar().setVisible(false);
+									login.getTxt().showError();
+									login.getPin().showError();
+								}
+								
+								
+							}
 						}
 						return null;
 					}
@@ -146,7 +174,7 @@ public class Controller {
 						.getSelectedItem());
 				year = year - magic;
 				dateWhen.setYear(year);
-				//END of MAGIC
+				// END of MAGIC
 
 				System.out.println("Choosen date: " + dateWhen);
 
@@ -220,7 +248,6 @@ public class Controller {
 
 			ArrayList<User> users = (ArrayList<User>) Model.MODEL
 					.doGetListPeolpleByEmail(event.getSelected());
-			
 
 			EventHolder eh = new EventHolder(title, when, where, desc, isEmail,
 					isSms, users, date, remind);
@@ -390,4 +417,8 @@ public class Controller {
 
 	}// END FriendsListener
 
+	public static void alert(Component c, String error) {
+		JOptionPane.showConfirmDialog(c, error, "Alert",
+				JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
+	}
 }

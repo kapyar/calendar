@@ -12,6 +12,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import View.MainContainer;
+
+import Controller.Controller;
+
 import main.APIConfig;
 import main.Action;
 import main.DataBaseAPI;
@@ -30,12 +34,13 @@ public enum Model {
 	private boolean isEnterLogIn = false;
 	private String CURRENT_LOGIN;
 
-	public boolean doLogIn(final String mail, final String pass) {
 
+	public boolean doLogIn(final String mail, final String pass, MainContainer frame) {
 		try {
 			dataBase.logIn(mail, pass);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Controller.alert(frame,
+					e.getMessage());
 			return false;
 		}
 		isEnterLogIn = true;
