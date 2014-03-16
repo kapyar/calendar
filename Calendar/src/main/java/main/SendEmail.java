@@ -14,9 +14,12 @@ import javax.mail.internet.MimeMessage;
 
 import Model.EventHolder;
 import View.Config;
-
+/*
+ * 
+ * need to add html
+ */
 public class SendEmail {
-
+      
 	private String msgBody;
 	private String from;
 	private ArrayList<User> invited;
