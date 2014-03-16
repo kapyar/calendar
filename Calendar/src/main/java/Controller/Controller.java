@@ -207,7 +207,7 @@ public class Controller {
 			String where = event.getTxtWhere().getText();
 			String when = event.getTxtWhen().getText();
 
-			String desc = event.getTxtDescription().getText();
+			String desc = event.getTxtWhen().getText();
 			boolean isEmail = event.getChckbxEmail().isSelected();
 			boolean isSms = event.getChckbxSms().isSelected();
 			Date date = event.getDateEvent();

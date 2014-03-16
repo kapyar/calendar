@@ -104,14 +104,25 @@ public enum Model {
 	}
 
 	public boolean doMakeFriendShip(ArrayList<String> list) {
-		
+
 		List<User> l = doGetListPeolpleByEmail(list);
-	
-		System.out.println("LIST: "+l);
+
+		// if not my friend
+		List<User> myFriendsAlready = new ArrayList<>();
+		try {
+			myFriendsAlready = dataBase.getFriends();
+		} catch (Exception e1) {
+			System.out.println("Get friends check is not");
+			e1.printStackTrace();
+		}
 
 		for (int i = 0; i < l.size(); ++i) {
 			try {
-				dataBase.addFriend(l.get(i).getId());
+				if (!myFriendsAlready.contains((l.get(i)))) {
+					dataBase.addFriend(l.get(i).getId());
+				} else {
+					System.out.println(l.get(i) + " Is Already your friend ");
+				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				continue;
@@ -121,7 +132,7 @@ public enum Model {
 	}
 
 	public List<User> doGetListPeolpleByEmail(ArrayList<String> mail) {
-	
+
 		List<User> l = new ArrayList<User>();
 		for (int i = 0; i < mail.size(); ++i) {
 			l.add(dataBase.getUserWithEmail(mail.get(i)));
