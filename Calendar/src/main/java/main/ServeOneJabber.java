@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import Model.EventHolder;
+
 public class ServeOneJabber extends Thread {
 
 	private Socket socket;
@@ -18,7 +20,7 @@ public class ServeOneJabber extends Thread {
 	private ObjectOutputStream osOut;
 	private DataBaseAPI dataBase = DataBaseAPI.GET;
 	private List<User> us;
-	
+
 	public ServeOneJabber(Socket s) throws IOException {
 		System.out.println("Constructor ServerOneJabber");
 		socket = s;
@@ -43,6 +45,12 @@ public class ServeOneJabber extends Thread {
 
 			case EVENT:
 				
+				EventHolder holder = (EventHolder) in.get(Action.EVENT_HOLDER);
+				String cLogin = (String) in.get(Action.LOGIN_FIELD);
+				SendEmail se = new SendEmail(holder, cLogin);
+				//send this e-mail
+				se.send();
+
 				break;
 			}// END of switch
 

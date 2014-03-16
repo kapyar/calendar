@@ -47,7 +47,7 @@ public class Controller {
 		login = new Login();
 		frame.showPane(login);
 		login.addListener(new LoginListener());
-		
+
 	}
 
 	// ////LISTENER CLASSES////////////
@@ -93,7 +93,7 @@ public class Controller {
 				event = new UserEvent(new Date());
 				event.addListener(new UserEventListener());
 				frame.showPane(event);
-				//System.exit(0);
+				// System.exit(0);
 			}
 			if (source == login.getBtnRegister()) {
 				register = new Register();
@@ -140,9 +140,13 @@ public class Controller {
 						.getLblMonth().getText());
 				dateWhen.setMonth(month);
 
+				// and now time for magic number
+				Integer magic = 1900;
 				Integer year = Integer.parseInt((String) calendar.getCmbYear()
 						.getSelectedItem());
+				year = year - magic;
 				dateWhen.setYear(year);
+				//END of MAGIC
 
 				System.out.println("Choosen date: " + dateWhen);
 
@@ -207,7 +211,7 @@ public class Controller {
 			String where = event.getTxtWhere().getText();
 			String when = event.getTxtWhen().getText();
 
-			String desc = event.getTxtWhen().getText();
+			String desc = event.getTxtDescription().getText();
 			boolean isEmail = event.getChckbxEmail().isSelected();
 			boolean isSms = event.getChckbxSms().isSelected();
 			Date date = event.getDateEvent();
@@ -216,15 +220,10 @@ public class Controller {
 
 			ArrayList<User> users = (ArrayList<User>) Model.MODEL
 					.doGetListPeolpleByEmail(event.getSelected());
-			// to send to eventHolder
-			ArrayList<Integer> usersId = new ArrayList<>();
-
-			for (User u : users) {
-				usersId.add(u.getId());
-			}
+			
 
 			EventHolder eh = new EventHolder(title, when, where, desc, isEmail,
-					isSms, usersId, date, remind);
+					isSms, users, date, remind);
 
 			return eh;
 
@@ -304,7 +303,7 @@ public class Controller {
 			Object source = e.getSource();
 
 			if (source == choose.getBtnEvent()) {
-			
+
 				calendar = new MyCalendar();
 				calendar.addListener(new CalendarListner());
 				calendar.addMyActionListener(new CalendarListner());
@@ -324,7 +323,7 @@ public class Controller {
 
 						choose.getProgressBar().setVisible(true);
 						choose.getProgressBar().setIndeterminate(true);
-						
+
 						friend = new Friend();
 						friend.addListener(new FriendsListener());
 						frame.showPane(friend);
@@ -356,12 +355,33 @@ public class Controller {
 
 			if (source == friend.getBtnMakeFriendship()) {
 
-				Model.MODEL.doMakeFriendShip(friend.getSelectedMails());
+				class MyWorker extends SwingWorker<Object, Object> {
+					@Override
+					protected Object doInBackground() throws Exception {
+						friend.getProgressBar().setVisible(true);
+						friend.getProgressBar().setIndeterminate(true);
+
+						if (friend.getList().getSelectedIndices().length != 0) {
+							Model.MODEL.doMakeFriendShip(friend
+									.getSelectedMails());
+						}
+
+						return null;
+					}
+
+					@Override
+					protected void done() {
+						friend.getProgressBar().setVisible(false);
+					}
+				}
+				new MyWorker().execute();
 
 				if (calendar == null) {
 					calendar = new MyCalendar();
-					calendar.addListener(new CalendarListner());
-
+					calendar.addListener(new CalendarListner());// for
+																// mouseEvent
+					calendar.addMyActionListener(new CalendarListner());// for
+																		// bthBack
 				}
 				frame.showPane(calendar);
 			}

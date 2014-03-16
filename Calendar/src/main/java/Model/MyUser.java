@@ -1,6 +1,5 @@
 package Model;
 
-
 //To hold data to make registration right
 public class MyUser {
 
@@ -8,7 +7,7 @@ public class MyUser {
 	private String user_pass;
 	private String user_mail;
 	private String user_phone;
- 
+
 	public MyUser(String name, String pass, String mail, String phone) {
 		user_name = name;
 		user_pass = pass;
