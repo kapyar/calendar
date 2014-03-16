@@ -90,8 +90,8 @@ public class Controller {
 
 								login.getProgressBar().setVisible(true);
 								login.getProgressBar().setIndeterminate(true);
-								
-								if (Model.MODEL.doLogIn(name, pass,frame)) {
+
+								if (Model.MODEL.doLogIn(name, pass, frame)) {
 
 									choose = new ChooserPanel();
 									choose.addListener(new ChooseListener());
@@ -102,8 +102,7 @@ public class Controller {
 									login.getTxt().showError();
 									login.getPin().showError();
 								}
-								
-								
+
 							}
 						}
 						return null;
@@ -223,12 +222,29 @@ public class Controller {
 			}
 
 			if (source == event.getBtnSave()) {
-				// TODO hold data in EventHOlder
-				// and send to Model to do the rest
-				EventHolder eh = getDataToSend();
-				Model.MODEL.doCreateEvent(eh);
+				class MyWorker extends SwingWorker<Object, Object> {
 
-				frame.showPane(calendar);
+					@Override
+					protected Object doInBackground() throws Exception {
+
+						event.getProgressBar().setVisible(true);
+						event.getProgressBar().setIndeterminate(true);
+
+						EventHolder eh = getDataToSend();
+						Model.MODEL.doCreateEvent(eh);
+
+						frame.showPane(calendar);
+						return null;
+
+					}
+
+					@Override
+					protected void done() {
+						event.getProgressBar().setVisible(false);
+					}
+				}
+				new MyWorker().execute();
+
 			}
 
 		}

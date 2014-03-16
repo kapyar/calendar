@@ -247,4 +247,8 @@ public class UserEvent extends MetroPanel {
 	public Date getDateEvent() {
 		return dateEvent;
 	}
+
+	public JProgressBar getProgressBar() {
+		return progressBar;
+	}
 }
