@@ -18,7 +18,6 @@ public class ServeOneJabber extends Thread {
 
 	private ObjectInputStream osIn;
 	private ObjectOutputStream osOut;
-	private DataBaseAPI dataBase = DataBaseAPI.GET;
 	private List<User> us;
 
 	public ServeOneJabber(Socket s) throws IOException {
@@ -44,13 +43,13 @@ public class ServeOneJabber extends Thread {
 			switch ((Action) in.get(Action.ACTION)) {
 
 			case EVENT:
-				
+				System.out.println("Event Part");
 				EventHolder holder = (EventHolder) in.get(Action.EVENT_HOLDER);
 				String cLogin = (String) in.get(Action.LOGIN_FIELD);
 				SendEmail se = new SendEmail(holder, cLogin);
 				//send this e-mail
 				se.send();
-
+				out.put(Action.ACTION.EVENT, Action.SEND);
 				break;
 			}// END of switch
 

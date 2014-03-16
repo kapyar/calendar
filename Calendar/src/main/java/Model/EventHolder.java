@@ -1,12 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
 import main.User;
 
-public class EventHolder {
+public class EventHolder implements Serializable {
 
 	private String title;
 	private String description;
@@ -30,6 +31,7 @@ public class EventHolder {
 		this.viaEmail = isEmail;
 		this.viaSMS = isSms;
 		this.userList = users;
+		this.members = new ArrayList<Integer>();
 
 		// init members number
 
