@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import main.User;
+
 public class EventHolder {
 
 	private String title;
 	private String description;
 	private Date date;
+	private ArrayList<User> userList;
 	private ArrayList<Integer> members;
 	private boolean viaEmail = false;
 	private boolean viaSMS = false;
@@ -17,18 +20,27 @@ public class EventHolder {
 	private String remind;
 
 	public EventHolder(String title2, String when, String where, String desc,
-			boolean isEmail, boolean isSms, ArrayList<Integer> usersId,
-			Date date2, String remind) {
+			boolean isEmail, boolean isSms, ArrayList<User> users, Date date2,
+			String remind) {
 
-		this.title	 	= title2;
-		this.when 		= when;
-		this.where 		= where;
+		this.title = title2;
+		this.when = when;
+		this.where = where;
 		this.description = desc;
-		this.viaEmail	 = isEmail;
-		this.viaSMS 	= isSms;
-		this.members 	= usersId;
-		this.date 		= date2;
-		this.remind 	= remind;
+		this.viaEmail = isEmail;
+		this.viaSMS = isSms;
+		this.userList = users;
+
+		// init members number
+
+		ArrayList<Integer> usersId = new ArrayList<>();
+
+		for (User u : users) {
+			members.add(u.getId());
+		}
+
+		this.date = date2;
+		this.remind = remind;
 	}
 
 	public String getTitle() {
@@ -61,6 +73,18 @@ public class EventHolder {
 
 	public String getWhen() {
 		return when;
+	}
+
+	@Override
+	public String toString() {
+		return "EventHolder [title=" + title + ", description=" + description
+				+ ", date=" + date + ", members=" + members + ", viaEmail="
+				+ viaEmail + ", viaSMS=" + viaSMS + ", when=" + when
+				+ ", where=" + where + ", remind=" + remind + "]";
+	}
+
+	public ArrayList<User> getUserList() {
+		return userList;
 	}
 
 }

@@ -27,8 +27,8 @@ import main.User;
 public enum Model {
 	MODEL;
 	private DataBaseAPI dataBase = DataBaseAPI.GET;
-
-	public String CURRENT_LOGIN;
+	private boolean isEnterLogIn = false;
+	private String CURRENT_LOGIN;
 
 	public boolean doLogIn(final String mail, final String pass) {
 
@@ -38,6 +38,8 @@ public enum Model {
 			e.printStackTrace();
 			return false;
 		}
+		isEnterLogIn = true;
+		CURRENT_LOGIN = mail;
 		return true;
 	}
 
@@ -62,12 +64,13 @@ public enum Model {
 
 	public boolean doLogOut() {
 		dataBase.logOut();
+		isEnterLogIn = false;
 		return true;
 
 	}
 
 	public boolean isLoginIn() {
-		return dataBase.isLoggedIn();
+		return isEnterLogIn;
 	}
 
 	// select all user in Makefriendship
@@ -88,8 +91,27 @@ public enum Model {
 			dataBase.createEvent(eh.getTitle(), eh.getDescription(),
 					eh.getDate(), eh.getDate(), eh.getMembers());
 		} catch (Exception e) {
+			System.out.println("BUT WHY model 92");
 			e.printStackTrace();
 			return false;
+		}
+		if (eh.isViaEmail()) {
+			HashMap<Action, Object> command = new HashMap<Action, Object>();
+
+			command.put(Action.ACTION, Action.EVENT);
+			command.put(Action.EVENT_HOLDER, eh);
+			command.put(Action.LOGIN_FIELD, CURRENT_LOGIN);
+
+			ExecutorService ex = Executors.newCachedThreadPool();
+			try {
+				Future<HashMap<Action, Object>> res = ex
+						.submit(new MultiJabberClient(command));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Cant send it back");
+				e.printStackTrace();
+			}
+			ex.shutdown();
 		}
 
 		return true;

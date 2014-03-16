@@ -140,9 +140,13 @@ public class Controller {
 						.getLblMonth().getText());
 				dateWhen.setMonth(month);
 
+				// and now time for magic number
+				Integer magic = 1900;
 				Integer year = Integer.parseInt((String) calendar.getCmbYear()
 						.getSelectedItem());
+				year = year - magic;
 				dateWhen.setYear(year);
+				//END of MAGIC
 
 				System.out.println("Choosen date: " + dateWhen);
 
@@ -207,7 +211,7 @@ public class Controller {
 			String where = event.getTxtWhere().getText();
 			String when = event.getTxtWhen().getText();
 
-			String desc = event.getTxtWhen().getText();
+			String desc = event.getTxtDescription().getText();
 			boolean isEmail = event.getChckbxEmail().isSelected();
 			boolean isSms = event.getChckbxSms().isSelected();
 			Date date = event.getDateEvent();
@@ -216,15 +220,10 @@ public class Controller {
 
 			ArrayList<User> users = (ArrayList<User>) Model.MODEL
 					.doGetListPeolpleByEmail(event.getSelected());
-			// to send to eventHolder
-			ArrayList<Integer> usersId = new ArrayList<>();
-
-			for (User u : users) {
-				usersId.add(u.getId());
-			}
+			
 
 			EventHolder eh = new EventHolder(title, when, where, desc, isEmail,
-					isSms, usersId, date, remind);
+					isSms, users, date, remind);
 
 			return eh;
 
