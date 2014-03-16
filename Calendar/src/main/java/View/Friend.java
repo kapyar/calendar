@@ -39,10 +39,9 @@ public class Friend extends MetroPanel {
 		Decorator.decorateTitle(lblBalanceTitle);
 		int midX = Config.WIDTH / 2;
 		lblBalanceTitle.setSize(290, 40);
-		lblBalanceTitle.setLocation(midX- lblBalanceTitle.getWidth() / 2+30, 40);
+		lblBalanceTitle.setLocation(midX - lblBalanceTitle.getWidth() / 2 + 30,
+				40);
 		add(lblBalanceTitle);
-
-		
 
 		progressBar = new JProgressBar();
 		progressBar.setBounds(50, 411, 700, 29);
@@ -74,19 +73,20 @@ public class Friend extends MetroPanel {
 				.getCellRenderer();
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 		list.setSize(lblBalanceTitle.getWidth(), 350);
-		list.setLocation(midX- list.getWidth() / 2, 100);
+		list.setLocation(midX - list.getWidth() / 2, 100);
 		add(list);
-		
+
 		btnMakeFriendship = ButtonFactory.getNormalButton("Make Friendship");
-		int lwBTN = 125; //local width button
+		int lwBTN = 125; // local width button
 		btnMakeFriendship.setSize(lwBTN, 40);
-		btnMakeFriendship.setLocation(list.getX()+list.getWidth()-lwBTN, 460);
+		btnMakeFriendship.setLocation(list.getX() + list.getWidth() - lwBTN,
+				460);
 		add(btnMakeFriendship);
 
 		btnBack = ButtonFactory.getNormalButton("Back");
 		btnBack.setSize(lwBTN, 40);
 		btnBack.setLocation(list.getX(), 460);
-			add(btnBack);
+		add(btnBack);
 
 	}
 
