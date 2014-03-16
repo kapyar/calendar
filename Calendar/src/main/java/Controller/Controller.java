@@ -266,6 +266,12 @@ public class Controller {
 
 			if (source == register.getBtnCancel()) {
 
+				System.out
+						.println("closing window: " + Model.MODEL.isLoginIn());
+				if (Model.MODEL.isLoginIn()) {
+					Model.MODEL.doLogOut();
+				}
+
 				choose = new ChooserPanel();
 				choose.addListener(new ChooseListener());
 				frame.showPane(choose);
