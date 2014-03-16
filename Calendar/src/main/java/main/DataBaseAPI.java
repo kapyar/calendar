@@ -54,7 +54,7 @@ public enum DataBaseAPI {
 	public void logIn(String mail, String pass) throws Exception {
 		// if there is no combination of mail/pass fire an error
 		List<User> users = this.getUserWithData(mail, pass);
-		
+
 		if (users.size() == 0) {
 			throw new Exception(APIConfig.ERROR_WRONG_LOGIN_DATA);
 		}
@@ -252,6 +252,7 @@ public enum DataBaseAPI {
 	public void closeConnection() {
 		log("closeConnection(): starting closing connection");
 		em.close();
+		factory.close();
 		log("closeConnection(): connection closed");
 	}
 
