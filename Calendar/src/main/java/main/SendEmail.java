@@ -1,6 +1,7 @@
 package main;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -11,37 +12,54 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import Model.EventHolder;
+import View.Config;
+/*
+ * 
+ * need to add html
+ */
 public class SendEmail {
+      
+	private String msgBody;
+	private String from;
+	private ArrayList<User> invited;
+	private String subject;
 
-	public SendEmail() {
+	public SendEmail(EventHolder eh, String loginFrom) {
+		this.from = loginFrom;
+		this.invited = eh.getUserList();
+		this.subject = eh.getTitle();
+		this.msgBody = ", you were invited to meeting at: " + eh.getWhen()
+				+ " on " + eh.getDate().getDay() + " ,"
+				+ Config.MONTHS[eh.getDate().getMonth()] + " in "
+				+ eh.getDate().getYear() + "\n" + eh.getDescription();
 
 	}
 
-	public static void main(String[] args) throws UnsupportedEncodingException {
-		
-		System.out.println("---------Start sending-------");
+	public void send() throws UnsupportedEncodingException {
+
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 
-		String msgBody = "KJSDhfkjhsdlfkjhasldkjfh " + "sdf' kasdkjfh aslkjdhf"
-				+ "asf; kalsdfjkhas;df" + "'ksadhk;jhfldskhkas";
+		for (int i = 0; i < invited.size(); ++i) {
+			try {
+				Message msg = new MimeMessage(session);
 
-		try {
-			Message msg = new MimeMessage(session);
+				msg.setFrom(new InternetAddress(from, "Awesome Calendar Inc"));
+				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
+						invited.get(i).getMail(), "Mr. User"));
+				msg.setSubject(subject);
+				msgBody = invited.get(i).getName() + msgBody;
+				msg.setText(msgBody);
+				Transport.send(msg);
 
-			msg.setFrom(new InternetAddress("dick@ukr.net",
-					"Example.com Admin"));
-			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-					"yaroslav-pro@mail.ru", "Mr. User"));
-			msg.setSubject("WORKS OR NOT");
-			msg.setText(msgBody);
-			Transport.send(msg);
-
-		} catch (AddressException e) {
-			// ...
-		} catch (MessagingException e) {
-			// ...
+			} catch (AddressException e) {
+				// ...
+			} catch (MessagingException e) {
+				// ...
+			}
 		}
-		System.out.println("---------Stop sending-------");
+
 	}
+
 }
