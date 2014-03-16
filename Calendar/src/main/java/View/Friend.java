@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import MYGUI.ButtonFactory;
 import MYGUI.Decorator;
+import MYGUI.MetroList;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
 import Model.Model;
@@ -51,7 +52,7 @@ public class Friend extends MetroPanel {
 		List<User> users = Model.MODEL.doGetAllUsers();
 		st = new String[users.size()];
 
-		list = new JList();
+		list = new MetroList();
 
 		for (int i = 0; i < users.size(); ++i) {
 			st[i] = users.get(i).getMail();
@@ -74,7 +75,6 @@ public class Friend extends MetroPanel {
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 		list.setSize(lblBalanceTitle.getWidth(), 350);
 		list.setLocation(midX- list.getWidth() / 2, 100);
-		list.setBackground(ConfigColor._bgEDP);
 		add(list);
 		
 		btnMakeFriendship = ButtonFactory.getNormalButton("Make Friendship");

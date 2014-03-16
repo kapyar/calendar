@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -38,12 +39,22 @@ public class Decorator {
 
 	public static void decorateBorderTitle(JComponent component,String s) {
 
-		Font font = new Font("Segoe UI", 1, 11);
+		Font font = new Font("Segoe UI", Font.ROMAN_BASELINE, 15);
+		
 		component.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createBevelBorder(1), s, 0, 0, font,
-				Color.WHITE));
+				ConfigColor._bCTC));
 		component.setAlignmentX(SwingConstants.CENTER);
 
+	}
+
+	public static void decorateJCheckBox(JCheckBox chckbx) {
+		
+		chckbx.setForeground(ConfigColor._bgEDP);
+		chckbx.setFont(Config.font);
+		chckbx.setBackground(Config.COLOR);
+		chckbx.setForeground(ConfigColor._bCTC);
+		chckbx.setFont(new Font("Segoe UI", Font.ROMAN_BASELINE, 15));
 	}
 
 }

@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -10,20 +11,26 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import MYGUI.ConfigGUICLient;
 import Model.Model;
 
 public class MainContainer extends JFrame implements WindowListener {
 
 	public MainContainer() {
 		// Look and feel
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException e) {
-		} catch (InstantiationException e) {
-		} catch (IllegalAccessException e) {
-		} catch (UnsupportedLookAndFeelException e) {
-		}
+//		try {
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//		} catch (ClassNotFoundException e) {
+//		} catch (InstantiationException e) {
+//		} catch (IllegalAccessException e) {
+//		} catch (UnsupportedLookAndFeelException e) {
+//		}
 
+		UIManager.put("ProgressBar.background", ConfigColor._rbtnBG);
+		UIManager.put("ProgressBar.foreground", ConfigGUICLient._bBG);
+		UIManager.put("ProgressBar.selectionBackground", ConfigColor._logBG);
+		UIManager.put("ProgressBar.selectionForeground", ConfigColor._logBG);
+		
 		addWindowListener(this);
 
 		setSize(new Dimension(Config.WIDTH, Config.HEIGHT));

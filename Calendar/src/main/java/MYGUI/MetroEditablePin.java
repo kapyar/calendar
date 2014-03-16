@@ -53,7 +53,7 @@ public class MetroEditablePin extends JPanel {
 			}
 		});
 
-		del = ButtonFactory.getDelButton("resources\\imagesClient\\del_1.png");
+		del = ButtonFactory.getDelButton("resources\\del_1.png");
 		del.setLocation(this.getWidth()-30, 3);
 		add(del);
 

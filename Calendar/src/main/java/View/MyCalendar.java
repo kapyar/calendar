@@ -28,6 +28,8 @@ public class MyCalendar extends MetroPanel {
 	private int midX = Config.WIDTH / 2;
 	public MyCalendar() {
 
+		
+		
 		this.setLayout(null); // Apply null layout
 		this.setBackground(new Color(34, 77, 125));
 		this.setSize(new Dimension(Config.C_WIDTH, Config.C_HEIGHT));
