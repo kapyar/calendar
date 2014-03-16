@@ -90,8 +90,8 @@ public class Controller {
 
 								login.getProgressBar().setVisible(true);
 								login.getProgressBar().setIndeterminate(true);
-
-								if (Model.MODEL.doLogIn(name, pass, frame)) {
+								
+								if (Model.MODEL.doLogIn(name, pass,frame)) {
 
 									choose = new ChooserPanel();
 									choose.addListener(new ChooseListener());
@@ -102,7 +102,8 @@ public class Controller {
 									login.getTxt().showError();
 									login.getPin().showError();
 								}
-
+								
+								
 							}
 						}
 						return null;
@@ -117,10 +118,7 @@ public class Controller {
 			}
 
 			if (source == login.getMyButton_Cancel()) {
-				event = new UserEvent(new Date());
-				event.addListener(new UserEventListener());
-				frame.showPane(event);
-				// System.exit(0);
+				 System.exit(0);
 			}
 			if (source == login.getBtnRegister()) {
 				register = new Register();
@@ -216,7 +214,7 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object source = e.getSource();
-
+			event.getProgressBar().setVisible(true);
 			if (source == event.getBtnCancel()) {
 				frame.showPane(calendar);
 			}
@@ -230,21 +228,20 @@ public class Controller {
 						event.getProgressBar().setVisible(true);
 						event.getProgressBar().setIndeterminate(true);
 
+						
 						EventHolder eh = getDataToSend();
 						Model.MODEL.doCreateEvent(eh);
-
 						frame.showPane(calendar);
 						return null;
-
 					}
 
-					@Override
 					protected void done() {
 						event.getProgressBar().setVisible(false);
 					}
+
 				}
 				new MyWorker().execute();
-
+				
 			}
 
 		}
@@ -421,10 +418,11 @@ public class Controller {
 					@Override
 					protected void done() {
 						friend.getProgressBar().setVisible(false);
+						
 					}
 				}
 				new MyWorker().execute();
-
+				Controller.info(frame, "You add friend");
 				if (calendar == null) {
 					calendar = new MyCalendar();
 					calendar.addListener(new CalendarListner());// for
@@ -441,6 +439,10 @@ public class Controller {
 
 	public static void alert(Component c, String error) {
 		JOptionPane.showConfirmDialog(c, error, "Alert",
+				JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
+	}
+	public static void info(Component c, String info) {
+		JOptionPane.showConfirmDialog(c, info, "Info",
 				JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
 	}
 }

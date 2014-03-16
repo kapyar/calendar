@@ -89,9 +89,7 @@ public class Friend extends MetroPanel {
 		add(btnBack);
 		
 		progressBar = new JProgressBar();
-		progressBar.setBackground(ConfigColor._bCPBC);
-		progressBar.setForeground(ConfigColor._bCHBC);
-		progressBar.setBounds(55, Config.HEIGHT - 120, 690, 40);
+		progressBar.setBounds(list.getX(), 510, list.getWidth(), 40);
 		progressBar.setVisible(false);
 		add(progressBar);
 

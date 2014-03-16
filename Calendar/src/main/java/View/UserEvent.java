@@ -181,10 +181,9 @@ public class UserEvent extends MetroPanel {
 		
 		
 		progressBar = new JProgressBar();
-		progressBar.setBounds(55, 420, 690, 29);
+		progressBar.setBounds(txtDescription.getX(), btnCancel.getY(), txtDescription.getWidth(), 39);
 		progressBar.setVisible(false);
-		
-		add(progressBar);
+				add(progressBar);
 	}
 
 	public void addListener(ActionListener l) {
@@ -199,6 +198,10 @@ public class UserEvent extends MetroPanel {
 
 	public JButton getBtnSave() {
 		return btnSave;
+	}
+
+	public JProgressBar getProgressBar() {
+		return progressBar;
 	}
 
 	// return selected string in list
