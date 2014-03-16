@@ -17,6 +17,7 @@ import Model.Model;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -46,6 +47,7 @@ public class UserEvent extends MetroPanel {
 	private JCheckBox chckbxEmail;
 	private JCheckBox chckbxSms;
 	private JComboBox comboBox;
+	private JProgressBar progressBar;
 
 	public UserEvent(Date dateWhen) {
 		int w = 215;
@@ -175,6 +177,14 @@ public class UserEvent extends MetroPanel {
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 		listOfFriends.setBounds(10, 20, panelFriend.getWidth()-20, panelFriend.getHeight()-30);
 		panelFriend.add(listOfFriends);
+		
+		
+		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(55, 420, 690, 29);
+		progressBar.setVisible(false);
+		
+		add(progressBar);
 	}
 
 	public void addListener(ActionListener l) {

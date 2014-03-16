@@ -18,6 +18,7 @@ public class SendEmail {
 	}
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
+		
 		System.out.println("---------Start sending-------");
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
@@ -28,10 +29,10 @@ public class SendEmail {
 		try {
 			Message msg = new MimeMessage(session);
 
-			msg.setFrom(new InternetAddress("kapyar@ukr.net",
+			msg.setFrom(new InternetAddress("dick@ukr.net",
 					"Example.com Admin"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-					"123kapyar@gmail.com", "Mr. User"));
+					"yaroslav-pro@mail.ru", "Mr. User"));
 			msg.setSubject("WORKS OR NOT");
 			msg.setText(msgBody);
 			Transport.send(msg);
