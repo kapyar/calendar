@@ -108,6 +108,7 @@ public class Controller {
 			Object source = e.getSource();
 
 			if (source == calendar.getBtnBack()) {
+				System.out.println("WAT");
 				frame.showPane(choose);
 
 			}
@@ -319,9 +320,8 @@ public class Controller {
 
 						choose.getProgressBar().setVisible(true);
 						choose.getProgressBar().setIndeterminate(true);
-						TimeUnit.SECONDS.sleep(5);
+						
 						friend = new Friend();
-
 						friend.addListener(new FriendsListener());
 						frame.showPane(friend);
 

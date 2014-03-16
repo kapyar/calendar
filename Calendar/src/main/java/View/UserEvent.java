@@ -137,6 +137,7 @@ public class UserEvent extends MetroPanel {
 		listOfFriends = new JList();
 
 		List<User> users =  Model.MODEL.doGetAllFriend();
+		System.out.println(users);
 		st = new String[users.size()];
 
 		for (int i = 0; i < users.size(); ++i) {
