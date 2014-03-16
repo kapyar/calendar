@@ -47,7 +47,7 @@ public class Controller {
 		login = new Login();
 		frame.showPane(login);
 		login.addListener(new LoginListener());
-		
+
 	}
 
 	// ////LISTENER CLASSES////////////
@@ -93,7 +93,7 @@ public class Controller {
 				event = new UserEvent(new Date());
 				event.addListener(new UserEventListener());
 				frame.showPane(event);
-				//System.exit(0);
+				// System.exit(0);
 			}
 			if (source == login.getBtnRegister()) {
 				register = new Register();
@@ -304,7 +304,7 @@ public class Controller {
 			Object source = e.getSource();
 
 			if (source == choose.getBtnEvent()) {
-			
+
 				calendar = new MyCalendar();
 				calendar.addListener(new CalendarListner());
 				calendar.addMyActionListener(new CalendarListner());
@@ -324,7 +324,7 @@ public class Controller {
 
 						choose.getProgressBar().setVisible(true);
 						choose.getProgressBar().setIndeterminate(true);
-						
+
 						friend = new Friend();
 						friend.addListener(new FriendsListener());
 						frame.showPane(friend);
@@ -356,12 +356,33 @@ public class Controller {
 
 			if (source == friend.getBtnMakeFriendship()) {
 
-				Model.MODEL.doMakeFriendShip(friend.getSelectedMails());
+				class MyWorker extends SwingWorker<Object, Object> {
+					@Override
+					protected Object doInBackground() throws Exception {
+						friend.getProgressBar().setVisible(true);
+						friend.getProgressBar().setIndeterminate(true);
+
+						if (friend.getList().getSelectedIndices().length != 0) {
+							Model.MODEL.doMakeFriendShip(friend
+									.getSelectedMails());
+						}
+
+						return null;
+					}
+
+					@Override
+					protected void done() {
+						friend.getProgressBar().setVisible(false);
+					}
+				}
+				new MyWorker().execute();
 
 				if (calendar == null) {
 					calendar = new MyCalendar();
-					calendar.addListener(new CalendarListner());
-
+					calendar.addListener(new CalendarListner());// for
+																// mouseEvent
+					calendar.addMyActionListener(new CalendarListner());// for
+																		// bthBack
 				}
 				frame.showPane(calendar);
 			}

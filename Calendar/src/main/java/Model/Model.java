@@ -66,6 +66,10 @@ public enum Model {
 
 	}
 
+	public boolean isLoginIn() {
+		return dataBase.isLoggedIn();
+	}
+
 	// select all user in Makefriendship
 	public List<User> doGetAllUsers() {
 
@@ -112,7 +116,7 @@ public enum Model {
 		try {
 			myFriendsAlready = dataBase.getFriends();
 		} catch (Exception e1) {
-			System.out.println("Get friends check is not");
+			System.out.println("Exception  Get friends check is not");
 			e1.printStackTrace();
 		}
 
