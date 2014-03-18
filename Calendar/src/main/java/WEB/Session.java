@@ -1,9 +1,9 @@
-package main;
+package WEB;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-import static main.APIConfig.log;
+import static WEB.APIConfig.log;
 
 public class Session {
 	private static SecureRandom random = new SecureRandom();

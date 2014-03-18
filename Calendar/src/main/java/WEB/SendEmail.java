@@ -1,4 +1,4 @@
-package main;
+package WEB;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -12,14 +12,16 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import WEB.User;
 import Model.EventHolder;
 import View.Config;
+
 /*
  * 
  * need to add html
  */
 public class SendEmail {
-      
+
 	private String msgBody;
 	private String from;
 	private ArrayList<User> invited;
@@ -47,9 +49,9 @@ public class SendEmail {
 
 				msg.setFrom(new InternetAddress(from, "Awesome Calendar Inc"));
 				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-						invited.get(i).getMail(), "Mr. User"));
+						invited.get(i).getUser_mail(), "Mr. User"));
 				msg.setSubject(subject);
-				msgBody = invited.get(i).getName() + msgBody;
+				msgBody = invited.get(i).getUser_name() + msgBody;
 				msg.setText(msgBody);
 				Transport.send(msg);
 

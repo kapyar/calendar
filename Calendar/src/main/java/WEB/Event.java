@@ -1,4 +1,4 @@
-package main;
+package WEB;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import static main.APIConfig.log;
+import static WEB.APIConfig.log;
 
 @Entity
 @Table(name = "events")

@@ -1,4 +1,6 @@
-package main;
+package WEB;
+
+
 
 public class APIConfig {
 	public static final boolean DEBUG = true;

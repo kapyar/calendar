@@ -1,4 +1,4 @@
-package main;
+package WEB;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import WEB.User;
 import Model.EventHolder;
 
 public class ServeOneJabber extends Thread {
@@ -47,7 +48,7 @@ public class ServeOneJabber extends Thread {
 				EventHolder holder = (EventHolder) in.get(Action.EVENT_HOLDER);
 				String cLogin = (String) in.get(Action.LOGIN_FIELD);
 				SendEmail se = new SendEmail(holder, cLogin);
-				//send this e-mail
+				// send this e-mail
 				se.send();
 				out.put(Action.ACTION.EVENT, Action.SEND);
 				break;

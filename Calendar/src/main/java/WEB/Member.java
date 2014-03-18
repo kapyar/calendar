@@ -1,4 +1,4 @@
-package main;
+package WEB;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

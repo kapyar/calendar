@@ -11,6 +11,7 @@ import MYGUI.MetroList;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
 import Model.Model;
+import WEB.DataBaseAPI;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -22,8 +23,7 @@ import javax.swing.ListModel;
 import javax.swing.ProgressMonitor;
 import javax.swing.SwingConstants;
 
-import main.DataBaseAPI;
-import main.User;
+import WEB.User;
 
 public class Friend extends MetroPanel {
 
@@ -54,7 +54,7 @@ public class Friend extends MetroPanel {
 		list = new MetroList();
 
 		for (int i = 0; i < users.size(); ++i) {
-			st[i] = users.get(i).getMail();
+			st[i] = users.get(i).getUser_mail();
 		}
 
 		list.setModel(new AbstractListModel() {

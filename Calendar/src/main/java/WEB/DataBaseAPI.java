@@ -1,4 +1,4 @@
-package main;
+package WEB;
 
 import java.util.Collection;
 import java.util.Date;
@@ -10,18 +10,25 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+
+
 import org.apache.commons.codec.digest.DigestUtils;
 
-import static main.APIConfig.log;
+import static WEB.APIConfig.log;
 
+/*
+ * maybe need to use another singletone with instance
+ *  to be able to make it null 
+ *  when do log out? check at home
+ */
 public enum DataBaseAPI {
 	GET;
 
 	private static final String PERSISTENCE_UNIT_NAME = "calendar";
 	private EntityManagerFactory factory;
 	private EntityManager em;
-	private Session session;
-	private User user;
+	private WEB.Session session;
+	private WEB.User user;
 
 	DataBaseAPI() {
 		log("DataBaseAPI(): constructor started");
@@ -53,7 +60,7 @@ public enum DataBaseAPI {
 
 	public void logIn(String mail, String pass) throws Exception {
 		// if there is no combination of mail/pass fire an error
-		List<User> users = this.getUserWithData(mail, pass);
+		List<WEB.User> users = this.getUserWithData(mail, pass);
 
 		if (users.size() == 0) {
 			throw new Exception(APIConfig.ERROR_WRONG_LOGIN_DATA);
@@ -63,12 +70,12 @@ public enum DataBaseAPI {
 		// TODO: check if the only one?
 
 		user = users.get(0);
-		session = new Session(user.getMail());
+		session = new Session(user.getUser_mail());
 
 		em.getTransaction().begin();
-		user.setSession(session.getSessionId());
+		user.setUser_session(session.getSessionId());
 		em.getTransaction().commit();
-		
+
 		log("logIn(): User with id " + user.getId() + " has logged in");
 	}
 
@@ -80,7 +87,7 @@ public enum DataBaseAPI {
 		}
 		// compare sessions on server and local
 		User serverUser = getUserWithEmail(session.getName());
-		return serverUser.getSession().equals(session.getSessionId());
+		return serverUser.getUser_session().equals(session.getSessionId());
 	}
 
 	public User getUserWithEmail(String mail) {
@@ -94,7 +101,7 @@ public enum DataBaseAPI {
 	public void logOut() {
 		em.getTransaction().begin();
 		session.setSession(null);
-		user.setSession(null);
+		user.setUser_session(null);
 		em.getTransaction().commit();
 		log("logOut(): user " + user.getId() + " has logged out");
 	}
@@ -127,8 +134,10 @@ public enum DataBaseAPI {
 	}
 
 	private boolean userHasFriend(int friendId) {
+
+		log("134:list of userHAsFriend( " + friendId + " )");
 		Query q = em
-				.createQuery("SELECT u FROM Friend u WHERE u.user_owner = :owner");
+				.createQuery("SELECT f FROM Friend f WHERE f.user_owner = :owner");
 		q.setParameter("owner", friendId);
 		List<Friend> f = q.getResultList();
 
@@ -158,7 +167,7 @@ public enum DataBaseAPI {
 				+ " added ( current userId: " + user.getId());
 	}
 
-	//it does not f..... works!
+	// it does not f..... works!
 	public List<User> getFriends() throws Exception {
 		if (!isLoggedIn()) {
 			log("getFriends(): exception: not logged in");
@@ -168,6 +177,7 @@ public enum DataBaseAPI {
 		Query q = em
 				.createQuery("SELECT u FROM User u JOIN Friend f ON u.id = f.user_slave AND f.user_owner = :owner");
 		q.setParameter("owner", user.getId());
+
 		List<User> friends = q.getResultList();
 
 		log("getFriends(): list of friends retreived");
@@ -249,12 +259,11 @@ public enum DataBaseAPI {
 		List<User> allUsers = q.getResultList();
 		return allUsers;
 	}
-   
+
 	// TODO: call this in shutDown hook in main app
-	public void closeConnection() {  
+	public void closeConnection() {
 		log("closeConnection(): starting closing connection");
 		em.close();
-		factory.close();
 		log("closeConnection(): connection closed");
 	}
 
