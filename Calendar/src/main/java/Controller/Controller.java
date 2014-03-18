@@ -22,7 +22,6 @@ import org.eclipse.persistence.exceptions.EclipseLinkException;
 
 import com.mysql.jdbc.TimeUtil;
 
-import main.User;
 import Model.EventHolder;
 import Model.Model;
 import Model.MyUser;
@@ -34,6 +33,7 @@ import View.MainContainer;
 import View.MyCalendar;
 import View.Register;
 import View.UserEvent;
+import WEB.User;
 
 public class Controller {
 
@@ -440,6 +440,7 @@ public class Controller {
 	public static void alert(Component c, String error) {
 		JOptionPane.showConfirmDialog(c, error, "Alert",
 				JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
+		
 	}
 	public static void info(Component c, String info) {
 		JOptionPane.showConfirmDialog(c, info, "Info",

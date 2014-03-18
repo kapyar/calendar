@@ -14,6 +14,7 @@ import MYGUI.MetroList;
 import MYGUI.MetroPanel;
 import MYGUI.MyButton;
 import Model.Model;
+import WEB.DataBaseAPI;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -31,8 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-import main.DataBaseAPI;
-import main.User;
+import WEB.User;
 
 public class UserEvent extends MetroPanel {
 	private MetroEditablePane txtName;
@@ -56,12 +56,13 @@ public class UserEvent extends MetroPanel {
 		int deltaY = 50;
 		int lblX = 450;
 		int txtX = 520;
-		btnSave = ButtonFactory.getNormalButton("Save");;
-		btnSave.setLocation(txtX+110, _Y+deltaY*7);
+		btnSave = ButtonFactory.getNormalButton("Save");
+		;
+		btnSave.setLocation(txtX + 110, _Y + deltaY * 7);
 		add(btnSave);
 
 		btnCancel = ButtonFactory.getNormalButton("Cancel");
-		btnCancel.setLocation(lblX, _Y+deltaY*7);
+		btnCancel.setLocation(lblX, _Y + deltaY * 7);
 		add(btnCancel);
 
 		JLabel lblNewEvent = new JLabel("New Event");
@@ -72,90 +73,84 @@ public class UserEvent extends MetroPanel {
 
 		JLabel lblName = new JLabel("What");
 		Decorator.decorateNormal(lblName);
-		lblName.setLocation(lblX, _Y+deltaY*0);
+		lblName.setLocation(lblX, _Y + deltaY * 0);
 		add(lblName);
-		
+
 		txtName = new MetroEditablePane();
-		txtName.setLocation(txtX, _Y+deltaY*0);
+		txtName.setLocation(txtX, _Y + deltaY * 0);
 		add(txtName);
 
-		
 		JLabel lblPlace = new JLabel("Where");
 		Decorator.decorateNormal(lblPlace);
-		lblPlace.setLocation(lblX, _Y+deltaY*1);
+		lblPlace.setLocation(lblX, _Y + deltaY * 1);
 		add(lblPlace);
 
 		txtWhere = new MetroEditablePane();
-		txtWhere.setLocation(txtX, _Y+deltaY*1);
+		txtWhere.setLocation(txtX, _Y + deltaY * 1);
 		add(txtWhere);
 
 		JLabel lblWhen = new JLabel("When");
 		Decorator.decorateNormal(lblWhen);
-		lblWhen.setLocation(lblX, _Y+deltaY*2);
+		lblWhen.setLocation(lblX, _Y + deltaY * 2);
 		add(lblWhen);
 
 		txtWhen = new MetroEditablePane();
-		txtWhen.setLocation(txtX, _Y+deltaY*2);
+		txtWhen.setLocation(txtX, _Y + deltaY * 2);
 		add(txtWhen);
 
-		
-		
 		MetroPanel panel = new MetroPanel();
-		panel.setBounds(lblX, _Y+deltaY*3, 131, 140);
+		panel.setBounds(lblX, _Y + deltaY * 3, 131, 140);
 		Decorator.decorateBorderTitle(panel, "Remind");
 		add(panel);
 		int _inPX = 28;
 		int _inPY = 20;
-		int  _inPdelta = 23;
+		int _inPdelta = 23;
 		chckbxEmail = new JCheckBox("email");
 		Decorator.decorateJCheckBox(chckbxEmail);
-		chckbxEmail.setBounds(_inPX, _inPY+_inPdelta*0, 97, 23);
+		chckbxEmail.setBounds(_inPX, _inPY + _inPdelta * 0, 97, 23);
 		panel.add(chckbxEmail);
-		
 
 		chckbxSms = new JCheckBox("sms");
 		Decorator.decorateJCheckBox(chckbxSms);
-		chckbxSms.setBounds(_inPX, _inPY+_inPdelta*1, 97, 23);
+		chckbxSms.setBounds(_inPX, _inPY + _inPdelta * 1, 97, 23);
 		panel.add(chckbxSms);
-		
 
 		JLabel lblRemindIn = new JLabel("In:");
-		lblRemindIn.setLocation(_inPX, _inPY+_inPdelta*2);
+		lblRemindIn.setLocation(_inPX, _inPY + _inPdelta * 2);
 		Decorator.decorateNormal(lblRemindIn);
 		panel.add(lblRemindIn);
 
 		comboBox = new JComboBox();
 		comboBox.setModel(Config.comboBoxModel);
-		comboBox.setBounds(_inPX, _inPY+_inPdelta*3+10, panel.getWidth()-2*_inPX, 20);
+		comboBox.setBounds(_inPX, _inPY + _inPdelta * 3 + 10, panel.getWidth()
+				- 2 * _inPX, 20);
 		panel.add(comboBox);
-		
-		
+
 		JLabel lblDescription = new JLabel("Description");
 		Decorator.decorateNormal(lblDescription);
 		lblDescription.setLocation(90, 80);
 		add(lblDescription);
-		
+
 		txtDescription = new MetroBigEditPanel();
-		txtDescription.setBounds(90,  _Y+deltaY*0, 283, deltaY*3+panel.getHeight());
+		txtDescription.setBounds(90, _Y + deltaY * 0, 283,
+				deltaY * 3 + panel.getHeight());
 		add(txtDescription);
-		
-		
-			
+
 		MetroPanel panelFriend = new MetroPanel();
-		panelFriend.setBounds(lblX+150, _Y+deltaY*3, 131, 140);
+		panelFriend.setBounds(lblX + 150, _Y + deltaY * 3, 131, 140);
 		Decorator.decorateBorderTitle(panelFriend, "Invite Friends");
 		add(panelFriend);
-		
-		
+
 		dateEvent = dateWhen;
 		listOfFriends = new MetroList();
 
-		List<User> users =  Model.MODEL.doGetAllFriend();
+		List<User> users = Model.MODEL.doGetAllFriend();
+		System.out.println("AAABBB" + users);
 		System.out.println(users);
 		st = new String[users.size()];
 
 		for (int i = 0; i < users.size(); ++i) {
-			st[i] = users.get(i).getMail();
+			st[i] = users.get(i).getUser_mail();
 		}
 
 		listOfFriends
@@ -171,19 +166,30 @@ public class UserEvent extends MetroPanel {
 				return values[index];
 			}
 		});
-		
+
 		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
 				.getCellRenderer();
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
-		listOfFriends.setBounds(10, 20, panelFriend.getWidth()-20, panelFriend.getHeight()-30);
+		listOfFriends.setBounds(10, 20, panelFriend.getWidth() - 20,
+				panelFriend.getHeight() - 30);
 		panelFriend.add(listOfFriends);
-		
-		
-		
+
 		progressBar = new JProgressBar();
-		progressBar.setBounds(txtDescription.getX(), btnCancel.getY(), txtDescription.getWidth(), 39);
+		progressBar.setBounds(txtDescription.getX(), btnCancel.getY(),
+				txtDescription.getWidth(), 39);
 		progressBar.setVisible(false);
-				add(progressBar);
+		add(progressBar);
+	}
+
+	public boolean isAlowed() {
+		return lenght(txtName) && lenght(txtWhen) && lenght(txtWhere);
+	}
+
+	private boolean lenght(MetroEditablePane m) {
+		if (m.getText().length() > 1)
+			return true;
+		m.showError();
+		return false;
 	}
 
 	public void addListener(ActionListener l) {
@@ -198,10 +204,6 @@ public class UserEvent extends MetroPanel {
 
 	public JButton getBtnSave() {
 		return btnSave;
-	}
-
-	public JProgressBar getProgressBar() {
-		return progressBar;
 	}
 
 	// return selected string in list

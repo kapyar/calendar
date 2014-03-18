@@ -8,8 +8,8 @@ import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 
-import main.DataBaseAPI;
-import main.User;
+import WEB.User;
+import WEB.DataBaseAPI;
 
 import com.sun.mail.imap.protocol.Namespaces.Namespace;
 

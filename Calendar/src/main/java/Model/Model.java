@@ -13,14 +13,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import View.MainContainer;
-
+import WEB.APIConfig;
+import WEB.Action;
+import WEB.DataBaseAPI;
+import WEB.MultiJabberClient;
+import WEB.User;
 import Controller.Controller;
 
-import main.APIConfig;
-import main.Action;
-import main.DataBaseAPI;
-import main.MultiJabberClient;
-import main.User;
 
 /*
  * All entity should be in this package
@@ -34,13 +33,12 @@ public enum Model {
 	private boolean isEnterLogIn = false;
 	private String CURRENT_LOGIN;
 
-
-	public boolean doLogIn(final String mail, final String pass, MainContainer frame) {
+	public boolean doLogIn(final String mail, final String pass,
+			MainContainer frame) {
 		try {
 			dataBase.logIn(mail, pass);
 		} catch (Exception e) {
-			Controller.alert(frame,
-					e.getMessage());
+			Controller.alert(frame, e.getMessage());
 			return false;
 		}
 		isEnterLogIn = true;

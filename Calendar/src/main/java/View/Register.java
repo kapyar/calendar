@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Controller;
 import MYGUI.ButtonFactory;
 import MYGUI.Decorator;
 import MYGUI.MetroEditablePane;
@@ -24,6 +25,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JProgressBar;
 
 public class Register extends MetroPanel {
@@ -45,83 +47,81 @@ public class Register extends MetroPanel {
 		panel.setSize(new Dimension(400, 400));
 		int midXfP = Config.WIDTH / 2 - panel.getWidth() / 2;
 		int midX = Config.WIDTH / 2;
-		panel.setLocation(midXfP,50);
+		panel.setLocation(midXfP, 50);
 		Font font = new Font("Segoe UI", 1, 25);
 		panel.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createBevelBorder(1), "Registration", 0, 0, font,
 				ConfigColor._bCTC));
 		panel.setAlignmentX(SwingConstants.CENTER);
 		add(panel);
-		
+
 		int _Y = 50;
-		int delta = 42+20;
-		
-		
+		int delta = 42 + 20;
+
 		JLabel lblLogin = new JLabel("login", SwingConstants.LEFT);
-		lblLogin.setLocation(new Point(118,_Y+delta*0));
+		lblLogin.setLocation(new Point(118, _Y + delta * 0));
 		panel.add(lblLogin);
 		Decorator.decorateNormal(lblLogin);
 
 		txtLogin = new MetroEditablePane();
-		txtLogin.setLocation(new Point(Config._EP_X,_Y+delta*0));
+		txtLogin.setLocation(new Point(Config._EP_X, _Y + delta * 0));
 		panel.add(txtLogin);
 
 		JLabel lblEmail = new JLabel("e-mail", SwingConstants.LEFT);
-		lblEmail.setLocation(new Point(110,_Y+delta*1));
+		lblEmail.setLocation(new Point(110, _Y + delta * 1));
 		panel.add(lblEmail);
 		Decorator.decorateNormal(lblEmail);
 
 		txtEmail = new MetroEditablePane();
-		txtEmail.setLocation(new Point(Config._EP_X,_Y+delta*1));
-		
+		txtEmail.setLocation(new Point(Config._EP_X, _Y + delta * 1));
+
 		panel.add(txtEmail);
 
 		JLabel lblNewLabel = new JLabel("phone", SwingConstants.LEFT);
-		lblNewLabel.setLocation(new Point(112,_Y+delta*2));
+		lblNewLabel.setLocation(new Point(112, _Y + delta * 2));
 		panel.add(lblNewLabel);
 		Decorator.decorateNormal(lblNewLabel);
 
 		txtPhone = new MetroEditablePane();
-		txtPhone.setLocation(new Point(Config._EP_X,_Y+delta*2));
+		txtPhone.setLocation(new Point(Config._EP_X, _Y + delta * 2));
 		panel.add(txtPhone);
 
 		JLabel lblPassword = new JLabel("password", SwingConstants.LEFT);
-		lblPassword.setLocation(new Point(91,_Y+delta*3));
+		lblPassword.setLocation(new Point(91, _Y + delta * 3));
 		panel.add(lblPassword);
 		Decorator.decorateNormal(lblPassword);
 
 		txtPass = new MetroEditablePin();
-		txtPass.setLocation(new Point(Config._EP_X,_Y+delta*3));
+		txtPass.setLocation(new Point(Config._EP_X, _Y + delta * 3));
 		panel.add(txtPass);
 		txtPass.getDel().setLocation(180, 2);
 
-		JLabel lblConfigm = new JLabel("confirm password",SwingConstants.LEFT);
-		lblConfigm.setLocation(new Point(35,_Y+delta*4));
+		JLabel lblConfigm = new JLabel("confirm password", SwingConstants.LEFT);
+		lblConfigm.setLocation(new Point(35, _Y + delta * 4));
 		panel.add(lblConfigm);
 		Decorator.decorateNormal(lblConfigm);
 
 		txtConfirmPass = new MetroEditablePin();
-		txtConfirmPass.setLocation(new Point(Config._EP_X,_Y+delta*4));
+		txtConfirmPass.setLocation(new Point(Config._EP_X, _Y + delta * 4));
 		panel.add(txtConfirmPass);
-		
+
 		txtConfirmPass.getDel().setLocation(180, 3);
-		
+
 		btnSave = ButtonFactory.getNormalButton("Save");
-		btnSave.setLocation(new Point(midX+25,Config.HEIGHT - 120));
+		btnSave.setLocation(new Point(midX + 25, Config.HEIGHT - 120));
 		add(btnSave);
-		
 
 		btnCancel = ButtonFactory.getNormalButton("Cancel");
-		
-	
-		btnCancel.setLocation(new Point(midX-125,Config.HEIGHT - 120));
+
+		btnCancel.setLocation(new Point(midX - 125, Config.HEIGHT - 120));
 		add(btnCancel);
 
 		progressBar = new JProgressBar();
-		progressBar.setBounds(10, panel.getHeight()-35, panel.getWidth()-20, 25);
+		progressBar.setBounds(10, panel.getHeight() - 35,
+				panel.getWidth() - 20, 25);
 		progressBar.setVisible(false);
-//		UIManager.put("ProgressBar.background", Color.white);
-//		UIManager.put("ProgressBar.foreground", new Color(63, 210, 253));
+		// UIManager.put("ProgressBar.background", Color.white);
+		// UIManager.put("ProgressBar.foreground", new Color(63, 210, 253));
 		panel.add(progressBar);
 
 	}
@@ -141,26 +141,48 @@ public class Register extends MetroPanel {
 	}
 
 	public boolean isConfirmedPass() {
-		return (!txtPass.getText().equals(""))
-				&& txtPass.getText().equals(txtConfirmPass.getText())
-				&& txtPass.getText().length() > 4;
+		return txtPass.getText().equals(txtConfirmPass.getText());
+
 	}
 
 	public boolean isAllowToRegister() {
-		highLight();
-		return isConfirmedPass() && txtEmail.getText().contains("@");
+		
+		return highLight();
 	}
 
-	public void highLight() {
+	public boolean highLight() {
 
 		if (!isConfirmedPass()) {
 			txtPass.showError();
 			txtConfirmPass.showError();
+			Controller.info(this, "Your password does not match");
+			return false;
+		}
+
+		if (txtPass.getText().length() < 4) {
+			txtPass.showError();
+			Controller.info(this, "Please, input more than 4 charachters");
+			return false;
 		}
 
 		if (!txtEmail.getText().contains("@")) {
 			txtEmail.showError();
+			Controller.info(this, "Invalid password");
+			return false;
 		}
+
+		if (txtPhone.getText().length() < 10) {
+			txtPhone.showError();
+			Controller.info(this, "Invalid phone number at least 10 numbers");
+			return false;
+		}
+		
+		if(txtLogin.getText().length() < 1){
+			txtLogin.showError();
+			Controller.info(this, "Name souldn`t be empty");
+			return false;
+		}
+		return true;
 	}
 
 	public JProgressBar getProgressBar() {

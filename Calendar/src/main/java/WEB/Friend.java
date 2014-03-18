@@ -1,4 +1,4 @@
-package main;
+package WEB;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -25,13 +25,31 @@ public class Friend {
 		this.user_owner = owner;
 		this.user_slave = slave;
 	}
-	
-	public int getOwner() {
+
+	public int getUser_owner() {
 		return user_owner;
 	}
-	
-	public int getSlave() {
+
+	public void setUser_owner(int user_owner) {
+		this.user_owner = user_owner;
+	}
+
+	public int getUser_slave() {
 		return user_slave;
 	}
+
+	public void setUser_slave(int user_slave) {
+		this.user_slave = user_slave;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 
 }

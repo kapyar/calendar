@@ -2,10 +2,9 @@ package ua.com.hoboNaUKMA.Calendar;
 
 import java.util.HashMap;
 
-import main.APIConfig;
-import main.DataBaseAPI;
 import Controller.Controller;
 import View.*;
+import WEB.DataBaseAPI;
 
 public class Main {
 
@@ -17,4 +16,3 @@ public class Main {
 
 	}
 }
-	
