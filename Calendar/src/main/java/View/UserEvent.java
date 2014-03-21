@@ -157,6 +157,7 @@ public class UserEvent extends MetroPanel {
 		add(progressBar);
 
 		cmbbxWhen = new JComboBox();
+		cmbbxWhen.setModel(Config.comboBoxModel);
 		cmbbxWhen.setBounds(520, 220, 75, 20);
 		add(cmbbxWhen);
 
