@@ -37,7 +37,6 @@ import WEB.User;
 public class UserEvent extends MetroPanel {
 	private MetroEditablePane txtName;
 	private MetroEditablePane txtWhere;
-	private MetroEditablePane txtWhen;
 	private MyButton btnCancel;
 	private MyButton btnSave;
 	private String[] st;
@@ -48,6 +47,7 @@ public class UserEvent extends MetroPanel {
 	private JCheckBox chckbxSms;
 	private JComboBox comboBox;
 	private JProgressBar progressBar;
+	private JComboBox cmbbxWhen;
 
 	public UserEvent(Date dateWhen) {
 		int w = 215;
@@ -93,10 +93,6 @@ public class UserEvent extends MetroPanel {
 		Decorator.decorateNormal(lblWhen);
 		lblWhen.setLocation(lblX, _Y + deltaY * 2);
 		add(lblWhen);
-
-		txtWhen = new MetroEditablePane();
-		txtWhen.setLocation(txtX, _Y + deltaY * 2);
-		add(txtWhen);
 
 		MetroPanel panel = new MetroPanel();
 		panel.setBounds(lblX, _Y + deltaY * 3, 131, 140);
@@ -159,8 +155,11 @@ public class UserEvent extends MetroPanel {
 				txtDescription.getWidth(), 39);
 		progressBar.setVisible(false);
 		add(progressBar);
-		
-		
+
+		cmbbxWhen = new JComboBox();
+		cmbbxWhen.setBounds(520, 220, 75, 20);
+		add(cmbbxWhen);
+
 		setListModel();
 	}
 
@@ -191,7 +190,7 @@ public class UserEvent extends MetroPanel {
 	}
 
 	public boolean isAlowed() {
-		return lenght(txtName) && lenght(txtWhen) && lenght(txtWhere);
+		return lenght(txtName) && lenght(txtWhere);
 	}
 
 	private boolean lenght(MetroEditablePane m) {
@@ -238,10 +237,6 @@ public class UserEvent extends MetroPanel {
 		return txtWhere;
 	}
 
-	public MetroEditablePane getTxtWhen() {
-		return txtWhen;
-	}
-
 	public MetroBigEditPanel getTxtDescription() {
 		return txtDescription;
 	}
@@ -264,5 +259,9 @@ public class UserEvent extends MetroPanel {
 
 	public JProgressBar getProgressBar() {
 		return progressBar;
+	}
+
+	public JComboBox getCmbbxWhen() {
+		return cmbbxWhen;
 	}
 }

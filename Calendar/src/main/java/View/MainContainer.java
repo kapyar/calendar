@@ -55,10 +55,9 @@ public class MainContainer extends JFrame implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		System.out.println("closing window: " + Model.MODEL.isLoginIn());
-		if (Model.MODEL.isLoginIn()) {
-			Model.MODEL.doLogOut();
-		}
+
+		Model.MODEL.doLogOut();
+
 	}
 
 	@Override
@@ -69,7 +68,6 @@ public class MainContainer extends JFrame implements WindowListener {
 
 	@Override
 	public void windowClosed(WindowEvent arg0) {
-		
 
 	}
 

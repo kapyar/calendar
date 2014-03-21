@@ -32,8 +32,7 @@ public enum Model {
 	private boolean isEnterLogIn = false;
 	private String CURRENT_LOGIN;
 
-	public boolean doLogIn(final String mail, final String pass,
-			MainContainer frame) {
+	public boolean doLogIn(final String mail, final String pass) {
 		try {
 			dataBase.logIn(mail, pass);
 		} catch (Exception e) {
@@ -64,9 +63,11 @@ public enum Model {
 	}
 
 	public boolean doLogOut() {
-		dataBase.logOut();// make session null
-		dataBase.closeConnection();// close all connection
-		isEnterLogIn = false;
+		if (isEnterLogIn) {
+			dataBase.logOut();// make session null
+			dataBase.closeConnection();// close all connection
+			isEnterLogIn = false;
+		}
 		return true;
 
 	}

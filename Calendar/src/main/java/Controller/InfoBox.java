@@ -18,4 +18,9 @@ public enum InfoBox {
 		JOptionPane.showConfirmDialog(c, info, "Info",
 				JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
 	}
+
+	public static int exit(Component c, String info) {
+		return JOptionPane.showConfirmDialog(c, info, "Exit",
+				JOptionPane.YES_NO_OPTION, JOptionPane.YES_NO_OPTION);
+	}
 }

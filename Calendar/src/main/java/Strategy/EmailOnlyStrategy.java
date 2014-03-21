@@ -28,11 +28,7 @@ public class EmailOnlyStrategy implements Strategy {
 		from = eh.getCreatorEvent();
 		invited = eh.getUserList();
 		subject = eh.getTitle();
-		msgBody = ", you were invited to meeting at: " + eh.getWhen() + " on "
-				+ eh.getDate().getDay() + " ,"
-				+ Config.MONTHS[eh.getDate().getMonth()] + " in "
-				+ eh.getDate().getYear() + "\n" + eh.getDescription();
-
+		msgBody = ", you were invited to meeting at: " + eh.getDateWhenRing();
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 
