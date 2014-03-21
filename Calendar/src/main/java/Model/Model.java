@@ -20,7 +20,6 @@ import WEB.MultiJabberClient;
 import WEB.User;
 import Controller.Controller;
 
-
 /*
  * All entity should be in this package
  * all work with DB should be implemented
@@ -38,7 +37,6 @@ public enum Model {
 		try {
 			dataBase.logIn(mail, pass);
 		} catch (Exception e) {
-			Controller.alert(frame, e.getMessage());
 			return false;
 		}
 		isEnterLogIn = true;

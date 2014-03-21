@@ -1,4 +1,4 @@
-package WEB;
+package Strategy;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -12,34 +12,26 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import WEB.User;
 import Model.EventHolder;
-import Strategy.Strategy;
 import View.Config;
+import WEB.User;
 
-/*
- * 
- * need to add html
- */
-public class SendEmail implements Strategy{
+public class EmailOnlyStrategy implements Strategy {
 
-	private String msgBody;
-	private String from;
-	private ArrayList<User> invited;
-	private String subject;
+	@Override
+	public void send(EventHolder eh) {
+		String msgBody;
+		String from;
+		ArrayList<User> invited;
+		String subject;
 
-	public SendEmail(EventHolder eh, String loginFrom) {
-		this.from = loginFrom;
-		this.invited = eh.getUserList();
-		this.subject = eh.getTitle();
-		this.msgBody = ", you were invited to meeting at: " + eh.getWhen()
-				+ " on " + eh.getDate().getDay() + " ,"
+		from = eh.getCreatorEvent();
+		invited = eh.getUserList();
+		subject = eh.getTitle();
+		msgBody = ", you were invited to meeting at: " + eh.getWhen() + " on "
+				+ eh.getDate().getDay() + " ,"
 				+ Config.MONTHS[eh.getDate().getMonth()] + " in "
 				+ eh.getDate().getYear() + "\n" + eh.getDescription();
-
-	}
-
-	public void send()  {
 
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
@@ -66,12 +58,6 @@ public class SendEmail implements Strategy{
 			}
 		}
 
-	}
-
-	@Override
-	public void send(EventHolder e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

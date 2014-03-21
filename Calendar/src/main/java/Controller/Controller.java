@@ -75,7 +75,7 @@ public class Controller {
 						if (name.isEmpty() || pass.isEmpty()) {
 
 							System.out.println("Please, enter data in filds");
-							Controller
+							InfoBox.BOX
 									.alert(frame,
 											"Please, enter email and passowrd in filds");
 							login.getTxt().showError();
@@ -83,15 +83,15 @@ public class Controller {
 						} else {
 							if (!name.contains("@")) {
 								System.out.println("Incorect email");
-								Controller.alert(frame,
+								InfoBox.BOX.alert(frame,
 										"Please, enter CORECT email  fild");
 								login.getTxt().showError();
 							} else {
 
 								login.getProgressBar().setVisible(true);
 								login.getProgressBar().setIndeterminate(true);
-								
-								if (Model.MODEL.doLogIn(name, pass,frame)) {
+
+								if (Model.MODEL.doLogIn(name, pass, frame)) {
 
 									choose = new ChooserPanel();
 									choose.addListener(new ChooseListener());
@@ -102,8 +102,7 @@ public class Controller {
 									login.getTxt().showError();
 									login.getPin().showError();
 								}
-								
-								
+
 							}
 						}
 						return null;
@@ -118,7 +117,7 @@ public class Controller {
 			}
 
 			if (source == login.getMyButton_Cancel()) {
-				 System.exit(0);
+				System.exit(0);
 			}
 			if (source == login.getBtnRegister()) {
 				register = new Register();
@@ -228,7 +227,6 @@ public class Controller {
 						event.getProgressBar().setVisible(true);
 						event.getProgressBar().setIndeterminate(true);
 
-						
 						EventHolder eh = getDataToSend();
 						Model.MODEL.doCreateEvent(eh);
 						frame.showPane(calendar);
@@ -241,7 +239,7 @@ public class Controller {
 
 				}
 				new MyWorker().execute();
-				
+
 			}
 
 		}
@@ -418,11 +416,11 @@ public class Controller {
 					@Override
 					protected void done() {
 						friend.getProgressBar().setVisible(false);
-						
+
 					}
 				}
 				new MyWorker().execute();
-				Controller.info(frame, "You add friend");
+				InfoBox.BOX.info(frame, "You add friend");
 				if (calendar == null) {
 					calendar = new MyCalendar();
 					calendar.addListener(new CalendarListner());// for
@@ -437,13 +435,4 @@ public class Controller {
 
 	}// END FriendsListener
 
-	public static void alert(Component c, String error) {
-		JOptionPane.showConfirmDialog(c, error, "Alert",
-				JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
-		
-	}
-	public static void info(Component c, String info) {
-		JOptionPane.showConfirmDialog(c, info, "Info",
-				JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
-	}
 }

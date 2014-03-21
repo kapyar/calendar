@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Controller;
+import Controller.InfoBox;
 import MYGUI.ButtonFactory;
 import MYGUI.Decorator;
 import MYGUI.MetroEditablePane;
@@ -155,31 +156,31 @@ public class Register extends MetroPanel {
 		if (!isConfirmedPass()) {
 			txtPass.showError();
 			txtConfirmPass.showError();
-			Controller.info(this, "Your password does not match");
+			InfoBox.BOX.info(this, "Your password does not match");
 			return false;
 		}
 
 		if (txtPass.getText().length() < 4) {
 			txtPass.showError();
-			Controller.info(this, "Please, input more than 4 charachters");
+			InfoBox.BOX.info(this, "Please, input more than 4 charachters");
 			return false;
 		}
 
 		if (!txtEmail.getText().contains("@")) {
 			txtEmail.showError();
-			Controller.info(this, "Invalid password");
+			InfoBox.BOX.info(this, "Invalid password");
 			return false;
 		}
 
 		if (txtPhone.getText().length() < 10) {
 			txtPhone.showError();
-			Controller.info(this, "Invalid phone number at least 10 numbers");
+			InfoBox.BOX.info(this, "Invalid phone number at least 10 numbers");
 			return false;
 		}
 		
 		if(txtLogin.getText().length() < 1){
 			txtLogin.showError();
-			Controller.info(this, "Name souldn`t be empty");
+			InfoBox.BOX.info(this, "Name souldn`t be empty");
 			return false;
 		}
 		return true;

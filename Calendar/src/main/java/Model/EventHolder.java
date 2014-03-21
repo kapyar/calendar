@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import Strategy.EmailOnlyStrategy;
+import Strategy.EmptyStrategy;
+import Strategy.SMSEmailStrategy;
+import Strategy.SmsOnlyStrategy;
+import Strategy.Strategy;
 import WEB.User;
 
 public class EventHolder implements Serializable {
@@ -19,6 +24,8 @@ public class EventHolder implements Serializable {
 	private String when;
 	private String where;
 	private String remind;
+	private Strategy strategy;
+	private String creatorEvent;
 
 	public EventHolder(String title2, String when, String where, String desc,
 			boolean isEmail, boolean isSms, ArrayList<User> users, Date date2,
@@ -33,6 +40,16 @@ public class EventHolder implements Serializable {
 		this.userList = users;
 		this.members = new ArrayList<Integer>();
 
+		if (isEmail && isSms) {
+			strategy = new SMSEmailStrategy();
+		} else if (isEmail) {
+			strategy = new EmailOnlyStrategy();
+		} else if (isSms) {
+			strategy = new SmsOnlyStrategy();
+		} else {
+			strategy = new EmptyStrategy();
+		}
+
 		// init members number
 
 		ArrayList<Integer> usersId = new ArrayList<>();
@@ -43,6 +60,10 @@ public class EventHolder implements Serializable {
 
 		this.date = date2;
 		this.remind = remind;
+	}
+
+	public void doStrategy() {
+		strategy.send(this);
 	}
 
 	public String getTitle() {
@@ -87,6 +108,18 @@ public class EventHolder implements Serializable {
 
 	public ArrayList<User> getUserList() {
 		return userList;
+	}
+
+	public String getCreatorEvent() {
+		return creatorEvent;
+	}
+
+	public void setCreatorEvent(String creatorEvent) {
+		this.creatorEvent = creatorEvent;
+	}
+
+	public Strategy getStrategy() {
+		return strategy;
 	}
 
 }

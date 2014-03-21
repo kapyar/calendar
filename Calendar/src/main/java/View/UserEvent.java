@@ -144,6 +144,27 @@ public class UserEvent extends MetroPanel {
 		dateEvent = dateWhen;
 		listOfFriends = new MetroList();
 
+		listOfFriends
+				.setToolTipText("Invite your frinds to do something together");
+
+		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
+				.getCellRenderer();
+		renderer.setHorizontalAlignment(SwingConstants.CENTER);
+		listOfFriends.setBounds(10, 20, panelFriend.getWidth() - 20,
+				panelFriend.getHeight() - 30);
+		panelFriend.add(listOfFriends);
+
+		progressBar = new JProgressBar();
+		progressBar.setBounds(txtDescription.getX(), btnCancel.getY(),
+				txtDescription.getWidth(), 39);
+		progressBar.setVisible(false);
+		add(progressBar);
+		
+		
+		setListModel();
+	}
+
+	public void setListModel() {
 		List<User> users = Model.MODEL.doGetAllFriend();
 		System.out.println("AAABBB" + users);
 		System.out.println(users);
@@ -167,18 +188,6 @@ public class UserEvent extends MetroPanel {
 			}
 		});
 
-		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
-				.getCellRenderer();
-		renderer.setHorizontalAlignment(SwingConstants.CENTER);
-		listOfFriends.setBounds(10, 20, panelFriend.getWidth() - 20,
-				panelFriend.getHeight() - 30);
-		panelFriend.add(listOfFriends);
-
-		progressBar = new JProgressBar();
-		progressBar.setBounds(txtDescription.getX(), btnCancel.getY(),
-				txtDescription.getWidth(), 39);
-		progressBar.setVisible(false);
-		add(progressBar);
 	}
 
 	public boolean isAlowed() {
