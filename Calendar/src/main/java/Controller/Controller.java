@@ -75,7 +75,7 @@ public class Controller {
 						if (name.isEmpty() || pass.isEmpty()) {
 
 							System.out.println("Please, enter data in filds");
-							Controller
+							InfoBox.BOX
 									.alert(frame,
 											"Please, enter email and passowrd in filds");
 							login.getTxt().showError();
@@ -83,18 +83,17 @@ public class Controller {
 						} else {
 							if (!name.contains("@")) {
 								System.out.println("Incorect email");
-								Controller.alert(frame,
+								InfoBox.BOX.alert(frame,
 										"Please, enter CORECT email  fild");
 								login.getTxt().showError();
 							} else {
 
 								login.getProgressBar().setVisible(true);
 								login.getProgressBar().setIndeterminate(true);
-								
-								if (Model.MODEL.doLogIn(name, pass,frame)) {
 
-									choose = new ChooserPanel();
-									choose.addListener(new ChooseListener());
+								if (Model.MODEL.doLogIn(name, pass)) {
+
+									initChoose();
 									frame.showPane(choose);
 
 								} else {
@@ -102,8 +101,7 @@ public class Controller {
 									login.getTxt().showError();
 									login.getPin().showError();
 								}
-								
-								
+
 							}
 						}
 						return null;
@@ -118,11 +116,12 @@ public class Controller {
 			}
 
 			if (source == login.getMyButton_Cancel()) {
-				 System.exit(0);
+				if (InfoBox.BOX.exit(frame, "Are you shure") == 0) {
+					System.exit(0);
+				}
 			}
 			if (source == login.getBtnRegister()) {
-				register = new Register();
-				register.addListener(new RegisterListener());
+				initRegister();
 				frame.showPane(register);
 
 			}
@@ -137,7 +136,7 @@ public class Controller {
 			Object source = e.getSource();
 
 			if (source == calendar.getBtnBack()) {
-				System.out.println("WAT");
+				initChoose();
 				frame.showPane(choose);
 
 			}
@@ -175,8 +174,7 @@ public class Controller {
 
 				System.out.println("Choosen date: " + dateWhen);
 
-				event = new UserEvent(dateWhen);
-				event.addListener(new UserEventListener());
+				initEvent(dateWhen);
 				frame.showPane(event);
 
 			}
@@ -228,9 +226,9 @@ public class Controller {
 						event.getProgressBar().setVisible(true);
 						event.getProgressBar().setIndeterminate(true);
 
-						
 						EventHolder eh = getDataToSend();
 						Model.MODEL.doCreateEvent(eh);
+						initCalendar();
 						frame.showPane(calendar);
 						return null;
 					}
@@ -241,7 +239,7 @@ public class Controller {
 
 				}
 				new MyWorker().execute();
-				
+
 			}
 
 		}
@@ -250,14 +248,14 @@ public class Controller {
 
 			String title = event.getTxtName().getText();
 			String where = event.getTxtWhere().getText();
-			String when = event.getTxtWhen().getText();
+			int when = event.getCmbbxWhen().getSelectedIndex();
 
 			String desc = event.getTxtDescription().getText();
 			boolean isEmail = event.getChckbxEmail().isSelected();
 			boolean isSms = event.getChckbxSms().isSelected();
 			Date date = event.getDateEvent();
 
-			String remind = (String) event.getComboBox().getSelectedItem();
+			int remind = event.getComboBox().getSelectedIndex();
 
 			ArrayList<User> users = (ArrayList<User>) Model.MODEL
 					.doGetListPeolpleByEmail(event.getSelected());
@@ -279,15 +277,12 @@ public class Controller {
 
 			if (source == register.getBtnCancel()) {
 
-				System.out
-						.println("closing window: " + Model.MODEL.isLoginIn());
 				if (Model.MODEL.isLoginIn()) {
 					Model.MODEL.doLogOut();
 				}
 
-				choose = new ChooserPanel();
-				choose.addListener(new ChooseListener());
-				frame.showPane(choose);
+				initLogin();
+				frame.showPane(login);
 
 			}
 
@@ -311,14 +306,9 @@ public class Controller {
 
 							if (Model.MODEL.doRegisterNewOne(user)) {
 
-								if (calendar == null) {
-									calendar = new MyCalendar();
-									CalendarListner cc = new CalendarListner();
-									calendar.addListener(cc);
-									calendar.addMyActionListener(cc);
-								}
+								initLogin();
 
-								frame.showPane(calendar);
+								frame.showPane(login);
 
 							} else {
 								System.out.println("Already exists");
@@ -350,14 +340,13 @@ public class Controller {
 
 			if (source == choose.getBtnEvent()) {
 
-				calendar = new MyCalendar();
-				calendar.addListener(new CalendarListner());
-				calendar.addMyActionListener(new CalendarListner());
+				initCalendar();
 				frame.showPane(calendar);
 			}
 
 			if (source == choose.getBtnBack()) {
 				Model.MODEL.doLogOut();
+				initLogin();
 				frame.showPane(login);
 			}
 
@@ -370,8 +359,7 @@ public class Controller {
 						choose.getProgressBar().setVisible(true);
 						choose.getProgressBar().setIndeterminate(true);
 
-						friend = new Friend();
-						friend.addListener(new FriendsListener());
+						initFriend();
 						frame.showPane(friend);
 
 						return null;
@@ -418,18 +406,12 @@ public class Controller {
 					@Override
 					protected void done() {
 						friend.getProgressBar().setVisible(false);
-						
+
 					}
 				}
 				new MyWorker().execute();
-				Controller.info(frame, "You add friend");
-				if (calendar == null) {
-					calendar = new MyCalendar();
-					calendar.addListener(new CalendarListner());// for
-																// mouseEvent
-					calendar.addMyActionListener(new CalendarListner());// for
-																		// bthBack
-				}
+				InfoBox.BOX.info(frame, "You add friend");
+				initCalendar();
 				frame.showPane(calendar);
 			}
 
@@ -437,13 +419,54 @@ public class Controller {
 
 	}// END FriendsListener
 
-	public static void alert(Component c, String error) {
-		JOptionPane.showConfirmDialog(c, error, "Alert",
-				JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
-		
+	// /// INITIALIZE /////////
+	private void initLogin() {
+		if (login == null) {
+			login = new Login();
+			login.addListener(new LoginListener());
+		}
 	}
-	public static void info(Component c, String info) {
-		JOptionPane.showConfirmDialog(c, info, "Info",
-				JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
+
+	private void initChoose() {
+
+		if (choose == null) {
+			choose = new ChooserPanel();
+			choose.addListener(new ChooseListener());
+		}
 	}
+
+	private void initFriend() {
+		if (friend == null) {
+			friend = new Friend();
+			friend.addListener(new FriendsListener());
+		}
+		friend.setListModel();
+	}
+
+	private void initCalendar() {
+		if (calendar == null) {
+			calendar = new MyCalendar();
+			calendar.addListener(new CalendarListner());
+			calendar.addMyActionListener(new CalendarListner());
+		}
+	}
+
+	private void initEvent(Date when) {
+
+		if (event == null) {
+			event = new UserEvent(when);
+			event.addListener(new UserEventListener());
+		}
+		event.setListModel();
+
+	}
+
+	private void initRegister() {
+
+		if (register == null) {
+			register = new Register();
+			register.addListener(new RegisterListener());
+		}
+	}
+
 }

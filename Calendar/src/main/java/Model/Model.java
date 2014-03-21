@@ -20,7 +20,6 @@ import WEB.MultiJabberClient;
 import WEB.User;
 import Controller.Controller;
 
-
 /*
  * All entity should be in this package
  * all work with DB should be implemented
@@ -33,12 +32,10 @@ public enum Model {
 	private boolean isEnterLogIn = false;
 	private String CURRENT_LOGIN;
 
-	public boolean doLogIn(final String mail, final String pass,
-			MainContainer frame) {
+	public boolean doLogIn(final String mail, final String pass) {
 		try {
 			dataBase.logIn(mail, pass);
 		} catch (Exception e) {
-			Controller.alert(frame, e.getMessage());
 			return false;
 		}
 		isEnterLogIn = true;
@@ -66,9 +63,11 @@ public enum Model {
 	}
 
 	public boolean doLogOut() {
-		dataBase.logOut();// make session null
-		dataBase.closeConnection();// close all connection
-		isEnterLogIn = false;
+		if (isEnterLogIn) {
+			dataBase.logOut();// make session null
+			dataBase.closeConnection();// close all connection
+			isEnterLogIn = false;
+		}
 		return true;
 
 	}

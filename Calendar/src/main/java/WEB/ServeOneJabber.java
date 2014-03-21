@@ -46,10 +46,7 @@ public class ServeOneJabber extends Thread {
 			case EVENT:
 				System.out.println("Event Part");
 				EventHolder holder = (EventHolder) in.get(Action.EVENT_HOLDER);
-				String cLogin = (String) in.get(Action.LOGIN_FIELD);
-				SendEmail se = new SendEmail(holder, cLogin);
-				// send this e-mail
-				se.send();
+				holder.doStrategy();
 				out.put(Action.ACTION.EVENT, Action.SEND);
 				break;
 			}// END of switch

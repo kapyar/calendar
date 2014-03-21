@@ -37,7 +37,6 @@ import WEB.User;
 public class UserEvent extends MetroPanel {
 	private MetroEditablePane txtName;
 	private MetroEditablePane txtWhere;
-	private MetroEditablePane txtWhen;
 	private MyButton btnCancel;
 	private MyButton btnSave;
 	private String[] st;
@@ -48,6 +47,7 @@ public class UserEvent extends MetroPanel {
 	private JCheckBox chckbxSms;
 	private JComboBox comboBox;
 	private JProgressBar progressBar;
+	private JComboBox cmbbxWhen;
 
 	public UserEvent(Date dateWhen) {
 		int w = 215;
@@ -93,10 +93,6 @@ public class UserEvent extends MetroPanel {
 		Decorator.decorateNormal(lblWhen);
 		lblWhen.setLocation(lblX, _Y + deltaY * 2);
 		add(lblWhen);
-
-		txtWhen = new MetroEditablePane();
-		txtWhen.setLocation(txtX, _Y + deltaY * 2);
-		add(txtWhen);
 
 		MetroPanel panel = new MetroPanel();
 		panel.setBounds(lblX, _Y + deltaY * 3, 131, 140);
@@ -144,6 +140,31 @@ public class UserEvent extends MetroPanel {
 		dateEvent = dateWhen;
 		listOfFriends = new MetroList();
 
+		listOfFriends
+				.setToolTipText("Invite your frinds to do something together");
+
+		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
+				.getCellRenderer();
+		renderer.setHorizontalAlignment(SwingConstants.CENTER);
+		listOfFriends.setBounds(10, 20, panelFriend.getWidth() - 20,
+				panelFriend.getHeight() - 30);
+		panelFriend.add(listOfFriends);
+
+		progressBar = new JProgressBar();
+		progressBar.setBounds(txtDescription.getX(), btnCancel.getY(),
+				txtDescription.getWidth(), 39);
+		progressBar.setVisible(false);
+		add(progressBar);
+
+		cmbbxWhen = new JComboBox();
+		cmbbxWhen.setModel(Config.comboBoxModel);
+		cmbbxWhen.setBounds(520, 220, 75, 20);
+		add(cmbbxWhen);
+
+		setListModel();
+	}
+
+	public void setListModel() {
 		List<User> users = Model.MODEL.doGetAllFriend();
 		System.out.println("AAABBB" + users);
 		System.out.println(users);
@@ -167,22 +188,10 @@ public class UserEvent extends MetroPanel {
 			}
 		});
 
-		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
-				.getCellRenderer();
-		renderer.setHorizontalAlignment(SwingConstants.CENTER);
-		listOfFriends.setBounds(10, 20, panelFriend.getWidth() - 20,
-				panelFriend.getHeight() - 30);
-		panelFriend.add(listOfFriends);
-
-		progressBar = new JProgressBar();
-		progressBar.setBounds(txtDescription.getX(), btnCancel.getY(),
-				txtDescription.getWidth(), 39);
-		progressBar.setVisible(false);
-		add(progressBar);
 	}
 
 	public boolean isAlowed() {
-		return lenght(txtName) && lenght(txtWhen) && lenght(txtWhere);
+		return lenght(txtName) && lenght(txtWhere);
 	}
 
 	private boolean lenght(MetroEditablePane m) {
@@ -229,10 +238,6 @@ public class UserEvent extends MetroPanel {
 		return txtWhere;
 	}
 
-	public MetroEditablePane getTxtWhen() {
-		return txtWhen;
-	}
-
 	public MetroBigEditPanel getTxtDescription() {
 		return txtDescription;
 	}
@@ -255,5 +260,9 @@ public class UserEvent extends MetroPanel {
 
 	public JProgressBar getProgressBar() {
 		return progressBar;
+	}
+
+	public JComboBox getCmbbxWhen() {
+		return cmbbxWhen;
 	}
 }

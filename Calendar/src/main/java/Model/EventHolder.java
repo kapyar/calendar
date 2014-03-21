@@ -1,10 +1,16 @@
 package Model;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import Strategy.EmailOnlyStrategy;
+import Strategy.EmptyStrategy;
+import Strategy.SMSEmailStrategy;
+import Strategy.SmsOnlyStrategy;
+import Strategy.Strategy;
 import WEB.User;
 
 public class EventHolder implements Serializable {
@@ -16,13 +22,16 @@ public class EventHolder implements Serializable {
 	private ArrayList<Integer> members;
 	private boolean viaEmail = false;
 	private boolean viaSMS = false;
-	private String when;
+	private int when;
 	private String where;
-	private String remind;
+	private int remind;
+	private Strategy strategy;
+	private String creatorEvent;
+	private Date dateWhenRing;
 
-	public EventHolder(String title2, String when, String where, String desc,
+	public EventHolder(String title2, int when, String where, String desc,
 			boolean isEmail, boolean isSms, ArrayList<User> users, Date date2,
-			String remind) {
+			int remind) {
 
 		this.title = title2;
 		this.when = when;
@@ -32,6 +41,17 @@ public class EventHolder implements Serializable {
 		this.viaSMS = isSms;
 		this.userList = users;
 		this.members = new ArrayList<Integer>();
+		this.remind = remind;
+
+		if (isEmail && isSms) {
+			strategy = new SMSEmailStrategy();
+		} else if (isEmail) {
+			strategy = new EmailOnlyStrategy();
+		} else if (isSms) {
+			strategy = new SmsOnlyStrategy();
+		} else {
+			strategy = new EmptyStrategy();
+		}
 
 		// init members number
 
@@ -42,7 +62,12 @@ public class EventHolder implements Serializable {
 		}
 
 		this.date = date2;
-		this.remind = remind;
+		this.dateWhenRing = convertWhenItHappens();
+
+	}
+
+	public void doStrategy() {
+		strategy.send(this);
 	}
 
 	public String getTitle() {
@@ -73,10 +98,6 @@ public class EventHolder implements Serializable {
 		return where;
 	}
 
-	public String getWhen() {
-		return when;
-	}
-
 	@Override
 	public String toString() {
 		return "EventHolder [title=" + title + ", description=" + description
@@ -89,4 +110,43 @@ public class EventHolder implements Serializable {
 		return userList;
 	}
 
+	public String getCreatorEvent() {
+		return creatorEvent;
+	}
+
+	public void setCreatorEvent(String creatorEvent) {
+		this.creatorEvent = creatorEvent;
+	}
+
+	public Strategy getStrategy() {
+		return strategy;
+	}
+
+	public void normalizeTimeWhen() {
+
+		date.setSeconds(0);
+		date.setHours(0);
+		date.setMinutes(0);
+
+		long d = date.getTime() + when * 30 * 60 * 100;
+		date.setTime(d);// must exally time what we choose
+	}
+
+	public Date convertWhenItHappens() {
+
+		// when it should be also the same
+
+		int sec = remind * 30 * 60 * 100;
+		// seconds plus
+		long dd = date.getTime() + sec;
+		Date toReturn = new Date(dd);
+
+		System.out.println("when it occurs: " + toReturn);
+		return toReturn;
+
+	}
+
+	public Date getDateWhenRing() {
+		return dateWhenRing;
+	}
 }

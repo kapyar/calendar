@@ -48,26 +48,9 @@ public class Friend extends MetroPanel {
 		progressBar.setVisible(false);
 		add(progressBar);
 
-		List<User> users = Model.MODEL.doGetAllUsers();
-		st = new String[users.size()];
-
 		list = new MetroList();
 
-		for (int i = 0; i < users.size(); ++i) {
-			st[i] = users.get(i).getUser_mail();
-		}
-
-		list.setModel(new AbstractListModel() {
-			String[] values = st;
-
-			public int getSize() {
-				return values.length;
-			}
-
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+	
 
 		DefaultListCellRenderer renderer = (DefaultListCellRenderer) list
 				.getCellRenderer();
@@ -92,6 +75,8 @@ public class Friend extends MetroPanel {
 		progressBar.setBounds(list.getX(), 510, list.getWidth(), 40);
 		progressBar.setVisible(false);
 		add(progressBar);
+		
+		setListModel();
 
 	}
 
@@ -128,5 +113,28 @@ public class Friend extends MetroPanel {
 
 	public JProgressBar getProgressBar() {
 		return progressBar;
+	}
+	
+	public void setListModel(){
+		
+		
+		List<User> users = Model.MODEL.doGetAllUsers();
+		st = new String[users.size()];
+		
+		for (int i = 0; i < users.size(); ++i) {
+			st[i] = users.get(i).getUser_mail();
+		}
+		
+		list.setModel(new AbstractListModel() {
+			String[] values = st;
+
+			public int getSize() {
+				return values.length;
+			}
+
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
 	}
 }
