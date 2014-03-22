@@ -1,9 +1,11 @@
 package Strategy;
 
+import java.io.Serializable;
+
 import Model.EventHolder;
 
-public interface Strategy {
+public abstract class Strategy implements Serializable {
 	
-	public void send(EventHolder e);
+	public abstract void send(EventHolder e);
 
 }

@@ -1,6 +1,8 @@
 package Strategy;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -16,10 +18,11 @@ import Model.EventHolder;
 import View.Config;
 import WEB.User;
 
-public class EmailOnlyStrategy implements Strategy {
+public class EmailOnlyStrategy extends Strategy {
 
 	@Override
 	public void send(EventHolder eh) {
+		System.out.println("Start sending msg");
 		String msgBody;
 		String from;
 		ArrayList<User> invited;
@@ -29,11 +32,14 @@ public class EmailOnlyStrategy implements Strategy {
 		invited = eh.getUserList();
 		subject = eh.getTitle();
 		msgBody = ", you were invited to meeting at: " + eh.getDateWhenRing();
+		Charset.forName("UTF-8").encode(msgBody);
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 
 		for (int i = 0; i < invited.size(); ++i) {
 			try {
+				System.out.println("Start loop");
+
 				Message msg = new MimeMessage(session);
 
 				msg.setFrom(new InternetAddress(from, "Awesome Calendar Inc"));
@@ -43,11 +49,11 @@ public class EmailOnlyStrategy implements Strategy {
 				msgBody = invited.get(i).getUser_name() + msgBody;
 				msg.setText(msgBody);
 				Transport.send(msg);
-
+				System.out.println("END loop");
 			} catch (AddressException e) {
-				// ...
+				e.printStackTrace();
 			} catch (MessagingException e) {
-				// ...
+				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

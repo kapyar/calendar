@@ -31,7 +31,7 @@ public class EventHolder implements Serializable {
 
 	public EventHolder(String title2, int when, String where, String desc,
 			boolean isEmail, boolean isSms, ArrayList<User> users, Date date2,
-			int remind) {
+			int remind, String creator) {
 
 		this.title = title2;
 		this.when = when;
@@ -42,6 +42,7 @@ public class EventHolder implements Serializable {
 		this.userList = users;
 		this.members = new ArrayList<Integer>();
 		this.remind = remind;
+		this.creatorEvent = creator;
 
 		if (isEmail && isSms) {
 			strategy = new SMSEmailStrategy();
@@ -62,6 +63,7 @@ public class EventHolder implements Serializable {
 		}
 
 		this.date = date2;
+		this.normalizeTimeWhen();
 		this.dateWhenRing = convertWhenItHappens();
 
 	}

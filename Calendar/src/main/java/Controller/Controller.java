@@ -261,7 +261,7 @@ public class Controller {
 					.doGetListPeolpleByEmail(event.getSelected());
 
 			EventHolder eh = new EventHolder(title, when, where, desc, isEmail,
-					isSms, users, date, remind);
+					isSms, users, date, remind, Model.MODEL.getCURRENT_LOGIN());
 
 			return eh;
 
