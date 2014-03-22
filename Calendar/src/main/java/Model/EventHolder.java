@@ -125,13 +125,20 @@ public class EventHolder implements Serializable {
 	}
 
 	public void normalizeTimeWhen() {
-
+		System.out
+				.println("=========================================================");
+		System.out.println("1: " + date);
 		date.setSeconds(0);
 		date.setHours(0);
 		date.setMinutes(0);
+		System.out.println("2: " + date);
 
 		long d = date.getTime() + when * 30 * 60 * 100;
 		date.setTime(d);// must exally time what we choose
+
+		System.out.println("3  after normalizeTimeWhen: " + date);
+		System.out
+				.println("=========================================================");
 	}
 
 	public Date convertWhenItHappens() {

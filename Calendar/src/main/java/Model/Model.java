@@ -148,7 +148,8 @@ public enum Model {
 
 		for (int i = 0; i < l.size(); ++i) {
 			try {
-				if (!myFriendsAlready.contains((l.get(i)))) {
+				if (!myFriendsAlready.contains((l.get(i)))
+						&& !l.get(i).getUser_mail().equals(CURRENT_LOGIN)) {
 					dataBase.addFriend(l.get(i).getId());
 				} else {
 					System.out.println(l.get(i) + " Is Already your friend ");
@@ -169,6 +170,7 @@ public enum Model {
 		}
 		return l;
 	}
+
 	// ///////////private part goes here/////////////////////////////
 
 	public String getCURRENT_LOGIN() {

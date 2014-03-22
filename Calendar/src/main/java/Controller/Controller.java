@@ -155,7 +155,7 @@ public class Controller {
 				System.out.println("Found, column: " + column + " row: " + row);
 				// need to rennder chosen cell
 
-				dateWhen = new java.util.Date();
+				dateWhen = new java.util.Date(0);
 
 				Integer day = (Integer) target.getValueAt(row, column);
 				dateWhen.setDate(day);

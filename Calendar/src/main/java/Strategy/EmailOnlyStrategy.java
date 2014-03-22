@@ -31,7 +31,8 @@ public class EmailOnlyStrategy extends Strategy {
 		from = eh.getCreatorEvent();
 		invited = eh.getUserList();
 		subject = eh.getTitle();
-		msgBody = ", you were invited to meeting at: " + eh.getDateWhenRing();
+		msgBody = ", you were invited to meeting at: " + eh.getDate() + '\n'
+				+ eh.getDescription();
 		Charset.forName("UTF-8").encode(msgBody);
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);

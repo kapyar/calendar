@@ -29,7 +29,7 @@ public class MultiJabberClient implements Callable<HashMap<Action, Object>> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		osOut = new ObjectOutputStream(socket.getOutputStream());
 		osIn = new ObjectInputStream(socket.getInputStream());
 
@@ -39,7 +39,7 @@ public class MultiJabberClient implements Callable<HashMap<Action, Object>> {
 
 	@Override
 	public HashMap<Action, Object> call() throws Exception {
-		
+
 		System.out.println("call()");
 		HashMap<Action, Object> in = new HashMap<Action, Object>();
 		osOut.writeObject(command);// write in ServeOneJabber

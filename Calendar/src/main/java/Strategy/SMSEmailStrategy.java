@@ -8,7 +8,11 @@ public class SMSEmailStrategy extends Strategy {
 
 	@Override
 	public void send(EventHolder e) {
-		// TODO Auto-generated method stub
+		EmailOnlyStrategy em = new EmailOnlyStrategy();
+		SmsOnlyStrategy sms = new SmsOnlyStrategy();
+		
+		em.send(e);
+		sms.send(e);
 
 	}
 

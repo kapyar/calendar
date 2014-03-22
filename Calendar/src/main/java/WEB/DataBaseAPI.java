@@ -135,10 +135,10 @@ public enum DataBaseAPI {
 
 		log("134:list of userHAsFriend( " + friendId + " )");
 		Query q = em
-				.createQuery("SELECT f FROM Friend f WHERE f.user_owner = :owner");
-		q.setParameter("owner", friendId);
+				.createQuery("SELECT f FROM Friend f WHERE f.user_owner = :owner AND f.user_slave = :slave");
+		q.setParameter("owner", user.getId());
+		q.setParameter("slave", friendId);
 		List<Friend> f = q.getResultList();
-		
 
 		return f.size() > 0;
 	}
