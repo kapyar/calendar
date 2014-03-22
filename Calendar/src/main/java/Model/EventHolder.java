@@ -2,9 +2,11 @@ package Model;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import Strategy.EmailOnlyStrategy;
 import Strategy.EmptyStrategy;
@@ -125,12 +127,16 @@ public class EventHolder implements Serializable {
 	}
 
 	public void normalizeTimeWhen() {
-
+		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG, Locale.ROOT);
+		df.format(date);
+		System.out.println(date);
 		date.setSeconds(0);
 		date.setHours(0);
 		date.setMinutes(0);
-
-		long d = date.getTime() + when * 30 * 60 * 100;
+		System.out.println("Whem "+when);
+		long d = date.getTime() + when * 30 * 60 * 100; // min * sec * milsec
+		
+		System.out.println("d "+d);
 		date.setTime(d);// must exally time what we choose
 	}
 
@@ -138,11 +144,11 @@ public class EventHolder implements Serializable {
 
 		// when it should be also the same
 
-		int sec = remind * 30 * 60 * 100;
+		int sec =remind  * 30 * 60 * 100;
 		// seconds plus
 		long dd = date.getTime() + sec;
 		Date toReturn = new Date(dd);
-
+		System.out.println("To remind: "+remind);
 		System.out.println("when it occurs: " + toReturn);
 		return toReturn;
 

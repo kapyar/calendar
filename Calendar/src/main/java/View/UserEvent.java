@@ -138,6 +138,7 @@ public class UserEvent extends MetroPanel {
 		add(panelFriend);
 
 		dateEvent = dateWhen;
+		
 		listOfFriends = new MetroList();
 
 		listOfFriends
