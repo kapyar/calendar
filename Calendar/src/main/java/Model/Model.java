@@ -136,7 +136,7 @@ public enum Model {
 	public boolean doMakeFriendShip(ArrayList<String> list) {
 
 		List<User> l = doGetListPeolpleByEmail(list);
-
+		
 		// if not my friend
 		List<User> myFriendsAlready = new ArrayList<>();
 		try {
@@ -147,8 +147,11 @@ public enum Model {
 		}
 
 		for (int i = 0; i < l.size(); ++i) {
+			System.out.println("!!!!!!!!!!!!!!!!!!!");
+			System.out.println(l.get(i));
 			try {
 				if (!myFriendsAlready.contains((l.get(i)))) {
+					System.out.println("IN IF ");
 					dataBase.addFriend(l.get(i).getId());
 				} else {
 					System.out.println(l.get(i) + " Is Already your friend ");

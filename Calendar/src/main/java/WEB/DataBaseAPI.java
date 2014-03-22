@@ -138,7 +138,10 @@ public enum DataBaseAPI {
 				.createQuery("SELECT f FROM Friend f WHERE f.user_owner = :owner");
 		q.setParameter("owner", friendId);
 		List<Friend> f = q.getResultList();
-		
+		for (Friend friend : f) {
+			System.out.println("===");
+			System.out.println(f);
+		}
 
 		return f.size() > 0;
 	}

@@ -150,17 +150,19 @@ public class UserEvent extends MetroPanel {
 				panelFriend.getHeight() - 30);
 		panelFriend.add(listOfFriends);
 
+		
+
+		cmbbxWhen = new JComboBox();
+		cmbbxWhen.setModel(Config.getTimeModel());
+		cmbbxWhen.setBounds(txtX,  _Y + deltaY * 2, 210, 31);
+		add(cmbbxWhen);
+		
 		progressBar = new JProgressBar();
 		progressBar.setBounds(txtDescription.getX(), btnCancel.getY(),
 				txtDescription.getWidth(), 39);
 		progressBar.setVisible(false);
 		add(progressBar);
-
-		cmbbxWhen = new JComboBox();
-		cmbbxWhen.setModel(Config.getTimeModel());
-		cmbbxWhen.setBounds(520, 220, 75, 20);
-		add(cmbbxWhen);
-
+		
 		setListModel();
 	}
 
@@ -189,7 +191,20 @@ public class UserEvent extends MetroPanel {
 		});
 
 	}
-
+	
+	public  void clearFileds()
+	{
+		txtName.getTextField().setText("");
+		txtWhere.getTextField().setText("");
+		txtDescription.getTextField().setText("");
+		chckbxEmail.setSelected(false);
+		chckbxSms.setSelected(false);
+		comboBox.setModel(Config.getTimeModel());
+		cmbbxWhen.setModel(Config.getTimeModel());
+		return;
+	};
+	
+	
 	public boolean isAlowed() {
 		return lenght(txtName) && lenght(txtWhere);
 	}
