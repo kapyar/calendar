@@ -127,6 +127,15 @@ public class Register extends MetroPanel {
 
 	}
 
+	public void clearFilds()
+	{
+		 txtLogin.getTextField().setText("");
+		 txtEmail.getTextField().setText("");;
+		 txtPhone.getTextField().setText("");;
+		 txtPass.getPass().setText("");;
+		 txtConfirmPass.getPass().setText("");;
+		return;
+	}
 	public void addListener(ActionListener l) {
 		btnSave.addActionListener(l);
 		btnCancel.addActionListener(l);
@@ -168,7 +177,7 @@ public class Register extends MetroPanel {
 
 		if (!txtEmail.getText().contains("@")) {
 			txtEmail.showError();
-			InfoBox.BOX.info(this, "Invalid password");
+			InfoBox.BOX.info(this, "Invalid email");
 			return false;
 		}
 

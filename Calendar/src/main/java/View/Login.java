@@ -139,13 +139,14 @@ public class Login extends MetroPanel implements MouseListener {
 		add(progressBar);
 		
 	}
-
+	
+	
 	public JRadioButton getCardRadioBtn() {
 		return rdbtnCardNumb;
 	}
 
 	public void clearFields() {
-		txt.getTextField().setText("");
+		//txt.getTextField().setText("");
 		pin.getPass().setText("");
 		rdbtnCardNumb.setFocusable(true);
 	}
