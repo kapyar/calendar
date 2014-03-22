@@ -1,9 +1,11 @@
 package Strategy;
 
+import java.io.Serializable;
+
 import Model.EventHolder;
 
 
-public class SmsOnlyStrategy implements Strategy {
+public class SmsOnlyStrategy extends Strategy {
 
 	
 

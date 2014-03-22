@@ -35,6 +35,7 @@ public enum Model {
 	public boolean doLogIn(final String mail, final String pass) {
 		try {
 			dataBase.logIn(mail, pass);
+			CURRENT_LOGIN = mail;
 		} catch (Exception e) {
 			return false;
 		}
@@ -169,5 +170,9 @@ public enum Model {
 		return l;
 	}
 	// ///////////private part goes here/////////////////////////////
+
+	public String getCURRENT_LOGIN() {
+		return CURRENT_LOGIN;
+	}
 
 }

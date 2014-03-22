@@ -10,8 +10,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-
-
 import org.apache.commons.codec.digest.DigestUtils;
 
 import static WEB.APIConfig.log;
@@ -140,6 +138,7 @@ public enum DataBaseAPI {
 				.createQuery("SELECT f FROM Friend f WHERE f.user_owner = :owner");
 		q.setParameter("owner", friendId);
 		List<Friend> f = q.getResultList();
+		
 
 		return f.size() > 0;
 	}

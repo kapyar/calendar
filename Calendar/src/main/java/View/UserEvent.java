@@ -117,7 +117,7 @@ public class UserEvent extends MetroPanel {
 		panel.add(lblRemindIn);
 
 		comboBox = new JComboBox();
-		comboBox.setModel(Config.comboBoxModel);
+		comboBox.setModel(Config.getTimeModel());
 		comboBox.setBounds(_inPX, _inPY + _inPdelta * 3 + 10, panel.getWidth()
 				- 2 * _inPX, 20);
 		panel.add(comboBox);
@@ -157,7 +157,7 @@ public class UserEvent extends MetroPanel {
 		add(progressBar);
 
 		cmbbxWhen = new JComboBox();
-		cmbbxWhen.setModel(Config.comboBoxModel);
+		cmbbxWhen.setModel(Config.getTimeModel());
 		cmbbxWhen.setBounds(520, 220, 75, 20);
 		add(cmbbxWhen);
 
