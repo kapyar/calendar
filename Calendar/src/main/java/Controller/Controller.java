@@ -239,6 +239,7 @@ public class Controller {
 					}
 
 					protected void done() {
+						event.clearFileds();
 						event.getProgressBar().setVisible(false);
 					}
 

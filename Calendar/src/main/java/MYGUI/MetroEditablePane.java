@@ -107,7 +107,7 @@ public class MetroEditablePane extends JPanel {
 	}
 
 	public void setTextField(String string) {
-		this.textField = string;
+		this.textField.setText(string);
 	}
 
 	public MetroTextView getTextField() {
