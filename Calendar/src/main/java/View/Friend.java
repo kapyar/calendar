@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class Friend extends MetroPanel {
 	private JProgressBar progressBar;
 	private String[] st;
 	private JList list;
+	private ScrollPane scrollPane;
 
 	public Friend() {
 
@@ -48,34 +50,34 @@ public class Friend extends MetroPanel {
 		progressBar.setVisible(false);
 		add(progressBar);
 
+		scrollPane = new ScrollPane();
 		list = new MetroList();
-
-	
-
 		DefaultListCellRenderer renderer = (DefaultListCellRenderer) list
 				.getCellRenderer();
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
-		list.setSize(lblBalanceTitle.getWidth(), 350);
-		list.setLocation(midX - list.getWidth() / 2, 100);
-		add(list);
+		scrollPane.setSize(lblBalanceTitle.getWidth(), 350);
+		scrollPane.setLocation(midX - list.getWidth() / 2, 100);
+		scrollPane.add(list);
+		add(scrollPane);
 
 		btnMakeFriendship = ButtonFactory.getNormalButton("Make Friendship");
 		int lwBTN = 125; // local width button
 		btnMakeFriendship.setSize(lwBTN, 40);
-		btnMakeFriendship.setLocation(list.getX() + list.getWidth() - lwBTN,
-				460);
+		btnMakeFriendship.setLocation(scrollPane.getX() + scrollPane.getWidth()
+				- lwBTN, 460);
 		add(btnMakeFriendship);
 
 		btnBack = ButtonFactory.getNormalButton("Back");
 		btnBack.setSize(lwBTN, 40);
-		btnBack.setLocation(list.getX(), 460);
+		btnBack.setLocation(scrollPane.getX(), 460);
 		add(btnBack);
-		
+
 		progressBar = new JProgressBar();
-		progressBar.setBounds(list.getX(), 510, list.getWidth(), 40);
+		progressBar
+				.setBounds(scrollPane.getX(), 510, scrollPane.getWidth(), 40);
 		progressBar.setVisible(false);
 		add(progressBar);
-		
+
 		setListModel();
 
 	}
@@ -114,17 +116,16 @@ public class Friend extends MetroPanel {
 	public JProgressBar getProgressBar() {
 		return progressBar;
 	}
-	
-	public void setListModel(){
-		
-		
+
+	public void setListModel() {
+
 		List<User> users = Model.MODEL.doGetAllUsers();
 		st = new String[users.size()];
-		
+
 		for (int i = 0; i < users.size(); ++i) {
 			st[i] = users.get(i).getUser_mail();
 		}
-		
+
 		list.setModel(new AbstractListModel() {
 			String[] values = st;
 
