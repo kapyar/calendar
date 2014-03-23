@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Color;
+import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,6 +49,7 @@ public class UserEvent extends MetroPanel {
 	private JComboBox comboBox;
 	private JProgressBar progressBar;
 	private JComboBox cmbbxWhen;
+	private ScrollPane scrollPane;
 
 	public UserEvent(Date dateWhen) {
 		int w = 215;
@@ -132,38 +134,38 @@ public class UserEvent extends MetroPanel {
 				deltaY * 3 + panel.getHeight());
 		add(txtDescription);
 
+		cmbbxWhen = new JComboBox();
+		cmbbxWhen.setModel(Config.getTimeModel());
+		cmbbxWhen.setBounds(txtX, _Y + deltaY * 2, 210, 31);
+		add(cmbbxWhen);
+
 		MetroPanel panelFriend = new MetroPanel();
 		panelFriend.setBounds(lblX + 150, _Y + deltaY * 3, 131, 140);
 		Decorator.decorateBorderTitle(panelFriend, "Invite Friends");
 		add(panelFriend);
 
 		dateEvent = dateWhen;
-		
-		listOfFriends = new MetroList();
 
+		scrollPane = new ScrollPane();
+		listOfFriends = new MetroList();
 		listOfFriends
 				.setToolTipText("Invite your frinds to do something together");
 
 		DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfFriends
 				.getCellRenderer();
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
-		listOfFriends.setBounds(10, 20, panelFriend.getWidth() - 20,
+		scrollPane.setBounds(10, 20, panelFriend.getWidth() - 20,
 				panelFriend.getHeight() - 30);
-		panelFriend.add(listOfFriends);
+		scrollPane.add(listOfFriends);
 
-		
+		panelFriend.add(scrollPane);
 
-		cmbbxWhen = new JComboBox();
-		cmbbxWhen.setModel(Config.getTimeModel());
-		cmbbxWhen.setBounds(txtX,  _Y + deltaY * 2, 210, 31);
-		add(cmbbxWhen);
-		
 		progressBar = new JProgressBar();
 		progressBar.setBounds(txtDescription.getX(), btnCancel.getY(),
 				txtDescription.getWidth(), 39);
 		progressBar.setVisible(false);
 		add(progressBar);
-		
+
 		setListModel();
 	}
 
@@ -192,9 +194,8 @@ public class UserEvent extends MetroPanel {
 		});
 
 	}
-	
-	public  void clearFileds()
-	{
+
+	public void clearFileds() {
 		txtName.getTextField().setText("");
 		txtWhere.getTextField().setText("");
 		txtDescription.getTextField().setText("");
@@ -204,8 +205,7 @@ public class UserEvent extends MetroPanel {
 		cmbbxWhen.setModel(Config.getTimeModel());
 		return;
 	};
-	
-	
+
 	public boolean isAlowed() {
 		return lenght(txtName) && lenght(txtWhere);
 	}

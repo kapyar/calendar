@@ -66,11 +66,14 @@ public enum Model {
 	public boolean doLogOut() {
 		if (isEnterLogIn) {
 			dataBase.logOut();// make session null
-			dataBase.closeConnection();// close all connection
 			isEnterLogIn = false;
 		}
 		return true;
 
+	}
+
+	public void doCloseConnection() {
+		dataBase.closeConnection();
 	}
 
 	public boolean isLoginIn() {

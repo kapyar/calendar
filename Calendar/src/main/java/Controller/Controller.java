@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import javax.jws.WebParam.Mode;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -118,6 +119,8 @@ public class Controller {
 
 			if (source == login.getMyButton_Cancel()) {
 				if (InfoBox.BOX.exit(frame, "Are you shure") == 0) {
+					Model.MODEL.doLogOut();
+					Model.MODEL.doCloseConnection();
 					System.exit(0);
 				}
 			}
@@ -160,19 +163,19 @@ public class Controller {
 				dateWhen = new java.util.Date(0);
 
 				Integer day = (Integer) target.getValueAt(row, column);
-				//System.out.println("Day"+day);
+				// System.out.println("Day"+day);
 				dateWhen.setDate(day);
 
 				int month = Config.getIndex(Config.MONTHS, calendar
 						.getLblMonth().getText());
 				dateWhen.setMonth(month);
-				//System.out.println("month"+month);
+				// System.out.println("month"+month);
 				// and now time for magic number
 				Integer magic = 1900;
 				Integer year = Integer.parseInt((String) calendar.getCmbYear()
 						.getSelectedItem());
 				year = year - magic;
-				//System.out.println("year "+year);
+				// System.out.println("year "+year);
 				dateWhen.setYear(year);
 				// END of MAGIC
 
@@ -287,7 +290,7 @@ public class Controller {
 				if (Model.MODEL.isLoginIn()) {
 					Model.MODEL.doLogOut();
 				}
-				
+
 				initLogin();
 				frame.showPane(login);
 
@@ -366,7 +369,7 @@ public class Controller {
 
 						choose.getProgressBar().setVisible(true);
 						choose.getProgressBar().setIndeterminate(true);
-						
+
 						initFriend();
 						frame.showPane(friend);
 
@@ -444,12 +447,13 @@ public class Controller {
 	}
 
 	private void initFriend() {
-	
+
 		if (friend == null) {
 			friend = new Friend();
 			friend.addListener(new FriendsListener());
-		}	friend.setListModel();
-		
+		}
+		friend.setListModel();
+
 	}
 
 	private void initCalendar() {
@@ -461,10 +465,10 @@ public class Controller {
 	}
 
 	private void initEvent(Date when) {
-		
-		//System.out.println("Choosen 1 date: " + when);
+
+		// System.out.println("Choosen 1 date: " + when);
 		if (event == null) {
-			//System.out.println("Choosen 2  date: " + when);
+			// System.out.println("Choosen 2  date: " + when);
 			event = new UserEvent(when);
 			event.addListener(new UserEventListener());
 		}

@@ -50,33 +50,36 @@ public class Login extends MetroPanel implements MouseListener {
 	private MyButton btnRegister;
 
 	public Login() {
-	
+
 		_W = super.getWidth();
 		_x = super.getX();
-		
+
 		JLabel lblBalanceTitle = new JLabel("Create Your Event");
 		Decorator.decorateTitle(lblBalanceTitle);
-		lblBalanceTitle.setBounds(_W/2-lblBalanceTitle.getPreferredSize().width / 2, 40, 290, 40);
+		lblBalanceTitle.setBounds(_W / 2
+				- lblBalanceTitle.getPreferredSize().width / 2, 40, 290, 40);
 		add(lblBalanceTitle);
-		
+
 		panel = new MetroPanel();
-		panel.setBounds(50, 116, _W-100, 296);
+		panel.setBounds(50, 116, _W - 100, 296);
 		panel.setOpaque(true);
 		panel.setBackground(ConfigColor._logBG);
 		panel.setVisible(true);
 		add(panel);
-		
-		int midP_X = panel.getWidth()/2;
+
+		int midP_X = panel.getWidth() / 2;
 		int _Y = 20;
 		int delta = 42;
-		
-		myButton_Enter = ButtonFactory.getNumbButton("Enter", 'E');
-		myButton_Enter.setLocation(new Point(midP_X-myButton_Enter.getWidth()/2+60,_Y+delta*5-20));
+
+		myButton_Enter = ButtonFactory.getNumbButton("Log In", 'L');
+		myButton_Enter.setLocation(new Point(midP_X - myButton_Enter.getWidth()
+				/ 2 + 60, _Y + delta * 5 - 20));
 		panel.add(myButton_Enter);
 		// listOfComponents.add(myButton_Enter);
 
-		myButton_Cancel = ButtonFactory.getNumbButton("Cancel", 'C');
-		myButton_Cancel.setLocation(new Point(midP_X-myButton_Cancel.getWidth()/2-60,_Y+delta*5-20));
+		myButton_Cancel = ButtonFactory.getNumbButton("Exit", 'E');
+		myButton_Cancel.setLocation(new Point(midP_X
+				- myButton_Cancel.getWidth() / 2 - 60, _Y + delta * 5 - 20));
 		panel.add(myButton_Cancel);
 		listOfComponents.add(myButton_Cancel);
 
@@ -90,63 +93,60 @@ public class Login extends MetroPanel implements MouseListener {
 
 		JLabel lblNubrerCart = new JLabel("Login", SwingConstants.CENTER);
 		Decorator.decorateNormal(lblNubrerCart);
-		lblNubrerCart.setLocation(midP_X-lblNubrerCart.getWidth()/2,_Y+delta*0);
+		lblNubrerCart.setLocation(midP_X - lblNubrerCart.getWidth() / 2, _Y
+				+ delta * 0);
 		panel.add(lblNubrerCart);
 
 		txt = new MetroEditablePane();
 		txt.getTextField().setBounds(8, 5, 144, 20);
 		txt.getTextField().addMouseListener(this);
-		txt.setLocation(midP_X-txt.getWidth()/2,_Y+delta*1);
+		txt.setLocation(midP_X - txt.getWidth() / 2, _Y + delta * 1);
 		panel.add(txt);
 
 		JLabel lblPin = new JLabel("Password", SwingConstants.CENTER);
 		Decorator.decorateNormal(lblPin);
-		lblPin.setLocation(midP_X-lblPin.getWidth()/2,_Y+delta*2);
+		lblPin.setLocation(midP_X - lblPin.getWidth() / 2, _Y + delta * 2);
 		panel.add(lblPin);
 
 		pin = new MetroEditablePin();
 		pin.getPass().addMouseListener(this);
-		pin.setLocation(midP_X-pin.getWidth()/2,_Y+delta*3);
+		pin.setLocation(midP_X - pin.getWidth() / 2, _Y + delta * 3);
 		panel.add(pin);
 
 		rdbtnCardNumb = new JRadioButton("");
-		rdbtnCardNumb.setBounds(222, _Y+delta*1-5, 21, 40);
+		rdbtnCardNumb.setBounds(222, _Y + delta * 1 - 5, 21, 40);
 		rdbtnCardNumb.setBackground(ConfigColor._rbtnBG);
 		rdbtnCardNumb.setSelected(true);
 		panel.add(rdbtnCardNumb);
 
 		rdbtPass = new JRadioButton("");
-		rdbtPass.setBounds(222, _Y+delta*3-5, 21, 40);
+		rdbtPass.setBounds(222, _Y + delta * 3 - 5, 21, 40);
 		rdbtPass.setBackground(ConfigColor._rbtnBG);
 		panel.add(rdbtPass);
 
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(rdbtnCardNumb);
 		radioGroup.add(rdbtPass);
-		
+
 		btnRegister = ButtonFactory.getNormalButton("Register");
-		btnRegister.setLocation(new Point(580,250));
-		
+		btnRegister.setLocation(new Point(580, 250));
+
 		panel.add(btnRegister);
 
-	
-		
-		
 		progressBar = new JProgressBar();
 		progressBar.setBounds(55, 420, 690, 29);
 		progressBar.setVisible(false);
-		
+
 		add(progressBar);
-		
+
 	}
-	
-	
+
 	public JRadioButton getCardRadioBtn() {
 		return rdbtnCardNumb;
 	}
 
 	public void clearFields() {
-		//txt.getTextField().setText("");
+		// txt.getTextField().setText("");
 		pin.getPass().setText("");
 		rdbtnCardNumb.setFocusable(true);
 	}

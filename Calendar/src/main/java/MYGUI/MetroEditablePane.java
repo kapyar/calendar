@@ -32,7 +32,7 @@ public class MetroEditablePane extends JPanel {
 
 		textField = new MetroTextView();
 		textField.getMargin();
-		textField.setBounds(8, 5, this.getWidth() - 45, this.getHeight()-10);
+		textField.setBounds(8, 5, this.getWidth() - 45, this.getHeight() - 10);
 		add(textField);
 		textField.setColumns(10);
 		textField.getDocument().addDocumentListener(new DocumentListener() {
@@ -106,6 +106,7 @@ public class MetroEditablePane extends JPanel {
 		return del;
 	}
 
+	// was another one
 	public void setTextField(String string) {
 		this.textField.setText(string);
 	}

@@ -57,6 +57,7 @@ public class MainContainer extends JFrame implements WindowListener {
 	public void windowClosing(WindowEvent e) {
 
 		Model.MODEL.doLogOut();
+		Model.MODEL.doCloseConnection();
 
 	}
 

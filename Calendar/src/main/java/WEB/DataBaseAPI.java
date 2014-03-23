@@ -265,5 +265,7 @@ public enum DataBaseAPI {
 		em.close();
 		log("closeConnection(): connection closed");
 	}
+	
+	
 
 }
