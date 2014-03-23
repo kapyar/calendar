@@ -32,6 +32,10 @@ public enum Model {
 	private boolean isEnterLogIn = false;
 	private String CURRENT_LOGIN;
 
+	public boolean dummy() {
+		return true;
+	}
+
 	public boolean doLogIn(final String mail, final String pass) {
 		try {
 			dataBase.logIn(mail, pass);

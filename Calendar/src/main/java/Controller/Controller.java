@@ -29,6 +29,7 @@ import Model.MyUser;
 import View.Config;
 import View.Friend;
 import View.ChooserPanel;
+import View.IntroSplash;
 import View.Login;
 import View.MainContainer;
 import View.MyCalendar;
@@ -46,10 +47,24 @@ public class Controller {
 	private ChooserPanel choose;
 	private Friend friend;
 	private Date dateWhen;
+	private IntroSplash intro;
 
 	public Controller(MainContainer main) {
 		frame = main;
+		intro = new IntroSplash();
 		login = new Login();
+
+		frame.showPane(intro);
+
+		Thread t = new Thread(intro);
+		t.start();
+		try {
+			TimeUnit.SECONDS.sleep(4);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		frame.showPane(login);
 		login.addListener(new LoginListener());
 
