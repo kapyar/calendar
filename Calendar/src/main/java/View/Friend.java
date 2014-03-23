@@ -56,7 +56,7 @@ public class Friend extends MetroPanel {
 				.getCellRenderer();
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 		scrollPane.setSize(lblBalanceTitle.getWidth(), 350);
-		scrollPane.setLocation(midX - list.getWidth() / 2, 100);
+		scrollPane.setLocation(midX - scrollPane.getWidth() / 2, 100);
 		scrollPane.add(list);
 		add(scrollPane);
 
