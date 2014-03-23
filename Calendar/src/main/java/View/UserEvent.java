@@ -133,7 +133,7 @@ public class UserEvent extends MetroPanel {
 		txtDescription.setBounds(90, _Y + deltaY * 0, 283,
 				deltaY * 3 + panel.getHeight());
 		add(txtDescription);
-		
+
 		cmbbxWhen = new JComboBox();
 		cmbbxWhen.setModel(Config.getTimeModel());
 		cmbbxWhen.setBounds(txtX, _Y + deltaY * 2, 210, 31);
@@ -145,8 +145,6 @@ public class UserEvent extends MetroPanel {
 		add(panelFriend);
 
 		dateEvent = dateWhen;
-
-		
 
 		scrollPane = new ScrollPane();
 		listOfFriends = new MetroList();
