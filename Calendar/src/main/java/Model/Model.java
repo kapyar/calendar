@@ -71,8 +71,9 @@ public enum Model {
 		if (isEnterLogIn) {
 			dataBase.logOut();// make session null
 			isEnterLogIn = false;
+			return true;
 		}
-		return true;
+		return false;
 
 	}
 

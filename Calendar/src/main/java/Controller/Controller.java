@@ -54,6 +54,7 @@ public class Controller {
 		intro = new IntroSplash();
 		login = new Login();
 
+		System.out.println("Before Show:");
 		frame.showPane(intro);
 
 		Thread t = new Thread(intro);
@@ -64,7 +65,7 @@ public class Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println("After Timer:");
 		frame.showPane(login);
 		login.addListener(new LoginListener());
 
