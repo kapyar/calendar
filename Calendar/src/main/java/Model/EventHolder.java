@@ -55,7 +55,6 @@ public class EventHolder implements Serializable {
 		}
 
 		// init members number
-
 		ArrayList<Integer> usersId = new ArrayList<>();
 
 		for (User u : users) {
@@ -133,7 +132,7 @@ public class EventHolder implements Serializable {
 		date.setMinutes(0);
 		System.out.println("2: " + date);
 
-		long d = date.getTime() + when * 30 * 60 * 100;
+		long d = date.getTime() + when * 30 * 60 * 1000;
 		date.setTime(d);// must exally time what we choose
 
 		System.out.println("3  after normalizeTimeWhen: " + date);

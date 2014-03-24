@@ -274,12 +274,12 @@ public class Controller {
 			String title = event.getTxtName().getText();
 			String where = event.getTxtWhere().getText();
 			int when = event.getCmbbxWhen().getSelectedIndex();
-
+			System.out.println(when+"S1");
 			String desc = event.getTxtDescription().getText();
 			boolean isEmail = event.getChckbxEmail().isSelected();
 			boolean isSms = event.getChckbxSms().isSelected();
 			Date date = event.getDateEvent();
-
+			System.out.println(date+" EventHoleder");
 			int remind = event.getComboBox().getSelectedIndex();
 
 			ArrayList<User> users = (ArrayList<User>) Model.MODEL

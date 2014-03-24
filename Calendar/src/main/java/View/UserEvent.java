@@ -145,7 +145,7 @@ public class UserEvent extends MetroPanel {
 		add(panelFriend);
 
 		dateEvent = dateWhen;
-
+		//System.out.println("LOLOL"+dateEvent);
 		scrollPane = new ScrollPane();
 		listOfFriends = new MetroList();
 		listOfFriends
@@ -171,8 +171,8 @@ public class UserEvent extends MetroPanel {
 
 	public void setListModel() {
 		List<User> users = Model.MODEL.doGetAllFriend();
-		System.out.println("AAABBB" + users);
-		System.out.println(users);
+//		System.out.println("AAABBB" + users);
+//		System.out.println(users);
 		st = new String[users.size()];
 
 		for (int i = 0; i < users.size(); ++i) {
