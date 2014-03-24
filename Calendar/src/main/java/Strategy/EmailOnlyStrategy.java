@@ -30,32 +30,35 @@ public class EmailOnlyStrategy extends Strategy {
 		String from;
 		ArrayList<User> invited;
 		String subject;
-
-		try {
+		
+		 try {
 			msgBody = readFile("resources/email.html");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-
+		 
 		StringBuffer msgStBuf = new StringBuffer(msgBody);
-
+		
+		
+		
 		from = eh.getCreatorEvent();
 		invited = eh.getUserList();
 		subject = eh.getTitle();
-
-		msgStBuf.insert(msgStBuf.lastIndexOf("_fWhat") + 8, eh.getTitle());
-		msgStBuf.insert(msgStBuf.lastIndexOf("_fWhen") + 8, eh.getDate());
-		msgStBuf.insert(msgStBuf.lastIndexOf("_fDescription") + 15,
-				eh.getDescription());
-
+		
+		msgStBuf.insert( msgStBuf.lastIndexOf("_fWhat")+8, eh.getTitle());
+		msgStBuf.insert( msgStBuf.lastIndexOf("_fWhen")+8, eh.getDate());
+		msgStBuf.insert( msgStBuf.lastIndexOf("_fDescription")+15, eh.getDescription());
+		
 		msgBody = ", you were invited to meeting at: " + eh.getDate() + '\n'
 				+ eh.getDescription();
-
+		
 		Charset.forName("UTF-8").encode(msgBody);
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 
+		
 		for (int i = 0; i < invited.size(); ++i) {
+			StringBuffer newMsgStBuf = new StringBuffer(msgStBuf);
 			try {
 				System.out.println("Start loop");
 
@@ -65,11 +68,11 @@ public class EmailOnlyStrategy extends Strategy {
 				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
 						invited.get(i).getUser_mail(), "Mr. User"));
 				msg.setSubject(subject);
-
-				msgStBuf.insert(msgStBuf.lastIndexOf("_fWho") + 7, "Dear, "
-						+ invited.get(i).getUser_name());
-				msgBody = msgStBuf.toString();
+				
+				msgStBuf.insert( newMsgStBuf.lastIndexOf("_fWho")+7, "Dear, "+invited.get(i).getUser_name());
+				msgBody =  newMsgStBuf.toString();
 				msg.setText(msgBody);
+				msg.setContent(msgBody, "text/html; charset=utf-8");
 				Transport.send(msg);
 				System.out.println("END loop");
 			} catch (AddressException e) {
@@ -83,19 +86,19 @@ public class EmailOnlyStrategy extends Strategy {
 		}
 
 	}
+	
+	private static String readFile( String file ) throws IOException {
+	    BufferedReader reader = new BufferedReader( new FileReader (file));
+	    String         line = null;
+	    StringBuilder  stringBuilder = new StringBuilder();
+	    String         ls = System.getProperty("line.separator");
 
-	private static String readFile(String file) throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String line = null;
-		StringBuilder stringBuilder = new StringBuilder();
-		String ls = System.getProperty("line.separator");
+	    while( ( line = reader.readLine() ) != null ) {
+	        stringBuilder.append( line );
+	        stringBuilder.append( ls );
+	    }
 
-		while ((line = reader.readLine()) != null) {
-			stringBuilder.append(line);
-			stringBuilder.append(ls);
-		}
-
-		return stringBuilder.toString();
+	    return stringBuilder.toString();
 	}
 
 }
