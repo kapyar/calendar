@@ -56,7 +56,9 @@ public class EmailOnlyStrategy extends Strategy {
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 
+		
 		for (int i = 0; i < invited.size(); ++i) {
+			StringBuffer newMsgStBuf = new StringBuffer(msgStBuf);
 			try {
 				System.out.println("Start loop");
 
@@ -67,8 +69,8 @@ public class EmailOnlyStrategy extends Strategy {
 						invited.get(i).getUser_mail(), "Mr. User"));
 				msg.setSubject(subject);
 				
-				msgStBuf.insert( msgStBuf.lastIndexOf("_fWho")+7, "Dear, "+invited.get(i).getUser_name());
-				msgBody =  msgStBuf.toString();
+				msgStBuf.insert( newMsgStBuf.lastIndexOf("_fWho")+7, "Dear, "+invited.get(i).getUser_name());
+				msgBody =  newMsgStBuf.toString();
 				msg.setText(msgBody);
 				msg.setContent(msgBody, "text/html; charset=utf-8");
 				Transport.send(msg);
