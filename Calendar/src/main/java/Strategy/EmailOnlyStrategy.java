@@ -70,6 +70,7 @@ public class EmailOnlyStrategy extends Strategy {
 				msgStBuf.insert( msgStBuf.lastIndexOf("_fWho")+7, "Dear, "+invited.get(i).getUser_name());
 				msgBody =  msgStBuf.toString();
 				msg.setText(msgBody);
+				msg.setContent(msgBody, "text/html; charset=utf-8");
 				Transport.send(msg);
 				System.out.println("END loop");
 			} catch (AddressException e) {
