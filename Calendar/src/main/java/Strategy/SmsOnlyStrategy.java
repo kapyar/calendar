@@ -24,7 +24,7 @@ public class SmsOnlyStrategy extends Strategy {
 
 		String user = "kapyar";
 		String pass = ".Opelastra16";
-		String mes = "You have meeting at: " + e.getDate();
+		String mes = "You have meeting at: " + e.getDate() + e.getWhere();
 
 		for (int i = 0; i < invited.size(); ++i) {
 

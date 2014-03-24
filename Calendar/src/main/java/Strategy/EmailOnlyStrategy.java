@@ -24,7 +24,7 @@ public class EmailOnlyStrategy extends Strategy {
 	public void send(EventHolder eh) {
 		System.out.println("Start sending msg");
 		String msgBody;
-		String from;
+		String from ;
 		ArrayList<User> invited;
 		String subject;
 
