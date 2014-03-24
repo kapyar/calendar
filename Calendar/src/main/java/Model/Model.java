@@ -100,9 +100,9 @@ public enum Model {
 	public boolean doCreateEvent(EventHolder eh) {
 
 		try {
-			//System.out.println(eh.getDate()+"DB");
+			// System.out.println(eh.getDate()+"DB");
 			dataBase.createEvent(eh.getTitle(), eh.getDescription(),
-					eh.getDate(), eh.getDate(), eh.getMembers());
+					eh.getDate(), eh.getDateWhenRing(), eh.getMembers());
 		} catch (Exception e) {
 			System.out.println("BUT WHY model 92");
 			e.printStackTrace();

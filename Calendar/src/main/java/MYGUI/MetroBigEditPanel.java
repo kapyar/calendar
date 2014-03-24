@@ -16,10 +16,10 @@ public class MetroBigEditPanel extends JPanel {
 		this.setLayout(null);
 
 		textField = new MetroTextArea();
-		textField.getMargin();
+		//textField.getMargin();
 		textField.setBounds(8, 5, this.getWidth() - 45, this.getHeight() - 10);
-		textField.setColumns(5);
-		textField.setRows(4);
+		textField.setColumns(20);
+		textField.setRows(20);
 		textField.setLineWrap(true);
 		add(textField);
 	}
