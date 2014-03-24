@@ -47,6 +47,8 @@ public class EmailOnlyStrategy extends Strategy {
 		
 		msgStBuf.insert( msgStBuf.lastIndexOf("_fWhat")+8, eh.getTitle());
 		msgStBuf.insert( msgStBuf.lastIndexOf("_fWhen")+8, eh.getDate());
+		System.out.println("Date Event Holder"+eh.getDate());
+		msgStBuf.insert( msgStBuf.lastIndexOf("_fWhere")+9, eh.getWhere());
 		msgStBuf.insert( msgStBuf.lastIndexOf("_fDescription")+15, eh.getDescription());
 		
 		msgBody = ", you were invited to meeting at: " + eh.getDate() + '\n'
@@ -70,6 +72,7 @@ public class EmailOnlyStrategy extends Strategy {
 				msg.setSubject(subject);
 				
 				msgStBuf.insert( newMsgStBuf.lastIndexOf("_fWho")+7, "Dear, "+invited.get(i).getUser_name());
+				msgBody = "";
 				msgBody =  newMsgStBuf.toString();
 				msg.setText(msgBody);
 				msg.setContent(msgBody, "text/html; charset=utf-8");

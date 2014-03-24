@@ -100,6 +100,7 @@ public enum Model {
 	public boolean doCreateEvent(EventHolder eh) {
 
 		try {
+			//System.out.println(eh.getDate()+"DB");
 			dataBase.createEvent(eh.getTitle(), eh.getDescription(),
 					eh.getDate(), eh.getDate(), eh.getMembers());
 		} catch (Exception e) {
