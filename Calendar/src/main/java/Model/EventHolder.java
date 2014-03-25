@@ -146,15 +146,13 @@ public class EventHolder implements Serializable {
 
 		int sec = remind * 30 * 60 * 1000;
 		// seconds plus
-		long dd = date.getTime() + sec;
+		long dd = date.getTime() - sec;
 		Date toReturn = new Date(dd);
 
 		System.out.println("when it occurs: " + toReturn);
 		return toReturn;
 
 	}
-
-	
 
 	public Date getDateWhenRing() {
 		return dateWhenRing;
