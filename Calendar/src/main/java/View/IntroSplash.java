@@ -10,9 +10,9 @@ public class IntroSplash extends MetroPanel implements Runnable {
 	public IntroSplash() {
 		JLabel logo = new JLabel();
 		logo.setSize(Config.WIDTH, Config.HEIGHT);
-		//logo.setLocation(Config.WIDTH/2 - logo.getWidth()/2, 80);
+		logo.setLocation(Config.WIDTH/2 -210 , 0);
 		
-		ImageIcon start = new ImageIcon("resources\\lsplah.png");
+		ImageIcon start = new ImageIcon("resources\\splah.png");
 		logo.setIcon(start);
 		this.add(logo);
 	}
