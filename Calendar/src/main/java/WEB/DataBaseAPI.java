@@ -174,7 +174,7 @@ public enum DataBaseAPI {
 		}
 
 		Query q = em
-				.createQuery("SELECT u FROM User u JOIN Friend f ON u.id = f.user_slave AND f.user_owner = :owner");
+				.createQuery("SELECT u FROM User u INNER JOIN Friend f ON u.id = f.user_slave AND f.user_owner = :owner");
 		q.setParameter("owner", user.getId());
 
 		List<User> friends = q.getResultList();
