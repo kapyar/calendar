@@ -1,7 +1,7 @@
-calendar
+Calendar
 ========
 
-java client server application, help doing things together
+java fat-client server application, help doing things together
 
 To start work with this app u need
 -------------------------------
